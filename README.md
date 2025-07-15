@@ -8,14 +8,14 @@ of the seminar is a branch in this repository, so don't worry if you don't have 
 
 1. Clone this repository
 2. Choose one of the following frameworks:
-  - Django
-  - ExpressJS
-  - FastAPI
-  - Flask
-  - Go
+  - Django (`git checkout django`)
+  - ExpressJS (`git checkout expressjs`)
+  - FastAPI (`git checkout fastapi`)
+  - Flask (`git checkout flask`)
+  - Go (`git checkout go`)
   - Spring Boot
 3. Switch the branch to the framework you chose (e.g., `git checkout django`)
-4. Follow the instructions in each step
+4. Follow the instructions in the `README.md`!
 
 ## Intended outcomes
 
