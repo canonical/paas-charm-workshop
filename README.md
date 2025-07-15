@@ -20,8 +20,8 @@ of the seminar is a branch in this repository, so don't worry if you don't have 
 ## Intended outcomes
 
 - You should be able to deploy a 12-factor application of your choice end-to-end! This means that:
-   - The application OCI image is created and pushed to a repository.
-   - The application is deployed to a Juju + Microk8s environment.
+  - The application OCI image is created and pushed to a repository.
+  - The application is deployed to a Juju + Microk8s environment.
 
 ## Prerequisites
 
