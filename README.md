@@ -22,3 +22,12 @@ of the seminar is a branch in this repository, so don't worry if you don't have 
 - You should be able to deploy a 12-factor application of your choice end-to-end! This means that:
    - The application OCI image is created and pushed to a repository.
    - The application is deployed to a Juju + Microk8s environment.
+
+## Prerequisites
+
+The following snaps are required for the tutorial.
+
+- [Rockcraft](https://snapcraft.io/rockcraft)
+- [Charmcraft](https://snapcraft.io/charmcraft)
+- [Juju](https://snapcraft.io/juju)
+- [LXD](https://snapcraft.io/lxd)
