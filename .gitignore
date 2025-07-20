@@ -1,0 +1,4 @@
+*.charm
+*.rock
+*.sqlite3
+__pycache__
