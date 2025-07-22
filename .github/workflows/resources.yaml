@@ -31,3 +31,4 @@ jobs:
           files: |
             **/*.rock
             **/*.charm
+          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
