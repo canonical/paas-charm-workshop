@@ -1,33 +1,29 @@
-# Deploy a 12-factor application of your choice end-to-end!
+# Hello Ubucon! Welcome to 12-factor Django app!
 
-This repository is the starting point of the seminar "Deploy a 12-factor application of your
-choice end-to-end!". Choose a framework of your choice and deploy it to an environment. Each step
-of the seminar is a branch in this repository, so don't worry if you don't have time for all steps.
+<p align="center">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ9iCTco4K9EbOUZleXxEvUyFvLXGEHCyg9Q&s">
+</p>
 
-## How to start
+This is a simple example of a 12-factor Django application. It's built using the Django framework.
+This application is built using the [django-admin](https://docs.djangoproject.com/en/5.2/ref/django-admin/)
+and exposes 3 endpoints:
+- /health
+- /fibonacci/:number
+- /keys
 
-1. Clone this repository
-2. Choose one of the following frameworks:
-  - Django (`git checkout django`)
-  - ExpressJS (`git checkout expressjs`)
-  - FastAPI (`git checkout fastapi`)
-  - Flask (`git checkout flask`)
-  - Go (`git checkout go`)
-  - Spring Boot
-3. Switch the branch to the framework you chose (e.g., `git checkout django`)
-4. Follow the instructions in the `README.md`!
+## How to run it locally?
 
-## Intended outcomes
+0. Change the working directory: `cd django-hello-world`
+1. Install dependencies: `pip install -r requirements.txt`
+2. Run the server: `DJANGO_DEBUG=true DJANGO_ALLOWED_HOSTS='["*"]' ./django_hello_world/manage.py runserver`
+3. Run the database migration script: `./django_hello_world/manage.py migrate`
+4. Test the endpoints using the following curl commands
+  - `curl http://localhost:8000/health`
+  - `curl http://localhost:8000/fibonacci/9`
+  - `curl -X POST http://localhost:8000/keys -H "Content-Type: application/json" --data '{"value": "golden snitch"}'`
+  - `curl http://localhost:8000/keys/<key_id>`
+5. Congratulations! You've finished exploring the Django Hello World project!
 
-- You should be able to deploy a 12-factor application of your choice end-to-end! This means that:
-  - The application OCI image is created and pushed to a repository.
-  - The application is deployed to a Juju + Microk8s environment.
+## Next steps
 
-## Prerequisites
-
-The following snaps are required for the tutorial.
-
-- [Rockcraft](https://snapcraft.io/rockcraft)
-- [Charmcraft](https://snapcraft.io/charmcraft)
-- [Juju](https://snapcraft.io/juju)
-- [LXD](https://snapcraft.io/lxd)
+Let's start packaging! Check out the next branch `git checkout django-01-rock`
