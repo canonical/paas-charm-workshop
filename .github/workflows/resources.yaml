@@ -23,15 +23,11 @@ jobs:
           cd *-hello-world
           export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
           rockcraft pack
-      - name: Upload artifact to GitHub
-        uses: actions/upload-artifact@v4
-        with:
-          name: django-hello-world_0.1_amd64.rock
-          path: '**/*.rock'
       - name: Build charm
         run: cd *-hello-world/charm && charmcraft pack
-      - name: Upload artifact to GitHub
-        uses: actions/upload-artifact@v4
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: django-hello-world_ubuntu-22.04-amd64.charm
-          path: '**/*.charm'
+          files: |
+            **/*.rock
+            **/*.charm
