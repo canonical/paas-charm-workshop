@@ -1,0 +1,31 @@
+name: Create artifact
+'on':
+  - push
+jobs:
+  build:
+    name: Build and release asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Rockcraft
+        run: |
+          sudo snap install rockcraft --classic
+      - name: Install Charmcraft
+        run: |
+          sudo snap install charmcraft --classic
+      - name: Build rock
+        run: |
+          cd *-hello-world
+          export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+          rockcraft pack
+      - name: Upload artifact to GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          path: '**/*.rock'
+      - name: Build charm
+        run: cd *-hello-world/charm && charmcraft pack
+      - name: Upload artifact to GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          path: '**/*.charm'
