@@ -17,14 +17,17 @@ jobs:
           sudo snap install rockcraft --classic
       - name: Install Charmcraft
         run: |
-          sudo snap install charmcraft --classic
+          sudo snap install charmcraft --classic --channel=latest/edge
       - name: Build rock
         run: |
           cd *-hello-world
           export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
           rockcraft pack
       - name: Build charm
-        run: cd *-hello-world/charm && charmcraft pack
+        run: |
+          cd *-hello-world/charm
+          export CHARMCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+          charmcraft pack
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
