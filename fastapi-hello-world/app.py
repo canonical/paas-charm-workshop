@@ -6,7 +6,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-DATABASE_URI = os.environ["POSTGRESQL_DB_CONNECT_STRING"]
+DATABASE_URI = os.environ.get("POSTGRESQL_DB_CONNECT_STRING", "")
 
 app = FastAPI()
 
