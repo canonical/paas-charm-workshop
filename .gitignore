@@ -2,3 +2,4 @@
 *.rock
 *.sqlite3
 __pycache__
+.venv/
