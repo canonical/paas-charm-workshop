@@ -13,7 +13,7 @@ This application exposes 3 endpoints:
 ## How to run it locally?
 
 0. Change the working directory: `cd fastapi-hello-world`
-1. Install dependencies: `pip install -r requirements.txt`
+1. Create a virtual environment and install the dependencies: `python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt`
 2. Run the server: `fastapi dev app.py`
 4. Test the endpoints using the following curl commands
   - `curl http://localhost:8000/health`
