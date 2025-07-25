@@ -10,6 +10,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
 ## Prerequisites
 
 - rockcraft: `sudo snap install rockcraft --channel=latest/edge`
+- lxd: `sudo snap install lxd && lxd init --auto`
 - (optional): [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## How to pack a Go application
