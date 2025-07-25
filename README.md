@@ -10,6 +10,10 @@ This application exposes 3 endpoints:
 - /fibonacci/:number (requires postgresql database)
 - /keys
 
+## Prerequisites
+
+- [go](https://go.dev/): `sudo snap install go --classic`
+
 ## How to run it locally?
 
 0. Change the working directory: `cd go-hello-world`
