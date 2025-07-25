@@ -11,6 +11,11 @@ and exposes 3 endpoints:
 - /fibonacci/:number (requires postgresql database)
 - /keys
 
+## Prerequisites
+
+- [NodeJS && NPM](https://nodejs.org/en/download)
+
+
 ## How to run it locally?
 
 0. Change the working directory: `cd expressjs-hello-world/app`
