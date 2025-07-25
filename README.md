@@ -1,33 +1,24 @@
-# Deploy a 12-factor application of your choice end-to-end!
+# Hello Ubucon! Welcome to 12-factor Go app!
 
-This repository is the starting point of the seminar "Deploy a 12-factor application of your
-choice end-to-end!". Choose a framework of your choice and deploy it to an environment. Each step
-of the seminar is a branch in this repository, so don't worry if you don't have time for all steps.
+<p align="center">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR069DA1jDGVM8x3_8vpwJtjjyabv40qNkm7A5NTiJyRzIYPf38vO8SW4v7R4YcvekCdjCZ6smEpvMk6j3pHTK05QH8PSkP0Dy8IjA-Y-th">
+</p>
 
-## How to start
+This is a simple example of a 12-factor Go application. It's built using the Go's default web framework.
+This application exposes 3 endpoints:
+- /health
+- /fibonacci/:number (requires postgresql database)
+- /keys
 
-1. Clone this repository
-2. Choose one of the following frameworks:
-  - Django (`git checkout django`)
-  - ExpressJS (`git checkout expressjs`)
-  - FastAPI (`git checkout fastapi`)
-  - Flask (`git checkout flask`)
-  - Go (`git checkout go`)
-  - Spring Boot
-3. Switch the branch to the framework you chose (e.g., `git checkout django`)
-4. Follow the instructions in the `README.md`!
+## How to run it locally?
 
-## Intended outcomes
+0. Change the working directory: `cd go-hello-world`
+1. Run the server: `go run .`
+4. Test the endpoints using the following curl commands
+  - `curl http://localhost:8080/health`
+  - `curl http://localhost:8080/fibonacci/9`
+5. Congratulations! You've finished exploring the Go Hello World project!
 
-- You should be able to deploy a 12-factor application of your choice end-to-end! This means that:
-  - The application OCI image is created and pushed to a repository.
-  - The application is deployed to a Juju + Microk8s environment.
+## Next steps
 
-## Prerequisites
-
-The following snaps are required for the tutorial.
-
-- [Rockcraft](https://snapcraft.io/rockcraft)
-- [Charmcraft](https://snapcraft.io/charmcraft)
-- [Juju](https://snapcraft.io/juju)
-- [LXD](https://snapcraft.io/lxd)
+Let's start packaging! Check out the next branch `git checkout go-01-rock`
