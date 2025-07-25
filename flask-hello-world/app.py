@@ -8,7 +8,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-DATABASE_URI = os.environ["POSTGRESQL_DB_CONNECT_STRING"]
+DATABASE_URI = os.environ.get("POSTGRESQL_DB_CONNECT_STRING", "")
 
 
 @app.route("/")
