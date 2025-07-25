@@ -8,11 +8,11 @@ of the seminar is a branch in this repository, so don't worry if you don't have 
 
 1. Clone this repository
 2. Choose one of the following frameworks:
-  - Django (`git checkout django`)
-  - ExpressJS (`git checkout expressjs`)
-  - FastAPI (`git checkout fastapi`)
-  - Flask (`git checkout flask`)
-  - Go (`git checkout go`)
+  - [Django](https://github.com/yanksyoon/hello-ubucon/tree/django) (`git checkout django`)
+  - [ExpressJS](https://github.com/yanksyoon/hello-ubucon/tree/expressjs) (`git checkout expressjs`)
+  - [FastAPI](https://github.com/yanksyoon/hello-ubucon/tree/fastapi) (`git checkout fastapi`)
+  - [Flask](https://github.com/yanksyoon/hello-ubucon/tree/flask) (`git checkout flask`)
+  - [Go](https://github.com/yanksyoon/hello-ubucon/tree/go) (`git checkout go`)
   - Spring Boot
 3. Switch the branch to the framework you chose (e.g., `git checkout django`)
 4. Follow the instructions in the `README.md`!
