@@ -16,6 +16,14 @@ using [Juju charms](https://juju.is/).
 0. Change the working directory: `cd fastapi-hello-world`
 1. Create a separate charm directory and change the working directory: `mkdir charm && cd charm`
 2. Initialize the charm: `charmcraft init --profile fastapi-framework --name fastapi-hello-world`
+3. Uncomment the database relation in `charmcraft.yaml`
+  ```diff
+  + requires:
+  +   postgresql:
+  +     interface: postgresql_client
+  +     optional: false
+  +     limit: 1
+  ```
 3. Pack the charm: `charmcraft pack`
 4. Inspect the charm: `mkdir inspect && unzip fastapi-hello-world_$(dpkg --print-architecture).charm -d inspect`
 5. Congratulations! You have have a local charm you can deploy to Juju!
