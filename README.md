@@ -16,9 +16,17 @@ using [Juju charms](https://juju.is/).
 0. Change the working directory: `cd flask-hello-world`
 1. Create a separate charm directory and change the working directory: `mkdir charm && cd charm`
 2. Initialize the charm: `charmcraft init --profile flask-framework --name flask-hello-world`
-3. Pack the charm: `charmcraft pack`
-4. Inspect the charm: `mkdir inspect && unzip flask-hello-world_ubuntu-22.04-amd64.charm -d inspect`
-5. Congratulations! You have have a local charm you can deploy to Juju!
+3. Uncomment the database relation in `charmcraft.yaml`
+  ```diff
+  + requires:
+  +   postgresql:
+  +     interface: postgresql_client
+  +     optional: false
+  +     limit: 1
+  ```
+4. Pack the charm: `charmcraft pack`
+5. Inspect the charm: `mkdir inspect && unzip flask-hello-world_ubuntu-22.04-amd64.charm -d inspect`
+6. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
