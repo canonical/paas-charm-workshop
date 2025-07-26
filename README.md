@@ -33,4 +33,4 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` e
 
 ## Next steps
 
-Let's start charming! Check out the next branch `git checkout django-02-charm`
+Let's start charming! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/blob/django-02-charm/README.md) `git checkout django-02-charm`
