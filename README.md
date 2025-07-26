@@ -25,7 +25,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `flask-framework` ex
     rockcraft.skopeo copy \
       --insecure-policy \
       --dest-tls-verify=false \
-      oci-archive:./flask-hello-world_0.1_amd64.rock \
+      oci-archive:./flask-hello-world_0.1_$(dpkg --print-architecture).rock \
       docker-daemon:flask-hello-world:0.1
     ```
 4. (Optional) Inspect the image: `dive flask-hello-world:0.1`
