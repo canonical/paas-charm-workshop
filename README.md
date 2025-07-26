@@ -22,4 +22,4 @@ using [Juju charms](https://juju.is/).
 
 ## Next steps
 
-Let's start getting our hands dirty! Check out the next branch `git checkout django-03-deploy`
+Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/django-03-deploy) `git checkout django-03-deploy`
