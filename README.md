@@ -24,7 +24,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
     rockcraft.skopeo copy \
       --insecure-policy \
       --dest-tls-verify=false \
-      oci-archive:./go-hello-world_0.1_amd64.rock \
+      oci-archive:./go-hello-world_0.1_$(dpkg --print-architecture).rock \
       docker://go-hello-world:0.1
     ```
 4. (Optional) Inspect the image: `dive go-hello-world:0.1`
