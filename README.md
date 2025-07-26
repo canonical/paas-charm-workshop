@@ -18,7 +18,7 @@ on MicroK8s. You can do so on your local microk8s deployment using the following
 ```bash
 rockcraft.skopeo --insecure-policy copy --dest-tls-verify=false \
   oci-archive:expressjs-hello-world_0.1_$(dpkg --print-architecture).rock \
-  docker-daemon:localhost:32000/expressjs-hello-world:0.1
+  docker://localhost:32000/expressjs-hello-world:0.1
 ```
 
 We'll also be using a shared Juju + Microk8s cluster, please ask for credentials :)
@@ -28,13 +28,13 @@ We'll also be using a shared Juju + Microk8s cluster, please ask for credentials
 2. Switch to your Juju model: `juju switch <your-model-name>`
 3. Deploy the application to Juju
     ```bash
-    juju deploy ./expressjs-hello-world/charm/expressjs-hello-world_$(dpkg --print-architecture).charm --resource app-image=localhost:32000/expressjs-hello-world:0.1 "$APPLICATION_NAME"
+    juju deploy ./expressjs-hello-world/charm/expressjs-hello-world_$(dpkg --print-architecture).charm --resource app-image=localhost:32000/expressjs-hello-world:0.1
     ```
 4. Relate the deployed application to database: `juju relate expressjs-hello-world postgresql`
 5. Test the application using the unit IP address:
     ```bash
     UNIT_IP=<your application's unit IP>
-    curl http://$UNIT_IP:3000/health
+    curl http://$UNIT_IP:8080/health
     ```
 
 ## Further information
