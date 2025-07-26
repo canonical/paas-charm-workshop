@@ -16,10 +16,18 @@ using [Juju charms](https://juju.is/).
 0. Change the working directory: `cd go-hello-world`
 1. Create a separate charm directory and change the working directory: `mkdir charm && cd charm`
 2. Initialize the charm: `charmcraft init --profile go-framework --name go-hello-world`
-3. Pack the charm: `charmcraft pack`
-4. Inspect the charm: `tar -xvzf go-hello-world_ubuntu-22.04-amd64.charm`
-5. Congratulations! You have have a local charm you can deploy to Juju!
+3. Uncomment the database relation in `charmcraft.yaml`
+  ```diff
+  + requires:
+  +   postgresql:
+  +     interface: postgresql_client
+  +     optional: false
+  +     limit: 1
+  ```
+4. Pack the charm: `charmcraft pack`
+5. Inspect the charm: `tar -xvzf go-hello-world_ubuntu-22.04-$(dpkg --print-architecture)$.charm`
+6. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
-Let's start getting our hands dirty! Check out the next branch `git checkout go-03-deploy`
+Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/go-03-deploy) `git checkout go-03-deploy`
