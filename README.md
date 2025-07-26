@@ -30,7 +30,7 @@ We'll also be using a shared Juju + Microk8s cluster, please ask for credentials
     ```bash
     juju deploy ./fastapi-hello-world/charm/fastapi-hello-world_$(dpkg --print-architecture).charm --resource app-image=localhost:32000/fastapi-hello-world:0.1
     ```
-4. Relate the deployed application to database: `juju relate $APPLICATION_NAME postgresql`
+4. Relate the deployed application to database: `juju relate fastapi-hello-world postgresql`
 5. Test the application using the unit IP address:
     ```bash
     UNIT_IP=<your application's unit IP>
