@@ -24,17 +24,17 @@ rockcraft.skopeo --insecure-policy copy --dest-tls-verify=false \
 We'll also be using a shared Juju + Microk8s cluster, please ask for credentials :)
 
 0. Setup your Juju connection to the shared Juju controller: `tar -xvzf juju_credentials.tar.gz -C ~/.local/share/juju`
-1. Test your juju connection: `juju controllers`, `juju models`
+1. Test your Juju connection: `juju controllers`, `juju models`
+2. Switch to your Juju model: `juju switch <your-model-name>`
 3. Deploy the application to Juju
     ```bash
-    APPLICATION_NAME=<your-name-with-no-spaces>
-    juju deploy ./fastapi-hello-world/charm/fastapi-hello-world_ubuntu-22.04-amd64.charm --resource app-image=localhost:32000/fastapi-hello-world:0.1 "$APPLICATION_NAME"
+    juju deploy ./fastapi-hello-world/charm/fastapi-hello-world_$(dpkg --print-architecture).charm --resource app-image=localhost:32000/fastapi-hello-world:0.1
     ```
 4. Relate the deployed application to database: `juju relate $APPLICATION_NAME postgresql`
 5. Test the application using the unit IP address:
     ```bash
     UNIT_IP=<your application's unit IP>
-    curl http://$UNIT_IP:8000/health
+    curl http://$UNIT_IP:8080/health
     ```
 
 ## Further information
