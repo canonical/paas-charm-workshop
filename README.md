@@ -25,4 +25,4 @@ This application exposes 3 endpoints:
 
 ## Next steps
 
-Let's start packaging! Check out the next branch `git checkout go-01-rock`
+Let's start packaging! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/go-01-rock) `git checkout go-01-rock`
