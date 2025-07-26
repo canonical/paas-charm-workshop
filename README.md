@@ -17,9 +17,9 @@ using [Juju charms](https://juju.is/).
 1. Create a separate charm directory and change the working directory: `mkdir charm && cd charm`
 2. Initialize the charm: `charmcraft init --profile expressjs-framework --name expressjs-hello-world`
 3. Pack the charm: `charmcraft pack`
-4. Inspect the charm: `tar -xvzf expressjs-hello-world_ubuntu-22.04-amd64.charm`
+4. Inspect the charm: `mkdir inspect && unzip django-hello-world_ubuntu-22.04-amd64.charm -d inspect`
 5. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
-Let's start getting our hands dirty! Check out the next branch `git checkout expressjs-03-deploy`
+Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/blob/expressjs-03-deploy/README.md) `git checkout expressjs-03-deploy`
