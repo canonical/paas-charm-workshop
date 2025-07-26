@@ -32,4 +32,4 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
 
 ## Next steps
 
-Let's start charming! Check out the next branch `git checkout go-02-charm`
+Let's start charming! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/go-02-charm) `git checkout go-02-charm`
