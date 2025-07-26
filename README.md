@@ -28,7 +28,7 @@ We'll also be using a shared Juju + Microk8s cluster, please ask for credentials
 2. Switch to your Juju model: `juju switch <your-model-name>`
 3. Deploy the application to Juju
     ```bash
-    juju deploy ./flask-hello-world/charm/flask-hello-world_ubuntu-22.04-amd64.charm --resource flask-app-image=localhost:32000/flask-hello-world:0.1
+    juju deploy ./flask-hello-world/charm/flask-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm --resource flask-app-image=localhost:32000/flask-hello-world:0.1
     ```
 4. Relate the deployed application to database: `juju relate flask-hello-world postgresql`
 5. Test the application using the unit IP address:
