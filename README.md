@@ -22,4 +22,4 @@ using [Juju charms](https://juju.is/).
 
 ## Next steps
 
-Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/fastapi-02-charm) `git checkout fastapi-03-deploy`
+Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/fastapi-03-deploy) `git checkout fastapi-03-deploy`
