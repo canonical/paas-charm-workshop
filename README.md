@@ -20,7 +20,7 @@ and exposes 3 endpoints:
 4. Test the endpoints using the following curl commands
   - `curl http://localhost:8000/health`
   - `curl http://localhost:8000/fibonacci/9`
-  - `curl -X POST http://localhost:8000/keys -H "Content-Type: application/json" --data '{"value": "golden snitch"}'`
+  - `curl -X POST http://localhost:8000/keys/ -H "Content-Type: application/json" --data '{"value": "golden snitch"}'`
   - `curl http://localhost:8000/keys/<key_id>`
 5. Congratulations! You've finished exploring the Django Hello World project!
 
