@@ -16,9 +16,17 @@ using [Juju charms](https://juju.is/).
 0. Change the working directory: `cd expressjs-hello-world`
 1. Create a separate charm directory and change the working directory: `mkdir charm && cd charm`
 2. Initialize the charm: `charmcraft init --profile expressjs-framework --name expressjs-hello-world`
-3. Pack the charm: `charmcraft pack`
-4. Inspect the charm: `mkdir inspect && unzip expressjs-hello-world_amd64.charm -d inspect`
-5. Congratulations! You have have a local charm you can deploy to Juju!
+3. Uncomment the database relation in `charmcraft.yaml`
+  ```diff
+  + requires:
+  +   postgresql:
+  +     interface: postgresql_client
+  +     optional: false
+  +     limit: 1
+  ```
+4. Pack the charm: `charmcraft pack`
+5. Inspect the charm: `mkdir inspect && unzip expressjs-hello-world_$(dpkg --print-architecture).charm -d inspect`
+6. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
