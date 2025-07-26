@@ -22,4 +22,4 @@ This application exposes 3 endpoints:
 
 ## Next steps
 
-Let's start packaging! Check out the next branch `git checkout fastapi-01-rock`
+Let's start packaging! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/fastapi-01-rock) `git checkout fastapi-01-rock`
