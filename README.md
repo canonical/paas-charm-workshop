@@ -25,7 +25,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `fastapi-framework` 
     rockcraft.skopeo copy \
       --insecure-policy \
       --dest-tls-verify=false \
-      oci-archive:./fastapi-hello-world_0.1_amd64.rock \
+      oci-archive:./fastapi-hello-world_0.1_$(dpkg --print-architecture)$.rock \
       docker-daemon:fastapi-hello-world:0.1
     ```
 4. (Optional) Inspect the image: `dive fastapi-hello-world:0.1`
@@ -33,4 +33,4 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `fastapi-framework` 
 
 ## Next steps
 
-Let's start charming! Check out the next branch `git checkout fastapi-02-charm`
+Let's start charming! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/fastapi-02-charm) `git checkout fastapi-02-charm`
