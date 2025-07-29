@@ -20,6 +20,14 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` e
 1. Initialize the project with rockcraft: `rockcraft init --profile django-framework`
   - Inspect the rockcraft extension `rockcraft expand-extensions`
 2. Pack the rock: `rockcraft pack`
+  - If you're on ARM based architecture, modify the `platforms` section of the `rockcraft.yaml` file.
+    ```diff
+      platforms:
+    -   amd64:
+    -   # arm64:
+    +   # amd64:
+    +   arm64:
+    ```
 3. Push the image to the local Docker registry:
     ```bash
     rockcraft.skopeo copy \
