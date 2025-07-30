@@ -2,7 +2,7 @@ name: fastapi-hello-world
 # see https://documentation.ubuntu.com/rockcraft/en/1.12.0/explanation/bases/
 # for more information about bases and using 'bare' bases for chiselled rocks
 base: ubuntu@24.04 # the base environment for this FastAPI application
-version: '0.1' # just for humans. Semantic versioning is recommended
+version: "0.1" # just for humans. Semantic versioning is recommended
 summary: A summary of your FastAPI application # 79 char long summary
 description: |
     This is fastapi project's description. You have a paragraph or two to tell the
@@ -13,7 +13,7 @@ description: |
 # you can check your architecture with `dpkg --print-architecture`
 platforms:
     amd64:
-    # arm64:
+    arm64:
     # ppc64el:
     # s390x:
 
@@ -31,8 +31,7 @@ platforms:
 # see https://documentation.ubuntu.com/rockcraft/en/1.12.0/reference/extensions/fastapi-framework
 # for more information.
 extensions:
-- fastapi-framework
-
+    - fastapi-framework
 # uncomment the sections you need and adjust according to your requirements.
 # parts:  # you need to uncomment this line to add or update any part.
 
