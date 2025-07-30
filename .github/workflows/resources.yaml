@@ -3,8 +3,12 @@ name: Create artifact
   - push
 jobs:
   build:
+    strategy:
+      matrix:
+        runtime: [ amd64, arm64 ]
+
     name: Build and release asset
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, "${{ matrix.runtime }}"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
