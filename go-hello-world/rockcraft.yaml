@@ -3,20 +3,20 @@ name: go-hello-world
 # for more information about bases and using 'bare' bases for chiselled rocks
 base: ubuntu@24.04 # as an alternative, a ubuntu base can be used
 build-base: ubuntu@24.04 # build-base is required when the base is bare
-version: '0.1' # just for humans. Semantic versioning is recommended
+version: "0.1" # just for humans. Semantic versioning is recommended
 summary: A summary of your Go application # 79 char long summary
 description: |
-    This is go-hello-world's description. You have a paragraph or two to tell the
-    most important story about it. Keep it under 100 words though,
-    we live in tweetspace and your description wants to look good in the
-    container registries out there.
+  This is go-hello-world's description. You have a paragraph or two to tell the
+  most important story about it. Keep it under 100 words though,
+  we live in tweetspace and your description wants to look good in the
+  container registries out there.
 # the platforms this rock should be built on and run on.
 # you can check your architecture with `dpkg --print-architecture`
 platforms:
-    amd64:
-    # arm64:
-    # ppc64el:
-    # s390x:
+  amd64:
+  arm64:
+  # ppc64el:
+  # s390x:
 
 # to ensure the go-framework extension functions properly, your Go project
 # should have a go.mod file. Check the parts section for the selection of
@@ -28,7 +28,7 @@ platforms:
 # |   |-- migrate.sh
 
 extensions:
-    - go-framework
+  - go-framework
 
 # uncomment the sections you need and adjust according to your requirements.
 # parts:
