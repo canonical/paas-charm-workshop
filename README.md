@@ -24,9 +24,15 @@ using [Juju charms](https://juju.is/).
   +     optional: false
   +     limit: 1
   ```
-3. Pack the charm: `charmcraft pack`
-4. Inspect the charm: `mkdir inspect && unzip fastapi-hello-world_$(dpkg --print-architecture).charm -d inspect`
-5. Congratulations! You have have a local charm you can deploy to Juju!
+4. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file.
+  ```diff
+  + --no-binary=:none:
+  ops ~= 2.17
+  paas-charm>=1.0,<2
+  ```
+5. Pack the charm: `charmcraft pack`
+6. Inspect the charm: `mkdir inspect && unzip fastapi-hello-world_$(dpkg --print-architecture).charm -d inspect`
+7. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
