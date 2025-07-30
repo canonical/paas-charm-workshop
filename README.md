@@ -24,9 +24,15 @@ using [Juju charms](https://juju.is/).
   +     optional: false
   +     limit: 1
   ```
-4. Pack the charm: `charmcraft pack`
-5. Inspect the charm: `mkdir inspect && unzip flask-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm -d inspect`
-6. Congratulations! You have have a local charm you can deploy to Juju!
+4. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file.
+  ```diff
+  + --no-binary=:none:
+  ops ~= 2.17
+  paas-charm>=1.0,<2
+  ```
+5. Pack the charm: `charmcraft pack`
+6. Inspect the charm: `mkdir inspect && unzip flask-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm -d inspect`
+7. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
