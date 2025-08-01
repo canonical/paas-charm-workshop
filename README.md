@@ -19,6 +19,15 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `expressjs-framework
 0. Change the working directory: `cd expressjs-hello-world`
 1. Initialize the project with rockcraft: `export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True && rockcraft init --profile expressjs-framework`
   - Inspect the rockcraft extension `rockcraft expand-extensions`
+  - Add the following contents to `rockcraft.yaml`
+    ```diff
+    parts:
+      runtime-debs:
+        plugin: nil
+        stage-packages:
+          # Added manually for the migrations
+          - postgresql-client
+    ```
 2. Pack the rock: `rockcraft pack`
   - If you're on ARM based architecture, modify the `platforms` section of the `rockcraft.yaml` file.
     ```diff
