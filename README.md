@@ -28,7 +28,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` e
     +   # amd64:
     +   arm64:
     ```
-3. Push the image to the local Docker registry:
+3. (Optional) Push the image to the local Docker registry:
     ```bash
     rockcraft.skopeo copy \
       --insecure-policy \
