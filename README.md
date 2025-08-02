@@ -28,6 +28,17 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
           # Added manually for the migrations
           - postgresql-client
     ```
+    command:
+    ```
+    echo <<EOF >> rockcraft.yaml
+    parts:
+      runtime-debs:
+        plugin: nil
+        stage-packages:
+          # Added manually for the migrations
+          - postgresql-client
+    EOF
+    ```
 2. Pack the rock: `rockcraft pack`
   - If you're on ARM based architecture, modify the `platforms` section of the `rockcraft.yaml` file.
     ```diff
