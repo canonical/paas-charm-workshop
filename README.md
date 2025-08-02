@@ -50,7 +50,7 @@ using [Juju charms](https://juju.is/).
       limit: 1
   EOF
   ```
-4. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file.
+4. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file
   ```diff
   + --no-binary=:none:
   ops ~= 2.17
@@ -70,7 +70,8 @@ using [Juju charms](https://juju.is/).
    ```
 7. Inspect the charm
    ```
-   tar -xvzf go-hello-world_$(dpkg --print-architecture).charm
+   mkdir inspect
+   tar -xvzf go-hello-world_$(dpkg --print-architecture).charm -d inspect
    ```
 9. Congratulations! You have have a local charm you can deploy to Juju!
 
