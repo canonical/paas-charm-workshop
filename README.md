@@ -21,7 +21,11 @@ We'll also be using a shared Juju + Microk8s cluster, please ask for credentials
 0. Setup your Juju connection to the shared Juju controller: `tar -xvzf juju_credentials.tar.gz -C ~/.local/share/juju`
 1. Test your Juju connection: `juju controllers`, `juju models`
 2. Switch to your Juju model: `juju switch <your-model-name>`
-3. Import SaaS applications: `juju consume admin/database.postgresql && juju consume admin/cos.prometheus && juju consume admin/cos.loki && juju consume admin/cos.grafana`
+3. Import SaaS applications:
+   - `juju consume admin/database.postgresql`
+   - `juju consume admin/cos.prometheus`
+   - `juju consume admin/cos.loki`
+   - `juju consume admin/cos.grafana`
 4. Deploy the application to Juju
     ```bash
     juju deploy ./expressjs-hello-world/charm/expressjs-hello-world_$(dpkg --print-architecture).charm --resource app-image=localhost:32000/expressjs-hello-world:0.1
