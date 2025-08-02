@@ -31,7 +31,7 @@ using [Juju charms](https://juju.is/).
   paas-charm>=1.0,<2
   ```
 5. Pack the charm: `charmcraft pack`
-6. Inspect the charm: `tar -xvzf go-hello-world_ubuntu-22.04-$(dpkg --print-architecture)$.charm`
+6. Inspect the charm: `tar -xvzf go-hello-world_$(dpkg --print-architecture).charm` 
 7. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
