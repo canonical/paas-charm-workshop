@@ -21,7 +21,8 @@ We'll also be using a shared Juju + Microk8s cluster, please ask for credentials
 0. Setup your Juju connection to the shared Juju controller: `tar -xvzf juju_credentials.tar.gz -C ~/.local/share/juju`
 1. Test your Juju connection: `juju controllers`, `juju models`
 2. Switch to your Juju model: `juju switch <your-model-name>`
-3. Import SaaS applications:
+3. Find SaaS offers: `juju find-offers ubucon-controller`
+4. Import SaaS applications:
    - `juju consume admin/database.postgresql`
    - `juju consume admin/cos.prometheus`
    - `juju consume admin/cos.loki`
