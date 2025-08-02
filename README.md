@@ -37,7 +37,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` e
    ```
   - (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
     ```
-    dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64' rockcraft.yaml
+    dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
     ```
 2. Pack the rock
    ```
