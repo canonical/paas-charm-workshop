@@ -33,7 +33,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
       --insecure-policy \
       --dest-tls-verify=false \
       oci-archive:./go-hello-world_0.1_$(dpkg --print-architecture).rock \
-      docker://go-hello-world:0.1
+      docker-daemon:go-hello-world:0.1
     ```
 4. (Optional) Inspect the image: `dive go-hello-world:0.1`
 5. Congratulations! You now have an OCI image for go-hello-world application!
