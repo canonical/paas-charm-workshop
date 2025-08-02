@@ -18,7 +18,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` e
 
 0. Change the working directory: `cd django-hello-world`
 1. Initialize the project with rockcraft: `rockcraft init --profile django-framework`
-  - Inspect the rockcraft extension `rockcraft expand-extensions`
+  - Inspect the rockcraft extension `ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True rockcraft expand-extensions`
 2. Pack the rock: `rockcraft pack`
   - If you're on ARM based architecture, modify the `platforms` section of the `rockcraft.yaml` file.
     ```diff
