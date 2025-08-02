@@ -13,6 +13,10 @@ using [Juju charms](https://juju.is/).
   ```
   sudo snap install charmcraft --classic
   ```
+- unzip
+  ```
+  sudo apt install unzip
+  ```
 
 ## How to extend a Go application with Juju charms
 
