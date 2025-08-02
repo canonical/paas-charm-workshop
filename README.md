@@ -50,7 +50,7 @@ using [Juju charms](https://juju.is/).
       limit: 1
   EOF
   ```
-4. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file.
+5. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file.
   ```diff
   + --no-binary=:none:
   ops ~= 2.17
@@ -60,20 +60,20 @@ using [Juju charms](https://juju.is/).
   # or use sed:
   sed -i '1s/^/--no-binary=:none:\n/' requirements.txt
   ```
-5. (ARM64 only) modify the `platforms` section of the `charmcraft.yaml` file
+6. (ARM64 only) modify the `platforms` section of the `charmcraft.yaml` file
     ```
     dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' charmcraft.yaml
     ```
-6. Pack the charm
+7. Pack the charm
    ```
    charmcraft pack
    ```
-6. Inspect the charm
+8. Inspect the charm
    ```
    mkdir inspect
    unzip fastapi-hello-world_$(dpkg --print-architecture).charm -d inspect
    ```
-8. Congratulations! You have have a local charm you can deploy to Juju!
+9. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
