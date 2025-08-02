@@ -11,6 +11,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
 
 - rockcraft: `sudo snap install rockcraft --channel=latest/edge`
 - lxd: `sudo snap install lxd && lxd init --auto`
+- (optional): [docker](https://docs.docker.com/engine/install/)
 - (optional): [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## How to pack a Go application
@@ -36,7 +37,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
     +   # amd64:
     +   arm64:
     ```
-3. Push the image to the local Docker registry:
+3. (Optional) Push the image to the local Docker registry:
     ```bash
     rockcraft.skopeo copy \
       --insecure-policy \
