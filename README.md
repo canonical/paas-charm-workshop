@@ -14,12 +14,7 @@ This section guides you through deploying a Flask application on Juju and Microk
 ## How to deploy a Flask application on Juju
 
 In this section, to be nice to our network, we've already populated the flask application image
-on MicroK8s. You can do so on your local microk8s deployment using the following command:
-```bash
-rockcraft.skopeo --insecure-policy copy --dest-tls-verify=false \
-  oci-archive:flask-hello-world_0.1_$(dpkg --print-architecture).rock \
-  docker://localhost:32000/flask-hello-world:0.1
-```
+on MicroK8s.
 
 We'll also be using a shared Juju + Microk8s cluster, please ask for credentials :)
 
