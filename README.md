@@ -21,17 +21,18 @@ We'll also be using a shared Juju + Microk8s cluster, please ask for credentials
 0. Setup your Juju connection to the shared Juju controller: `tar -xvzf juju_credentials.tar.gz -C ~/.local/share/juju`
 1. Test your Juju connection: `juju controllers`, `juju models`
 2. Switch to your Juju model: `juju switch <your-model-name>`
-3. Import SaaS applications:
+3. Find SaaS offers: `juju find-offers ubucon-controller`
+4. Import SaaS applications:
    - `juju consume admin/database.postgresql`
    - `juju consume admin/cos.prometheus`
    - `juju consume admin/cos.loki`
    - `juju consume admin/cos.grafana`
-4. Deploy the application to Juju
+5. Deploy the application to Juju
     ```bash
     juju deploy ./flask-hello-world/charm/flask-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm --resource flask-app-image=localhost:32000/flask-hello-world:0.1
     ```
-5. Relate the deployed application to database: `juju relate flask-hello-world postgresql`
-6. Test the application using the unit IP address:
+6. Relate the deployed application to database: `juju relate flask-hello-world postgresql`
+7. Test the application using the unit IP address:
     ```bash
     UNIT_IP=<your application's unit IP>
     curl http://$UNIT_IP:8000/health
