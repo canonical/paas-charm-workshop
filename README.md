@@ -30,7 +30,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
     ```
     command:
     ```
-    echo <<EOF >> rockcraft.yaml
+    cat <<EOF >> rockcraft.yaml
     parts:
       runtime-debs:
         plugin: nil
