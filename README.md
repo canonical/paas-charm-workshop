@@ -18,7 +18,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
 
 0. Change the working directory: `cd go-hello-world`
 1. Initialize the project with rockcraft: `rockcraft init --profile go-framework`
-  - Inspect the rockcraft extension `rockcraft expand-extensions`
+  - Inspect the rockcraft extension `ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True rockcraft expand-extensions`
   - Add the following contents to `rockcraft.yaml`
     ```diff
     parts:
