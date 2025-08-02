@@ -71,7 +71,7 @@ using [Juju charms](https://juju.is/).
 7. Inspect the charm
    ```
    mkdir inspect
-   tar -xvzf go-hello-world_$(dpkg --print-architecture).charm -d inspect
+   unzip go-hello-world_$(dpkg --print-architecture).charm -d inspect
    ```
 9. Congratulations! You have have a local charm you can deploy to Juju!
 
