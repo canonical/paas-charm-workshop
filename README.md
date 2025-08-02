@@ -9,14 +9,26 @@ using [Juju charms](https://juju.is/).
 
 ## Prerequisites
 
-- charmcraft: `sudo snap install charmcraft --classic`
+- charmcraft
+  ```
+  sudo snap install charmcraft --classic
+  ```
 
 ## How to extend a Go application with Juju charms
 
-0. Change the working directory: `cd go-hello-world`
-1. Create a separate charm directory and change the working directory: `mkdir charm && cd charm`
-2. Initialize the charm: `charmcraft init --profile go-framework --name go-hello-world`
-3. Uncomment the database relation in `charmcraft.yaml`
+1. Change the working directory
+   ```
+   cd go-hello-world
+   ```
+2. Create a separate charm directory and change the working directory
+   ```
+   mkdir charm && cd charm
+   ```
+3. Initialize the charm
+   ```
+   charmcraft init --profile go-framework --name go-hello-world
+   ```
+4. Uncomment the database relation in `charmcraft.yaml`
   ```diff
   + requires:
   +   postgresql:
@@ -24,15 +36,39 @@ using [Juju charms](https://juju.is/).
   +     optional: false
   +     limit: 1
   ```
+  ```bash
+  # or append the contents to the file
+  cat <<EOF >> charmcraft.yaml
+  requires:
+    postgresql:
+      interface: postgresql_client
+      optional: false
+      limit: 1
+  EOF
+  ```
 4. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file.
   ```diff
   + --no-binary=:none:
   ops ~= 2.17
   paas-charm>=1.0,<2
   ```
-5. Pack the charm: `charmcraft pack`
-6. Inspect the charm: `tar -xvzf go-hello-world_$(dpkg --print-architecture).charm` 
-7. Congratulations! You have have a local charm you can deploy to Juju!
+  ```bash
+  # or use sed:
+  sed -i '1s/^/--no-binary=:none:\n/' requirements.txt
+  ```
+5. (ARM64 only) modify the `platforms` section of the `charmcraft.yaml` file
+    ```
+    dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' charmcraft.yaml
+    ```
+6. Pack the charm
+   ```
+   charmcraft pack
+   ```
+7. Inspect the charm
+   ```
+   tar -xvzf go-hello-world_$(dpkg --print-architecture).charm
+   ```
+9. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
