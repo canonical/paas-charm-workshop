@@ -9,7 +9,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `fastapi-framework` 
 
 ## Prerequisites
 
-- rockcraft: `sudo snap install rockcraft --channel=latest/edge`
+- rockcraft: `sudo snap install rockcraft --channel=latest/edge --classic`
 - lxd: `sudo snap install lxd && lxd init --auto`
 - (optional): [docker](https://docs.docker.com/engine/install/)
 - (optional): [dive](https://github.com/wagoodman/dive) to inspect OCI images
