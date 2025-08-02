@@ -10,6 +10,9 @@ This section guides you through deploying a Django application on Juju and Micro
 
 - [Juju](https://juju.is/): `sudo snap install juju --channel=3/stable`
 - Juju credentials (we don't want to overload the network with Juju and Microk8s)
+  - Go to the Google Spreadsheet link on the slides and,
+    1. download the credentials
+    2. choose a Juju model with your corresponding architecture, mark your name down on the "Assigned" column.
 
 ## How to deploy a Django application on Juju
 
