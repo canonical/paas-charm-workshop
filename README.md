@@ -8,10 +8,18 @@ This section guides you through deploying a Flask application on Juju and Microk
 
 ## Prerequisites
 
-- [Juju](https://juju.is/): `sudo snap install juju --channel=3/stable`
+- [Juju](https://juju.is/)
+  ```
+  sudo snap install juju --channel=3/stable
+  ```
 - Juju credentials (we don't want to overload the network with Juju and Microk8s)
   - Go to the Google Spreadsheet link on the slides and,
     1. download the credentials
+    ```
+    wget <link-to-juju-controller.tar.gz>
+    mkdir -p ~/.local/share/
+    tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
+    ```
     2. choose a Juju model with your corresponding architecture, mark your name down on the "Assigned" column.
 
 ## How to deploy a Flask application on Juju
@@ -19,33 +27,73 @@ This section guides you through deploying a Flask application on Juju and Microk
 In this section, to be nice to our network, we've already populated the flask application image
 on MicroK8s.
 
-We'll also be using a shared Juju + Microk8s cluster, please ask for credentials :)
+We'll also be using a shared Juju + Microk8s cluster :)
 
-0. Setup your Juju connection to the shared Juju controller: `tar -xvzf juju_credentials.tar.gz -C ~/.local/share/juju`
-1. Test your Juju connection: `juju controllers`, `juju models`
-2. Switch to your Juju model: `juju switch <your-model-name>`
-3. Find SaaS offers: `juju find-offers ubucon-controller`
-4. Import SaaS applications:
-   - `juju consume admin/database.postgresql`
-   - `juju consume admin/cos.prometheus`
-   - `juju consume admin/cos.loki`
-   - `juju consume admin/cos.grafana`
+1. Test your juju connection
+   ```
+   juju controllers
+   juju models
+   ```
+2. Switch to your Juju model
+   ```
+   juju switch <your-model-name>
+   ```
+3. Find SaaS offers
+   ```
+   juju find-offers ubucon-controller:
+   ```
+4. Import SaaS applications
+   ```
+   juju consume admin/database.postgresql
+   juju consume admin/cos.prometheus-k8s
+   juju consume admin/cos.loki-k8s
+   juju consume admin/cos.grafana-k8s
 5. Deploy the application to Juju
     ```bash
     juju deploy ./flask-hello-world/charm/flask-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm --resource flask-app-image=localhost:32000/flask-hello-world:0.1
     ```
-6. Relate the deployed application to database: `juju relate flask-hello-world postgresql`
-7. Test the application using the unit IP address:
+6. Relate the deployed application to database
+   ```
+   juju relate flask-hello-world postgresql
+   ```
+8. Test the application using the unit IP address:
     ```bash
     UNIT_IP=<your application's unit IP>
     curl http://$UNIT_IP:8000/health
     ```
-8. Deploy nginx-ingress-integrator charm: `juju deploy nginx-ingress-integrator --trust --config path-routes=/ --config service-hostname=<your-model-name>`
-9. Relate the application application to nginx-ingress-integrator: `juju relate flask-hello-world nginx-ingress-integrator`
-   - Wait for the ingress IP to show up on the nginx-ingress-integrator unit status: `juju status --relations --watch 5s`
-11. Add your application endpoint to `/etc/hosts` file: `echo "<ingress-ip> <your-model-name>" | sudo tee -a /etc/hosts`
-12. Store your secret: `curl -X POST http://<ingress-ip>/keys/ -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv`
-13. Retrieve your secret: `curl http://<ingress-ip>/keys/<key-id>`
+9. Deploy nginx-ingress-integrator charm
+   ```
+   juju deploy nginx-ingress-integrator --trust --config path-routes=/ --config service-hostname=<your-model-name>
+   ```
+11. Relate the application application to nginx-ingress-integrator
+    ```
+    juju relate flask-hello-world nginx-ingress-integrator
+    ```
+   - Wait for the ingress IP to show up on the nginx-ingress-integrator unit status
+     ```
+     juju status --relations --watch 5s
+     ```
+10. Add your application endpoint to `/etc/hosts` file
+    ```
+    INGRESS_IP=<ingress-ip>
+    MODEL_NAME=<your-model-name>
+    echo "$INGRESS_IP $MODEL_NAME" | sudo tee -a /etc/hosts
+    ```
+11. Store your secret
+    ```
+    curl -X POST http://$INGRESS_IP/keys/ -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
+    ```
+12. Retrieve your secret
+    ```
+    curl http://$INGRESS_IP/keys/<key-id>
+    ```
+13. Relate Canonical Observability Stack (COS)
+    ```
+    juju relate flask-hello-world prometheus-k8s
+    juju relate flask-hello-world loki-k8s
+    juju relate flask-hello-world grafana-k8s
+    ```
+14. Visit the Grafana URL (link & credentials in spreadsheet)
 
 ## Further information
 
