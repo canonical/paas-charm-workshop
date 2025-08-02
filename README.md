@@ -39,6 +39,12 @@ We'll also be using a shared Juju + Microk8s cluster, please ask for credentials
     UNIT_IP=<your application's unit IP>
     curl http://$UNIT_IP:8000/health
     ```
+8. Deploy nginx-ingress-integrator charm: `juju deploy nginx-ingress-integrator --trust --config path-routes=/ --config service-hostname=<your-model-name>`
+9. Relate the application application to nginx-ingress-integrator: `juju relate django-hello-world nginx-ingress-integrator`
+   - Wait for the ingress IP to show up on the nginx-ingress-integrator unit status: `juju status --relations --watch 5s`
+11. Add your application endpoint to `/etc/hosts` file: `echo "<ingress-ip> <your-model-name>" | sudo tee -a /etc/hosts`
+12. Store your secret: `curl -X POST http://<ingress-ip>/keys/ -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv`
+13. Retrieve your secret: `curl http://<ingress-ip>/keys/<key-id>`
 
 ## Further information
 
