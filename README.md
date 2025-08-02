@@ -14,12 +14,7 @@ This section guides you through deploying a Go application on Juju and Microk8s!
 ## How to deploy a Go application on Juju
 
 In this section, to be nice to our network, we've already populated the go application image
-on MicroK8s. You can do so on your local microk8s deployment using the following command:
-```bash
-rockcraft.skopeo --insecure-policy copy --dest-tls-verify=false \
-  oci-archive:go-hello-world_0.1_$(dpkg --print-architecture).rock \
-  docker://localhost:32000/go-hello-world:0.1
-```
+on MicroK8s.
 
 We'll also be using a shared Juju + Microk8s cluster, please ask for credentials :)
 
