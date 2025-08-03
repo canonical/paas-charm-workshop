@@ -12,16 +12,34 @@ This application exposes 3 endpoints:
 
 ## Prerequisites
 
-- [go](https://go.dev/): `sudo snap install go --classic`
+- [go](https://go.dev/)
 
-## How to run it locally?
+```
+sudo snap install go --classic
+```
 
-0. Change the working directory: `cd go-hello-world`
-1. Run the server: `go run .`
-4. Test the endpoints using the following curl commands
-  - `curl http://localhost:8080/health`
-  - `curl http://localhost:8080/fibonacci/9`
-5. Congratulations! You've finished exploring the Go Hello World project!
+## 🏃 How to run it locally?
+
+1. Change the working directory
+
+```
+cd go-hello-world
+```
+
+2. Run the server
+
+```
+go run .
+```
+
+3. Test the endpoints using the following curl commands
+
+```
+curl http://localhost:8080/health
+curl http://localhost:8080/fibonacci/9
+```
+
+4. Congratulations! You've finished exploring the Go Hello World project!
 
 ## Next steps
 
