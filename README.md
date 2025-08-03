@@ -4,6 +4,8 @@
   <img src="./docs/juju_status.png">
 </p>
 
+\*Read this in other languages: [English](README.md), [한국어](README.ko.md)
+
 This repository is the starting point of the seminar "Deploy a 12-factor application of your
 choice end-to-end!". Choose a framework of your choice and deploy it to an environment. Each step
 of the seminar is a branch in this repository, so don't worry if you don't have time for all steps.
