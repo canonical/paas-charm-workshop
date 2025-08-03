@@ -4,8 +4,11 @@
     <img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png">
 </p>
 
+\*Read this in other languages: [English](README.md), [한국어](README.ko.md)
+
 This is a simple example of a 12-factor FastAPI application. It's built using the FastAPI framework.
 This application exposes 3 endpoints:
+
 - /health
 - /fibonacci/:number (requires postgresql database)
 - /keys
