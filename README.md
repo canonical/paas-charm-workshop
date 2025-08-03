@@ -4,8 +4,11 @@
     <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR069DA1jDGVM8x3_8vpwJtjjyabv40qNkm7A5NTiJyRzIYPf38vO8SW4v7R4YcvekCdjCZ6smEpvMk6j3pHTK05QH8PSkP0Dy8IjA-Y-th">
 </p>
 
+\*Read this in other languages: [English](README.md), [한국어](README.ko.md)
+
 This is a simple example of a 12-factor Go application. It's built using the Go's default web framework.
 This application exposes 3 endpoints:
+
 - /health
 - /fibonacci/:number (requires postgresql database)
 - /keys
