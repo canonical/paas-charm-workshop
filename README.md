@@ -4,6 +4,8 @@
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt_7ioYr9T6uh35rT46Z_cyNVtMM_SgbHppA&s">
 </p>
 
+\*Read this in other languages: [English](README.md), [한국어](README.ko.md)
+
 This section guides you to packing the flask-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `flask-framework` extension.
 
