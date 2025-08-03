@@ -4,8 +4,11 @@
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7sHccHQUzTTgVX3-vKj2a-Sl1QniFKUvu2mQM1WJIRS0qmLD6V4AnSXVlRtCOlnK7exaAQiLhaDzORMCQfyfy_Oxi08PzT2Rm2aZuMo93vA">
 </p>
 
+\*Read this in other languages: [English](README.md), [한국어](README.ko.md)
+
 This is a simple example of a 12-factor Flask application. It's built using the Flask framework.
 This application exposes 3 endpoints:
+
 - /health
 - /fibonacci/:number (requires postgresql database)
 - /keys
