@@ -11,19 +11,38 @@ and exposes 3 endpoints:
 - /fibonacci/:number (requires postgresql database)
 - /keys
 
-## Prerequisites
+## 📝 Prerequisites
 
 - [NodeJS && NPM](https://nodejs.org/en/download)
 
 
-## How to run it locally?
+## 🏃 How to run it locally?
 
-0. Change the working directory: `cd expressjs-hello-world/app`
-1. Install dependencies: `npm install`
-2. Run the server: `npm start`
+1. Change the working directory
+
+```
+cd expressjs-hello-world/app
+```
+
+2. Install dependencies
+
+```
+npm install
+```
+
+3. Run the server
+
+```
+npm start
+```
+
 4. Test the endpoints using the following curl commands
-  - `curl http://localhost:3000/health`
-  - `curl http://localhost:3000/fibonacci/9`
+
+```
+curl http://localhost:3000/health
+curl http://localhost:3000/fibonacci/9
+```
+
 5. Congratulations! You've finished exploring the ExpressJS Hello World project!
 
 ## Next steps
