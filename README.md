@@ -4,6 +4,8 @@
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ9iCTco4K9EbOUZleXxEvUyFvLXGEHCyg9Q&s">
 </p>
 
+\*Read this in other languages: [English](README.md), [한국어](README.ko.md)
+
 This is a simple example of a 12-factor Django application. It's built using the Django framework.
 This application is built using the [django-admin](https://docs.djangoproject.com/en/5.2/ref/django-admin/)
 and exposes 3 endpoints:
