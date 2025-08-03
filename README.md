@@ -10,14 +10,33 @@ This application exposes 3 endpoints:
 - /fibonacci/:number (requires postgresql database)
 - /keys
 
-## How to run it locally?
+## 🏃 How to run it locally?
 
-0. Change the working directory: `cd flask-hello-world`
-1. Create a virtual environment and install the dependencies: `python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt`
-2. Run the server: `python3 app.py`
+1. Change the working directory
+
+```
+cd flask-hello-world
+```
+
+2. Create a virtual environment and install the dependencies
+
+```
+python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt
+```
+
+3. Run the server
+
+```
+python3 app.py
+```
+
 4. Test the endpoints using the following curl commands
-  - `curl http://localhost:3000/health`
-  - `curl http://localhost:3000/fibonacci/9`
+
+```
+curl http://localhost:3000/health
+curl http://localhost:3000/fibonacci/9
+```
+
 5. Congratulations! You've finished exploring the Flask Hello World project!
 
 ## Next steps
