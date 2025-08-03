@@ -4,7 +4,10 @@
     <img src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_450,h_366/https://assets.ubuntu.com/v1/8e1d3bf5-juju-hero-juju.is.svg">
 </p>
 
+\*Read this in other languages: [English](README.md), [한국어](README.ko.md)
+
 This section guides you through deploying a FastAPI application on Juju and Microk8s!
+
 ## 📝 Prerequisites
 
 - 🔮 [Juju](https://juju.is/)
@@ -47,20 +50,21 @@ We'll also be using a shared Juju + Microk8s cluster :)
    juju consume admin/cos.prometheus-k8s
    juju consume admin/cos.loki-k8s
    juju consume admin/cos.grafana-k8s
+   ```
 5. Deploy the application to Juju
-    ```bash
-    juju deploy ./fastapi-hello-world/charm/fastapi-hello-world_$(dpkg --print-architecture).charm --resource app-image=localhost:32000/fastapi-hello-world:0.1
-    ```
+   ```bash
+   juju deploy ./fastapi-hello-world/charm/fastapi-hello-world_$(dpkg --print-architecture).charm --resource app-image=localhost:32000/fastapi-hello-world:0.1
+   ```
 6. Relate the deployed application to database
    ```
    juju relate fastapi-hello-world postgresql
    juju status
    ```
 7. Test the application using the unit IP address:
-    ```bash
-    UNIT_IP=<your application's unit IP>
-    curl http://$UNIT_IP:8080/health
-    ```
+   ```bash
+   UNIT_IP=<your application's unit IP>
+   curl http://$UNIT_IP:8080/health
+   ```
 8. Deploy nginx-ingress-integrator charm
    ```
    juju deploy nginx-ingress-integrator --trust --config path-routes=/ --config service-hostname=<your-model-name>
@@ -70,7 +74,7 @@ We'll also be using a shared Juju + Microk8s cluster :)
    juju relate fastapi-hello-world nginx-ingress-integrator
    ```
    - Wait for the ingress IP to show up on the nginx-ingress-integrator unit status
-     ```    
+     ```
      juju status --relations --watch 5s
      ```
 10. Add your application endpoint to `/etc/hosts` file
