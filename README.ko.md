@@ -18,8 +18,8 @@
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
-- (선택 사항): 🐳 [docker]
-- (선택 사항): 🤿 [dive]로 OCI 이미지를 검사
+- (선택 사항): 🐳 [docker](https://docs.docker.com/engine/install/)
+- (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive) OCI 이미지 분석 도구
 
 ## 📦 Flask 애플리케이션 패키징 방법
 
