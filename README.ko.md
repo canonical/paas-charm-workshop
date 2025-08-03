@@ -62,4 +62,4 @@
 
 ## 다음 단계
 
-쥬쥬 시작! [다음 브랜치] `git checkout fastapi-02-charm`을 확인하세요.
+쥬쥬 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/fastapi-02-charm) `git checkout fastapi-02-charm`을 확인하세요.
