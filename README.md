@@ -5,14 +5,13 @@
 </p>
 
 This section guides you through deploying a FastAPI application on Juju and Microk8s!
+## 📝 Prerequisites
 
-## Prerequisites
-
-- [Juju](https://juju.is/)
+- 🔮 [Juju](https://juju.is/)
   ```
   sudo snap install juju --channel=3/stable
   ```
-- Juju credentials (we don't want to overload the network with Juju and Microk8s)
+- 🔑 Juju credentials (we don't want to overload the network with Juju and Microk8s)
   - Go to the Google Spreadsheet link on the slides and,
     1. download the credentials
     ```
@@ -22,7 +21,7 @@ This section guides you through deploying a FastAPI application on Juju and Micr
     ```
     2. choose a Juju model with your corresponding architecture, mark your name down on the "Assigned" column.
 
-## How to deploy a FastAPI application on Juju
+## 🚀 How to deploy a FastAPI application on Juju
 
 In this section, to be nice to our network, we've already populated the fastapi application image
 on MicroK8s.
