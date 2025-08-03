@@ -4,6 +4,8 @@
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt_7ioYr9T6uh35rT46Z_cyNVtMM_SgbHppA&s">
 </p>
 
+\*Read this in other languages: [English](README.md), [한국어](README.ko.md)
+
 This section guides you to packing the fastapi-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `fastapi-framework` extension.
 
@@ -27,6 +29,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `fastapi-framework` 
    cd fastapi-hello-world
    ```
 2. Initialize the project with rockcraft
+
    ```rockcraft init --profile fastapi-framework
 
    ```
