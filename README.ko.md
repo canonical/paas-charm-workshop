@@ -17,7 +17,7 @@
   sudo snap install lxd && lxd init --auto
   ```
 - (선택 사항): 🐳 [docker](https://docs.docker.com/engine/install/)
-- (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive)로 OCI 이미지를 검사
+- (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive)OCI 이미지 분석 도구
 
 ## 📦 Django 애플리케이션 패키징 방법
 
@@ -60,4 +60,4 @@
 
 ## 다음 단계
 
-쥬쥬 시작! [다음 브랜치] `git checkout django-02-charm`을 확인하세요.
+쥬쥬 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/blob/django-02-charm/README.md) `git checkout django-02-charm`을 확인하세요.
