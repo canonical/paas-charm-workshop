@@ -48,8 +48,8 @@ curl -X POST http://localhost:8000/keys/ -H "Content-Type: application/json" --d
 curl http://localhost:8000/keys/<key_id>
 ```
 
-6. 축하합니다! Django Hello World 프로젝트 탐색을 완료했습니다!
+6. 축하합니다! Django Hello World 프로젝트를 완성했습니다!
 
 ## 다음 단계
 
-패키징 시작! [다음 브랜치] `git checkout django-01-rock`을 확인하세요.
+패키징 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/django-01-rock) `git checkout django-01-rock`을 확인하세요.
