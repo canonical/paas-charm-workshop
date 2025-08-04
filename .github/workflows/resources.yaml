@@ -3,7 +3,7 @@ name: Create artifact
 on:
   push:
     tags:
-      - "*-complete"
+      - "fastapi-complete"
 jobs:
   build:
     strategy:
