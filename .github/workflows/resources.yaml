@@ -2,7 +2,7 @@ name: Create artifact
 on:
   push:
     tags:
-      - "*-complete"
+      - "flask-complete"
 jobs:
   build:
     strategy:
