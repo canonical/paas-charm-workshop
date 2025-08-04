@@ -1,6 +1,9 @@
 name: Create artifact
-'on':
-  - push
+
+on:
+  push:
+    tags:
+      - "*-complete"
 jobs:
   build:
     strategy:
