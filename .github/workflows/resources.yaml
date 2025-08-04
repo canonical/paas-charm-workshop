@@ -1,6 +1,8 @@
 name: Create artifact
-'on':
-  - push
+on:
+  push:
+    tags:
+      - "expressjs-complete"
 jobs:
   build:
     strategy:
