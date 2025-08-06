@@ -48,7 +48,7 @@ juju find-offers ubucon-controller:
 4. SaaS 애플리케이션 가져오기
 
 ```bash
-juju consume admin/database.postgresql
+juju consume admin/postgres.postgresql-k8s
 juju consume admin/cos.prometheus-k8s
 juju consume admin/cos.loki-k8s
 juju consume admin/cos.grafana-k8s
