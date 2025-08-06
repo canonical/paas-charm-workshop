@@ -24,7 +24,7 @@
 - [FastAPI](https://github.com/yanksyoon/hello-ubucon/tree/fastapi) (`git checkout fastapi`)
 - [Flask](https://github.com/yanksyoon/hello-ubucon/tree/flask) (`git checkout flask`)
 - [Go](https://github.com/yanksyoon/hello-ubucon/tree/go) (`git checkout go`)
-- Spring Boot
+- [Spring Boot](https://github.com/yanksyoon/hello-ubucon/tree/springboot) (`git checkout springboot`)
 
 3. 선택한 프레임워크의 브랜치로 전환합니다 (예: `git checkout django`)
 
