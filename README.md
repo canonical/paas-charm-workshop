@@ -19,57 +19,46 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
   ```
   sudo snap install lxd && lxd init --auto
   ```
-- (optional): 🐳 [docker](https://docs.docker.com/engine/install/)
 - (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## 📦 How to pack a Go application
 
 1. Change the working directory
-   ```
-   cd go-hello-world
-   ```
+  ```bash
+  cd go-hello-world
+  ```
 2. Initialize the project with rockcraft
-   ```
-   rockcraft init --profile go-framework
-   ```
-
-- Inspect the rockcraft extension
+  ```bash
+  rockcraft init --profile go-framework
   ```
-  export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-  rockcraft expand-extensions
-  ```
-- Add the postgresql-client package to the runtime
-  ```
-  cat <<EOF >> rockcraft.yaml
-  parts:
-    runtime-debs:
-      plugin: nil
-      stage-packages:
-        # Added manually for the migrations
-        - postgresql-client
-  EOF
-  ```
-- (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
-  ```
-  dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-  ```
-
+  - Inspect the rockcraft extension
+    ```bash
+    export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+    rockcraft expand-extensions
+    ```
+  - Add the postgresql-client package to the runtime
+    ```bash
+    cat <<EOF >> rockcraft.yaml
+    parts:
+      runtime-debs:
+        plugin: nil
+        stage-packages:
+          # Added manually for the migrations
+          - postgresql-client
+    EOF
+    ```
+  - (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
+    ```bash
+    dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
+    ```
 2. Pack the rock
-   ```
-   rockcraft pack
-   ```
-3. (Optional) Push the image to the local Docker registry
-   ```bash
-   rockcraft.skopeo copy \
-     --insecure-policy \
-     --dest-tls-verify=false \
-     oci-archive:./go-hello-world_0.1_$(dpkg --print-architecture).rock \
-     docker-daemon:go-hello-world:0.1
-   ```
-4. (Optional) Inspect the image
-   ```
-   dive go-hello-world:0.1
-   ```
+  ```
+  rockcraft pack
+  ```
+3. (Optional) Inspect the image
+  ```bash
+  dive docker-archive://go-hello-world_0.1_$(dpkg --print-architecture).rock
+  ```
 5. Congratulations! You now have an OCI image for go-hello-world application!
 
 ## Next steps

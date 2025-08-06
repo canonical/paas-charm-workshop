@@ -18,7 +18,6 @@
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
-- (선택 사항): 🐳 [docker](https://docs.docker.com/engine/install/)
 - (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive)OCI 이미지 분석 도구
 
 ## 📦 Go 애플리케이션 패키징 방법
@@ -31,43 +30,33 @@
    ```bash
    rockcraft init --profile go-framework
    ```
-
-- rockcraft 확장 검사
-  ```bash
-  export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-  rockcraft expand-extensions
-  ```
-- runtime에 postgresql-client 패키지 추가
-  ```bash
-  cat <<EOF >> rockcraft.yaml
-  parts:
-    runtime-debs:
-      plugin: nil
-      stage-packages:
-        # Added manually for the migrations
-        - postgresql-client
-  EOF
-  ```
-- (ARM64 전용) `rockcraft.yaml` 파일의 `platforms` 섹션 수정
-  ```bash
-  dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-  ```
-
+   - rockcraft 확장 검사
+   ```bash
+   export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+   rockcraft expand-extensions
+   ```
+   - runtime에 postgresql-client 패키지 추가
+   ```bash
+   cat <<EOF >> rockcraft.yaml
+   parts:
+      runtime-debs:
+         plugin: nil
+         stage-packages:
+         # Added manually for the migrations
+         - postgresql-client
+   EOF
+   ```
+   - (ARM64 전용) `rockcraft.yaml` 파일의 `platforms` 섹션 수정
+   ```bash
+   dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
+   ```
 3. rock 패키징
    ```bash
    rockcraft pack
    ```
-4. (선택 사항) 이미지를 로컬 Docker 레지스트리에 등록
+3. (선택 사항) 이미지 내용 확인
    ```bash
-   rockcraft.skopeo copy \
-     --insecure-policy \
-     --dest-tls-verify=false \
-     oci-archive:./go-hello-world_0.1_$(dpkg --print-architecture).rock \
-     docker-daemon:go-hello-world:0.1
-   ```
-5. (선택 사항) 이미지 내용 확인
-   ```bash
-   dive go-hello-world:0.1
+   dive docker-archive://go-hello-world_0.1_$(dpkg --print-architecture).rock
    ```
 6. 축하합니다! 이제 go-hello-world 애플리케이션을 위한 OCI 이미지가 준비되었습니다!
 
