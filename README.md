@@ -19,27 +19,26 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `expressjs-framework
   ```
   sudo snap install lxd && lxd init --auto
   ```
-- (optional): 🐳 [docker](https://docs.docker.com/engine/install/)
 - (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## 📦 How to pack a ExpressJS application
 
 1. Change the working directory
-   ```
+   ```bash
    cd expressjs-hello-world
    ```
 2. Initialize the project with rockcraft
-   ```
+   ```bash
    export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
    rockcraft init --profile expressjs-framework
    ```
 
 - Inspect the rockcraft extension
-  ```
+  ```bash
   rockcraft expand-extensions
   ```
 - Add the postgresql-client package to the runtime
-  ```
+  ```bash
   cat <<EOF >> rockcraft.yaml
   parts:
     runtime-debs:
@@ -50,25 +49,17 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `expressjs-framework
   EOF
   ```
 - (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
-  ```
+  ```bash
   dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
   ```
 
-2. Pack the rock
-   ```
+3. Pack the rock
+   ```bash
    rockcraft pack
    ```
-3. (Optional) Push the image to the local Docker registry
-   ```bash
-   rockcraft.skopeo copy \
-     --insecure-policy \
-     --dest-tls-verify=false \
-     oci-archive:./expressjs-hello-world_0.1_$(dpkg --print-architecture).rock \
-     docker-daemon:expressjs-hello-world:0.1
-   ```
 4. (Optional) Inspect the image
-   ```
-   dive expressjs-hello-world:0.1
+   ```bash
+   dive docker-archive://expressjs-hello-world_0.1_$(dpkg --print-architecture).rock
    ```
 5. Congratulations! You now have an OCI image for expressjs-hello-world application!
 
