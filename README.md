@@ -19,46 +19,36 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `flask-framework` ex
   ```
   sudo snap install lxd && lxd init --auto
   ```
-- (optional): 🐳 [docker](https://docs.docker.com/engine/install/)
 - (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## 📦 How to pack a Flask application
 
 1. Change the working directory
-   ```
-   cd flask-hello-world
-   ```
+  ```bash
+  cd flask-hello-world
+  ```
 2. Initialize the project with rockcraft
-   ```
-   rockcraft init --profile flask-framework
-   ```
+  ```bash
+  rockcraft init --profile flask-framework
+  ```
+  - Inspect the rockcraft extension
+    ```bash
+    export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+    rockcraft expand-extensions
+    ```
+  - (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
+    ```bash
+    dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
+    ```
 
-- Inspect the rockcraft extension
+3. Pack the rock
+  ```bash
+  rockcraft pack
   ```
-  export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-  rockcraft expand-extensions
-  ```
-- (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
-  ```
-  dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-  ```
-
-2. Pack the rock
-   ```
-   rockcraft pack
-   ```
-3. (Optional) Push the image to the local Docker registry:
-   ```bash
-   rockcraft.skopeo copy \
-     --insecure-policy \
-     --dest-tls-verify=false \
-     oci-archive:./flask-hello-world_0.1_$(dpkg --print-architecture).rock \
-     docker-daemon:flask-hello-world:0.1
-   ```
 4. (Optional) Inspect the image
-   ```
-   dive flask-hello-world:0.1
-   ```
+  ```
+  dive docker-archive://flask-hello-world_0.1_$(dpkg --print-architecture).rock
+  ```
 5. Congratulations! You now have an OCI image for flask-hello-world application!
 
 ## Next steps

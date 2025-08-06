@@ -18,7 +18,6 @@
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
-- (선택 사항): 🐳 [docker](https://docs.docker.com/engine/install/)
 - (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive) OCI 이미지 분석 도구
 
 ## 📦 Flask 애플리케이션 패키징 방법
@@ -31,34 +30,25 @@
    ```bash
    rockcraft init --profile flask-framework
    ```
-
-- rockcraft 확장 내용 확인
-  ```bash
-  export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-  rockcraft expand-extensions
-  ```
-- (ARM64 전용) `rockcraft.yaml` 파일의 `platforms` 섹션 수정
-  ```bash
-  dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-  ```
+   - rockcraft 확장 내용 확인
+   ```bash
+   export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+   rockcraft expand-extensions
+   ```
+   - (ARM64 전용) `rockcraft.yaml` 파일의 `platforms` 섹션 수정
+   ```bash
+   dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
+      ```
 
 3. rock 패키징
    ```bash
    rockcraft pack
    ```
-4. (선택 사항) 이미지를 로컬 Docker 레지스트리에 등록
+4. (선택 사항) 이미지 검사
    ```bash
-   rockcraft.skopeo copy \
-     --insecure-policy \
-     --dest-tls-verify=false \
-     oci-archive:./flask-hello-world_0.1_$(dpkg --print-architecture).rock \
-     docker-daemon:flask-hello-world:0.1
+   dive docker-archive://flask-hello-world_0.1_$(dpkg --print-architecture).rock
    ```
-5. (선택 사항) 이미지 검사
-   ```bash
-   dive flask-hello-world:0.1
-   ```
-6. 축하합니다! 이제 flask-hello-world 애플리케이션을 위한 OCI 이미지가 준비되었습니다!
+5. 축하합니다! 이제 flask-hello-world 애플리케이션을 위한 OCI 이미지가 준비되었습니다!
 
 ## 다음 단계
 
