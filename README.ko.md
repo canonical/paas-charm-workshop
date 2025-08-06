@@ -26,70 +26,99 @@
 ## 🚀 Flask 애플리케이션을 Juju에 배포하는 방법
 
 1. Juju 연결 테스트
-   ```bash
-   juju controllers
-   juju models
-   ```
+
+```bash
+juju controllers
+juju models
+```
+
 2. Juju 모델로 전환
-   ```bash
-   juju switch <your-model-name>
-   ```
+
+```bash
+export MODEL_NAME=<your-model-name>
+juju switch $MODEL_NAME
+```
+
 3. SaaS 오퍼 찾기
-   ```bash
-   juju find-offers ubucon-controller:
-   ```
+
+```bash
+juju find-offers ubucon-controller:
+```
+
 4. SaaS 애플리케이션 가져오기
-   ```bash
-   juju consume admin/database.postgresql
-   juju consume admin/cos.prometheus-k8s
-   juju consume admin/cos.loki-k8s
-   juju consume admin/cos.grafana-k8s
-   ```
+
+```bash
+juju consume admin/postgres.postgresql-k8s
+juju consume admin/cos.prometheus-k8s
+juju consume admin/cos.loki-k8s
+juju consume admin/cos.grafana-k8s
+```
+
 5. 애플리케이션을 Juju에 배포
-   ```bash
-   juju deploy ./flask-hello-world/charm/flask-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm --resource flask-app-image=localhost:32000/flask-hello-world:0.1
-   ```
+
+```bash
+export APPLICATION_NAME=<your-model-name>
+juju deploy ./flask-hello-world/charm/flask-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm \
+  $APPLICATION_NAME \
+  --resource flask-app-image=localhost:32000/flask-hello-world:0.1
+```
+
 6. 배포된 애플리케이션을 데이터베이스에 연결
-   ```bash
-   juju relate flask-hello-world postgresql
-   ```
+
+```bash
+juju relate $APPLICATION_NAME postgresql-k8s
+juju status --watch=5s
+```
+
 7. IP 주소를 사용하여 애플리케이션 테스트
-   ```bash
-   UNIT_IP=<your application's unit IP>
-   curl http://$UNIT_IP:8000/health
-   ```
+
+```bash
+UNIT_IP=<your application unit IP>
+curl http://$UNIT_IP:8000/health
+```
+
 8. nginx-ingress-integrator charm 배포
-   ```bash
-   juju deploy nginx-ingress-integrator --trust --config path-routes=/ --config service-hostname=<your-model-name>
-   ```
+
+```bash
+export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
+juju deploy nginx-ingress-integrator --trust \
+  --config path-routes="/" \
+  --config service-hostname=$SERVICE_HOSTNAME
+```
+
 9. 애플리케이션을 nginx-ingress-integrator에 연결
-   ```bash
-   juju relate flask-hello-world nginx-ingress-integrator
-   ```
+
+```bash
+juju relate $APPLICATION_NAME nginx-ingress-integrator
+```
+
    - nginx-ingress-integrator 단위 상태에서 ingress IP가 표시될 때까지 대기
-     ```bash
-     juju status --relations --watch 5s
-     ```
-10. `/etc/hosts` 파일에 애플리케이션 엔드포인트 추가
-    ```bash
-    INGRESS_IP=<ingress-ip>
-    MODEL_NAME=<your-model-name>
-    echo "$INGRESS_IP $MODEL_NAME" | sudo tee -a /etc/hosts
-    ```
+
+      ```bash
+      juju status --relations --watch 5s
+      ```
+
 11. 비밀 저장
-    ```bash
-    curl -X POST http://$INGRESS_IP/keys/ -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
-    ```
+
+```bash
+curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
+```
+
 12. 비밀 검색
-    ```bash
-    curl http://$INGRESS_IP/keys/<key-id>
-    ```
+
+```bash
+curl http://$SERVICE_HOSTNAME/keys/<key-id>
+```
+
 13. Canonical Observability Stack (COS) 연결
-    ```bash
-    juju relate flask-hello-world prometheus-k8s
-    juju relate flask-hello-world loki-k8s
-    juju relate flask-hello-world grafana-k8s
-    ```
+
+```bash
+juju relate $APPLICATION_NAME prometheus-k8s
+juju relate $APPLICATION_NAME loki-k8s
+juju relate $APPLICATION_NAME grafana-k8s
+juju status --watch=5s
+```
+
 14. Grafana URL 방문 (링크 및 자격 증명은 스프레드시트에서 확인)
 
 ## 추가 정보
