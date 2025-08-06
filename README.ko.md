@@ -54,7 +54,7 @@
    ```bash
    rockcraft pack
    ```
-3. (선택 사항) 이미지 내용 확인
+3. (선택 사항) 이미지 분석
    ```bash
    dive docker-archive://go-hello-world_0.1_$(dpkg --print-architecture).rock
    ```
