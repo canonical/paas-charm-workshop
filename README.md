@@ -122,6 +122,7 @@ curl http://$SERVICE_HOSTNAME/keys/<key-id>
 juju relate $APPLICATION_NAME prometheus-k8s
 juju relate $APPLICATION_NAME loki-k8s
 juju relate $APPLICATION_NAME grafana-k8s
+juju status --watch=5s
 ```
 
 14. Visit the Grafana URL (link & credentials in spreadsheet)
