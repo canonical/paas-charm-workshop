@@ -19,48 +19,37 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `fastapi-framework` 
   ```
   sudo snap install lxd && lxd init --auto
   ```
-- (optional): 🐳 [docker](https://docs.docker.com/engine/install/)
 - (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## 📦 How to pack a FastAPI application
 
 1. Change the working directory
-   ```
+   ```bash
    cd fastapi-hello-world
    ```
 2. Initialize the project with rockcraft
-
-   ```rockcraft init --profile fastapi-framework
-
+   ```bash
+   rockcraft init --profile fastapi-framework
    ```
-
-- Inspect the rockcraft extension
-  ```
-  export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-  rockcraft expand-extensions
-  ```
-- (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
-  ```
-  dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-  ```
+    - Inspect the rockcraft extension
+      ```bash
+      export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+      rockcraft expand-extensions
+      ```
+    - (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
+      ```bash
+      dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
+      ```
 
 3. Pack the rock
-   ```
+   ```bash
    rockcraft pack
    ```
-4. (Optional) Push the image to the local Docker registry
-   ```bash
-   rockcraft.skopeo copy \
-     --insecure-policy \
-     --dest-tls-verify=false \
-     oci-archive:./fastapi-hello-world_0.1_$(dpkg --print-architecture)$.rock \
-     docker-daemon:fastapi-hello-world:0.1
+4. (Optional) Inspect the image
    ```
-5. (Optional) Inspect the image
+   dive docker-archive://fastapi-hello-world_0.1_$(dpkg --print-architecture).rock
    ```
-   dive fastapi-hello-world:0.1
-   ```
-6. Congratulations! You now have an OCI image for fastapi-hello-world application!
+5. Congratulations! You now have an OCI image for fastapi-hello-world application!
 
 ## Next steps
 
