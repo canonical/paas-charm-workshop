@@ -1,46 +1,71 @@
-# 🚀 Deploy a 12-factor application of your choice end-to-end!
+# Hello Ubucon! Welcome to 12-factor Go app!
 
 <p align="center">
-  <img src="./docs/juju_status.png">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR069DA1jDGVM8x3_8vpwJtjjyabv40qNkm7A5NTiJyRzIYPf38vO8SW4v7R4YcvekCdjCZ6smEpvMk6j3pHTK05QH8PSkP0Dy8IjA-Y-th">
 </p>
 
 \*Read this in other languages: [English](README.md), [한국어](README.ko.md)
 
-This repository is the starting point of the seminar "Deploy a 12-factor application of your
-choice end-to-end!". Choose a framework of your choice and deploy it to an environment. Each step
-of the seminar is a branch in this repository, so don't worry if you don't have time for all steps.
+This is a simple example of a 12-factor Spring Boot application. It's initialized using the 
+Spring Initializr tool, packaged as a snap.
 
-## 🌱 How to start
+This application exposes 3 endpoints:
 
-1. Clone this repository
+- /health
+- /fibonacci/:number (requires postgresql database)
+- /keys
+
+## Prerequisites
+
+- java
 
 ```bash
-git clone https://github.com/canonical/paas-charm-workshop.git
+sudo apt install -y default-jdk
 ```
 
-2. Choose one of the following frameworks:
+- (Optional) devpack-for-spring snap
 
-- [Django](https://github.com/yanksyoon/hello-ubucon/tree/django) (`git checkout django`)
-- [ExpressJS](https://github.com/yanksyoon/hello-ubucon/tree/expressjs) (`git checkout expressjs`)
-- [FastAPI](https://github.com/yanksyoon/hello-ubucon/tree/fastapi) (`git checkout fastapi`)
-- [Flask](https://github.com/yanksyoon/hello-ubucon/tree/flask) (`git checkout flask`)
-- [Go](https://github.com/yanksyoon/hello-ubucon/tree/go) (`git checkout go`)
-- [Spring Boot](https://github.com/yanksyoon/hello-ubucon/tree/springboot) (`git checkout springboot`)
+```bash
+sudo snap install devpack-for-spring --classic
+devpack-for-spring boot start \
+  --path spring-hello-world \
+  --project maven-project \
+  --language java \
+  --boot-version 3.4.4 \
+  --version 0.0.1 \
+  --group com.example \
+  --artifact spring-hello-world \
+  --name spring-hello-world \
+  --description "Demo project for Spring Boot" \
+  --package-name com.example.spring-hello-world \
+  --dependencies web \
+  --packaging jar \
+  --java-version 21
+```
 
-3. Switch the branch to the framework you chose (e.g., `git checkout django`)
-4. Follow the instructions in the `README.md`!
+## 🏃 How to run it locally?
 
-## 👨🏻‍💻 Intended outcomes
+1. Change the working directory
 
-- You should be able to deploy a 12-factor application of your choice end-to-end! This means that:
-  - The application OCI image is created and pushed to a repository.
-  - The application is deployed to a Juju + Microk8s environment.
+```bash
+cd spring-hello-world
+```
 
-## 📝 Prerequisites
+2. Run the server
 
-The following snaps are required for the tutorial.
+```bash
+./mvnw spring-boot:run
+```
 
-- [Rockcraft](https://snapcraft.io/rockcraft)
-- [Charmcraft](https://snapcraft.io/charmcraft)
-- [Juju](https://snapcraft.io/juju)
-- [LXD](https://snapcraft.io/lxd)
+3. Test the endpoints using the following curl commands
+
+```
+curl http://localhost:8080/health
+curl http://localhost:8080/fibonacci/9
+```
+
+4. Congratulations! You've finished exploring the Spring Hello World project!
+
+## Next steps
+
+Let's start packaging! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/springboot-01-rock) `git checkout springboot-01-rock`
