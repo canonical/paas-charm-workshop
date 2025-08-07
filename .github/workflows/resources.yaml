@@ -1,0 +1,40 @@
+name: Create artifact
+on:
+  push:
+    tags:
+      - "springboot-complete"
+jobs:
+  build:
+    strategy:
+      matrix:
+        runtime: [ amd64, arm64 ]
+
+    name: Build and release asset
+    runs-on: [self-hosted, "${{ matrix.runtime }}"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup LXD
+        uses: canonical/setup-lxd@main
+
+      - name: Install Rockcraft
+        run: |
+          sudo snap install rockcraft --classic --channel=latest/edge
+      - name: Install Charmcraft
+        run: |
+          sudo snap install charmcraft --classic --channel=latest/edge
+      - name: Build rock
+        run: |
+          cd *-hello-world
+          export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+          rockcraft pack
+      - name: Build charm
+        run: cd *-hello-world/charm && charmcraft pack
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            **/*.rock
+            **/*.charm
+          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
