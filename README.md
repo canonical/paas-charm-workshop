@@ -1,49 +1,31 @@
-# Hello Ubucon! Welcome to 12-factor Go app!
+# Hello Ubucon! Welcome to 12-factor Flask rock!
 
 <p align="center">
-    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR069DA1jDGVM8x3_8vpwJtjjyabv40qNkm7A5NTiJyRzIYPf38vO8SW4v7R4YcvekCdjCZ6smEpvMk6j3pHTK05QH8PSkP0Dy8IjA-Y-th">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt_7ioYr9T6uh35rT46Z_cyNVtMM_SgbHppA&s">
 </p>
 
 \*Read this in other languages: [English](README.md), [한국어](README.ko.md)
 
-This is a simple example of a 12-factor Spring Boot application. It's initialized using the 
-Spring Initializr tool, packaged as a snap.
+This section guides you to packing the spring-hello-world project into an OCI compliant image
+using [Rockcraft](https://github.com/canonical/rockcraft)'s `spring-boot-framework` extension.
 
-This application exposes 3 endpoints:
+## 📝 Prerequisites
 
-- /health
-- /fibonacci/:number (requires postgresql database)
-- /keys
-
-## Prerequisites
-
-- java
+- 🪨 rockcraft
 
 ```bash
-sudo apt install -y default-jdk
+sudo snap install rockcraft --channel=latest/edge --classic
 ```
 
-- (Optional) devpack-for-spring snap
+- ☁️ lxd
 
 ```bash
-sudo snap install devpack-for-spring --classic
-devpack-for-spring boot start \
-  --path spring-hello-world \
-  --project maven-project \
-  --language java \
-  --boot-version 3.4.4 \
-  --version 0.0.1 \
-  --group com.example \
-  --artifact spring-hello-world \
-  --name spring-hello-world \
-  --description "Demo project for Spring Boot" \
-  --package-name com.example.spring-hello-world \
-  --dependencies web \
-  --packaging jar \
-  --java-version 21
+sudo snap install lxd && lxd init --auto
 ```
 
-## 🏃 How to run it locally?
+- (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
+
+## 📦 How to pack a Flask application
 
 1. Change the working directory
 
@@ -51,21 +33,39 @@ devpack-for-spring boot start \
 cd spring-hello-world
 ```
 
-2. Run the server
+2. Initialize the project with rockcraft
 
 ```bash
-./mvnw spring-boot:run
+rockcraft init --profile spring-boot-framework
 ```
 
-3. Test the endpoints using the following curl commands
+  - Inspect the rockcraft extension
+
+    ```bash
+    export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+    rockcraft expand-extensions
+    ```
+
+  - (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
+
+    ```bash
+    dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
+    ```
+
+3. Pack the rock
+
+```bash
+rockcraft pack
+```
+
+4. (Optional) Inspect the image
 
 ```
-curl http://localhost:8080/health
-curl http://localhost:8080/fibonacci/9
+dive docker-archive://spring-hello-world_0.1_$(dpkg --print-architecture).rock
 ```
 
-4. Congratulations! You've finished exploring the Spring Hello World project!
+5. Congratulations! You now have an OCI image for flask-hello-world application!
 
 ## Next steps
 
-Let's start packaging! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/springboot-01-rock) `git checkout springboot-01-rock`
+Let's start charming! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/springboot-02-charm) `git checkout springboot-02-charm`

@@ -1,48 +1,30 @@
-# 안녕하세요, Ubucon! 12-factor Go 앱에 오신 것을 환영합니다!
+# 안녕하세요, Ubucon! 12-factor Flask rock에 오신 것을 환영합니다!
 
 <p align="center">
-    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR069DA1jDGVM8x3_8vpwJtjjyabv40qNkm7A5NTiJyRzIYPf38vO8SW4v7R4YcvekCdjCZ6smEpvMk6j3pHTK05QH8PSkP0Dy8IjA-Y-th">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt_7ioYr9T6uh35rT46Z_cyNVtMM_SgbHppA&s">
 </p>
 
-\*Read this in other languages: [English](README.md), [한국어](README.ko.md)
+\*다른 언어로 읽기: [English](README.md), [한국어](README.ko.md)
 
-이 앱은 12-factor Spring Boot 애플리케이션의 간단한 예입니다. Spring Boot의 Spring Initializr를 사용하여 초기화되었습니다.
+이 섹션은 [Rockcraft](https://github.com/canonical/rockcraft)의 `spring-boot-framework` 확장을 사용하여 spring-hello-world 프로젝트를 OCI 이미지로 패키징하는 방법을 안내합니다.
 
-이 애플리케이션은 3개의 엔드포인트를 제공합니다:
+## 📝 필수 조건
 
-- /health
-- /fibonacci/:number (postgresql 데이터베이스 필요)
-- /keys
-
-## 필요 사항
-
-- java
+- 🪨 rockcraft
 
 ```bash
-sudo apt install -y default-jdk
+sudo snap install rockcraft --channel=latest/edge --classic
 ```
 
-- (선택사항) devpack-for-spring snap
+- ☁️ lxd
 
 ```bash
-sudo snap install devpack-for-spring --classic
-devpack-for-spring boot start \
-  --path spring-hello-world \
-  --project maven-project \
-  --language java \
-  --boot-version 3.4.4 \
-  --version 0.0.1 \
-  --group com.example \
-  --artifact spring-hello-world \
-  --name spring-hello-world \
-  --description "Demo project for Spring Boot" \
-  --package-name com.example.spring-hello-world \
-  --dependencies web \
-  --packaging jar \
-  --java-version 21
+sudo snap install lxd && lxd init --auto
 ```
 
-## 🏃 로컬에서 실행하는 방법
+- (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive) OCI 이미지 분석 도구
+
+## 📦 Flask 애플리케이션 패키징 방법
 
 1. 작업 디렉토리 변경
 
@@ -50,22 +32,39 @@ devpack-for-spring boot start \
 cd spring-hello-world
 ```
 
-
-2. 서버 실행
+2. rockcraft로 프로젝트 초기화
 
 ```bash
-./mvnw spring-boot:run
+rockcraft init --profile spring-boot-framework
 ```
 
-3. 다음 curl 명령어를 사용하여 엔드포인트 테스트
+   - rockcraft 확장 내용 확인
 
-```
-curl http://localhost:8080/health
-curl http://localhost:8080/fibonacci/9
+  ```bash
+  export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+  rockcraft expand-extensions
+  ```
+
+   - (ARM64 전용) `rockcraft.yaml` 파일의 `platforms` 섹션 수정
+
+  ```bash
+  dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
+  ```
+
+3. rock 패키징
+
+```bash
+rockcraft pack
 ```
 
-4. 축하합니다! Spring Hello World 프로젝트 탐색을 완료했습니다!
+4. (선택 사항) 이미지 분석
+
+```bash
+dive docker-archive://spring-hello-world_0.1_$(dpkg --print-architecture).rock
+```
+
+5. 축하합니다! 이제 spring-hello-world 애플리케이션을 위한 OCI 이미지가 준비되었습니다!
 
 ## 다음 단계
 
-패키징 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/springboot-01-rock) `git checkout springboot-01-rock`을 확인하세요.
+쥬쥬 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/springboot-02-charm) `git checkout springboot-02-charm`을 확인하세요.
