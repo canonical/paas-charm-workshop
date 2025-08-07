@@ -1,30 +1,28 @@
-# 안녕하세요, Ubucon! 12-factor Spring Boot rock에 오신 것을 환영합니다!
+# 안녕하세요, Ubucon! 12-factor Spring Boot charm에 오신 것을 환영합니다!
 
 <p align="center">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt_7ioYr9T6uh35rT46Z_cyNVtMM_SgbHppA&s">
+    <img src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_200,h_200/https://api.charmhub.io/api/v1/media/download/charm_g5MbnEy7wX7GTPtr20TcB16YCvXXZu2Y_icon_e08d61629f52f85dd79e8222b8b2360a7377af42e1a0f22fceca778ec3226d7c.png">
 </p>
 
 \*다른 언어로 읽기: [English](README.md), [한국어](README.ko.md)
 
-이 섹션은 [Rockcraft](https://github.com/canonical/rockcraft)의 `spring-boot-framework` 확장을 사용하여 spring-hello-world 프로젝트를 OCI 이미지로 패키징하는 방법을 안내합니다.
+이 섹션은 [Juju charms](https://juju.is/)를 사용하여 spring-hello-world 프로젝트에 운영 능력을 확장하는 방법을 안내합니다.
 
 ## 📝 필수 조건
 
-- 🪨 rockcraft
+- ✨ charmcraft
 
 ```bash
-sudo snap install rockcraft --channel=latest/edge --classic
+sudo snap install charmcraft --classic
 ```
 
-- ☁️ lxd
+- 📂 unzip
 
 ```bash
-sudo snap install lxd && lxd init --auto
+sudo apt install unzip
 ```
 
-- (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive) OCI 이미지 분석 도구
-
-## 📦 Spring Boot 애플리케이션 패키징 방법
+## 🪄 Spring Boot 애플리케이션을 Juju charms로 확장하는 방법
 
 1. 작업 디렉토리 변경
 
@@ -32,59 +30,73 @@ sudo snap install lxd && lxd init --auto
 cd spring-hello-world
 ```
 
-2. rockcraft로 프로젝트 초기화
+2. 별도의 charm 디렉토리 생성 및 작업 디렉토리 변경
 
 ```bash
-rockcraft init --profile spring-boot-framework
+mkdir charm && cd charm
 ```
 
-  - 데이터베이스 마이그레이션 스크립트 추가
-
-    ```bash
-    cat <<EOF >> rockcraft.yaml
-    parts:
-      runtime-debs:
-          plugin: nil
-          stage-packages:
-              # Added manually for the migrations
-              - postgresql-client
-      migrate:
-          plugin: dump
-          source: .
-          stage:
-              - app/migrate.sh
-          organize:
-              migrate.sh: app/migrate.sh
-    EOF
-    ```
-
-   - rockcraft 확장 내용 확인
-
-  ```bash
-  export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-  rockcraft expand-extensions
-  ```
-
-   - (ARM64 전용) `rockcraft.yaml` 파일의 `platforms` 섹션 수정
-
-  ```bash
-  dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-  ```
-
-3. rock 패키징
+3. charm 초기화
 
 ```bash
-rockcraft pack
+charmcraft init --profile spring-boot-framework --name spring-hello-world
 ```
 
-4. (선택 사항) 이미지 분석
+4. `charmcraft.yaml`에서 데이터베이스 관계 주석 해제
+
+```diff
++ requires:
++   postgresql:
++     interface: postgresql_client
++     optional: false
++     limit: 1
+```
 
 ```bash
-dive docker-archive://spring-hello-world_0.1_$(dpkg --print-architecture).rock
+# 또는 파일에 내용을 추가
+cat <<EOF >> charmcraft.yaml
+requires:
+  postgresql:
+    interface: postgresql_client
+    optional: false
+    limit: 1
+EOF
 ```
 
-5. 축하합니다! 이제 spring-hello-world 애플리케이션을 위한 OCI 이미지가 준비되었습니다!
+5. (권장) 같은 `charm` 디렉토리의 `requirements.txt` 파일을 수정하여 다음 줄 추가
+
+```diff
++ --no-binary=:none:
+ops ~= 2.17
+paas-charm>=1.0,<2
+```
+
+```bash
+# 또는 sed 사용:
+sed -i '1s/^/--no-binary=:none:\n/' requirements.txt
+```
+
+6. (ARM64 전용) `charmcraft.yaml` 파일의 `platforms` 섹션 수정
+
+```bash
+dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' charmcraft.yaml
+```
+
+7. charm 패키징
+
+```bash
+charmcraft pack
+```
+
+8. charm 내용 확인
+
+```bash
+mkdir inspect
+unzip spring-hello-world_$(dpkg --print-architecture).charm -d inspect
+```
+   
+9. 축하합니다! 이제 Juju에 배포할 수 있는 로컬 charm이 준비되었습니다!
 
 ## 다음 단계
 
-쥬쥬 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/springboot-02-charm) `git checkout springboot-02-charm`을 확인하세요.
+배포 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/spring-03-deploy) `git checkout spring-03-deploy`을 확인하세요.

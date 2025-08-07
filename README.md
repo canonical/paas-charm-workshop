@@ -1,31 +1,29 @@
-# Hello Ubucon! Welcome to 12-factor Spring Boot rock!
+# Hello Ubucon! Welcome to 12-factor Spring Boot charm!
 
 <p align="center">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt_7ioYr9T6uh35rT46Z_cyNVtMM_SgbHppA&s">
+    <img src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_200,h_200/https://api.charmhub.io/api/v1/media/download/charm_g5MbnEy7wX7GTPtr20TcB16YCvXXZu2Y_icon_e08d61629f52f85dd79e8222b8b2360a7377af42e1a0f22fceca778ec3226d7c.png">
 </p>
 
 \*Read this in other languages: [English](README.md), [한국어](README.ko.md)
 
-This section guides you to packing the spring-hello-world project into an OCI compliant image
-using [Rockcraft](https://github.com/canonical/rockcraft)'s `spring-boot-framework` extension.
+This section guides you to extending the spring-hello-world project with operational capabilities
+using [Juju charms](https://juju.is/).
 
 ## 📝 Prerequisites
 
-- 🪨 rockcraft
+- ✨ charmcraft
 
 ```bash
-sudo snap install rockcraft --channel=latest/edge --classic
+sudo snap install charmcraft --classic
 ```
 
-- ☁️ lxd
+- 📂 unzip
 
 ```bash
-sudo snap install lxd && lxd init --auto
+sudo apt install unzip
 ```
 
-- (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
-
-## 📦 How to pack a Spring Boot application
+## 🪄 How to extend a Spring Boot application with Juju charms
 
 1. Change the working directory
 
@@ -33,58 +31,73 @@ sudo snap install lxd && lxd init --auto
 cd spring-hello-world
 ```
 
-2. Initialize the project with rockcraft
+2. Create a separate charm directory and change the working directory
 
 ```bash
-rockcraft init --profile spring-boot-framework
+mkdir charm && cd charm
 ```
-  - Add the migration script to the image
 
-    ```bash
-    cat <<EOF >> rockcraft.yaml
-    parts:
-      runtime-debs:
-          plugin: nil
-          stage-packages:
-              # Added manually for the migrations
-              - postgresql-client
-      migrate:
-          plugin: dump
-          source: .
-          stage:
-              - app/migrate.sh
-          organize:
-              migrate.sh: app/migrate.sh
-    EOF
-    ```
-
-  - Inspect the rockcraft extension
-
-    ```bash
-    export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-    rockcraft expand-extensions
-    ```
-
-  - (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
-
-    ```bash
-    dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-    ```
-
-3. Pack the rock
+3. Initialize the charm
 
 ```bash
-rockcraft pack
+charmcraft init --profile spring-boot-framework --name spring-hello-world
 ```
 
-4. (Optional) Inspect the image
+4. Uncomment the database relation in `charmcraft.yaml`
 
-```
-dive docker-archive://spring-hello-world_0.1_$(dpkg --print-architecture).rock
+```diff
++ requires:
++   postgresql:
++     interface: postgresql_client
++     optional: false
++     limit: 1
 ```
 
-5. Congratulations! You now have an OCI image for flask-hello-world application!
+```bash
+# or append the contents to the file
+cat <<EOF >> charmcraft.yaml
+requires:
+  postgresql:
+    interface: postgresql_client
+    optional: false
+    limit: 1
+EOF
+```
+
+5. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file
+
+```diff
++ --no-binary=:none:
+ops ~= 2.17
+paas-charm>=1.0,<2
+```
+
+```bash
+# or use sed:
+sed -i '1s/^/--no-binary=:none:\n/' requirements.txt
+```
+
+6. (ARM64 only) modify the `platforms` section of the `charmcraft.yaml` file
+
+```bash
+dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' charmcraft.yaml
+```
+
+7. Pack the charm
+
+```bash
+charmcraft pack
+```
+
+8. Inspect the charm
+
+```bash
+mkdir inspect
+unzip spring-hello-world_$(dpkg --print-architecture).charm -d inspect
+```
+
+9. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
-Let's start charming! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/springboot-02-charm) `git checkout springboot-02-charm`
+Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/spring-03-deploy) `git checkout spring-03-deploy`
