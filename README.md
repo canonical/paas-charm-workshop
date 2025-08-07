@@ -1,103 +1,132 @@
-# Hello Ubucon! Welcome to 12-factor Spring Boot charm!
+# Hello Ubucon! Welcome to 12-factor Spring Boot deployment!
 
 <p align="center">
-    <img src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_200,h_200/https://api.charmhub.io/api/v1/media/download/charm_g5MbnEy7wX7GTPtr20TcB16YCvXXZu2Y_icon_e08d61629f52f85dd79e8222b8b2360a7377af42e1a0f22fceca778ec3226d7c.png">
+    <img src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_450,h_366/https://assets.ubuntu.com/v1/8e1d3bf5-juju-hero-juju.is.svg">
 </p>
 
 \*Read this in other languages: [English](README.md), [한국어](README.ko.md)
 
-This section guides you to extending the spring-hello-world project with operational capabilities
-using [Juju charms](https://juju.is/).
+This section guides you through deploying a Spring Boot application on Juju and Microk8s!
 
 ## 📝 Prerequisites
 
-- ✨ charmcraft
+- 🔮 [Juju](https://juju.is/)
+  ```
+  sudo snap install juju --channel=3/stable
+  ```
+- 🔑 Juju credentials (we don't want to overload the network with Juju and Microk8s)
+  - Go to the Google Spreadsheet link on the slides and,
+    1. download the credentials
+    ```
+    wget <link-to-juju-controller.tar.gz>
+    mkdir -p ~/.local/share/
+    tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
+    ```
+    2. choose a Juju model with your corresponding architecture, mark your name down on the "Assigned" column.
+
+## 🚀 How to deploy a Spring Boot application on Juju
+
+In this section, to be nice to our network, we've already populated the spring boot application image
+on MicroK8s.
+
+We'll also be using a shared Juju + Microk8s cluster :)
+
+1. Test your juju connection
 
 ```bash
-sudo snap install charmcraft --classic
+juju controllers
+juju models
 ```
 
-- 📂 unzip
+2. Switch to your Juju model
 
 ```bash
-sudo apt install unzip
+export MODEL_NAME=<your-model-name>
+juju switch $MODEL_NAME
 ```
 
-## 🪄 How to extend a Spring Boot application with Juju charms
-
-1. Change the working directory
+3. Find SaaS offers
 
 ```bash
-cd spring-hello-world
+juju find-offers ubucon-controller:
 ```
 
-2. Create a separate charm directory and change the working directory
+4. Import SaaS applications
 
 ```bash
-mkdir charm && cd charm
+juju consume admin/postgres.postgresql-k8s
+juju consume admin/cos.prometheus-k8s
+juju consume admin/cos.loki-k8s
+juju consume admin/cos.grafana-k8s
 ```
 
-3. Initialize the charm
+5. Deploy the application to Juju
 
 ```bash
-charmcraft init --profile spring-boot-framework --name spring-hello-world
+export APPLICATION_NAME=<your-model-name>
+juju deploy ./spring-hello-world/charm/spring-hello-world_$(dpkg --print-architecture).charm \
+  $APPLICATION_NAME \
+  --resource app-image=localhost:32000/spring-hello-world:0.1
 ```
 
-4. Uncomment the database relation in `charmcraft.yaml`
-
-```diff
-+ requires:
-+   postgresql:
-+     interface: postgresql_client
-+     optional: false
-+     limit: 1
-```
+6. Relate the deployed application to database
 
 ```bash
-# or append the contents to the file
-cat <<EOF >> charmcraft.yaml
-requires:
-  postgresql:
-    interface: postgresql_client
-    optional: false
-    limit: 1
-EOF
+juju relate $APPLICATION_NAME postgresql-k8s
+juju status --watch=5s
 ```
 
-5. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file
-
-```diff
-+ --no-binary=:none:
-ops ~= 2.17
-paas-charm>=1.0,<2
-```
+7. Test the application using the unit IP address
 
 ```bash
-# or use sed:
-sed -i '1s/^/--no-binary=:none:\n/' requirements.txt
+UNIT_IP=<your application unit IP>
+curl http://$UNIT_IP:8000/health
 ```
 
-6. (ARM64 only) modify the `platforms` section of the `charmcraft.yaml` file
+8. Deploy nginx-ingress-integrator charm
 
 ```bash
-dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' charmcraft.yaml
+export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
+juju deploy nginx-ingress-integrator --trust \
+  --config path-routes="/" \
+  --config service-hostname=$SERVICE_HOSTNAME
 ```
 
-7. Pack the charm
+9. Relate the application application to nginx-ingress-integrator
 
 ```bash
-charmcraft pack
+juju relate $APPLICATION_NAME nginx-ingress-integrator
 ```
 
-8. Inspect the charm
+  - Wait for the ingress IP to show up on the nginx-ingress-integrator unit status
+
+    ```bash
+    juju status --relations --watch 5s
+    ```
+
+11. Store your secret
 
 ```bash
-mkdir inspect
-unzip spring-hello-world_$(dpkg --print-architecture).charm -d inspect
+curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
 ```
 
-9. Congratulations! You have have a local charm you can deploy to Juju!
+12. Retrieve your secret
 
-## Next steps
+```bash
+curl http://$SERVICE_HOSTNAME/keys/<key-id>
+```
 
-Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/spring-03-deploy) `git checkout spring-03-deploy`
+13. Relate Canonical Observability Stack (COS)
+
+```bash
+juju relate $APPLICATION_NAME prometheus-k8s
+juju relate $APPLICATION_NAME loki-k8s
+juju relate $APPLICATION_NAME grafana-k8s
+juju status --watch=5s
+```
+
+14. Visit the Grafana URL (link & credentials in spreadsheet)
+
+## Further information
+
+The complete documentation and tutorial is available at [12-factor application read the docs](https://canonical-12-factor-app-support.readthedocs-hosted.com/latest/tutorial/)!

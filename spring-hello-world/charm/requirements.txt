@@ -1,0 +1,3 @@
+--no-binary=:none:
+ops ~= 2.17
+paas-charm>=1.0,<2

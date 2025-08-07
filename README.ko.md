@@ -1,102 +1,130 @@
-# 안녕하세요, Ubucon! 12-factor Spring Boot charm에 오신 것을 환영합니다!
+# 안녕하세요, Ubucon! 12-factor Spring Boot 배포에 오신 것을 환영합니다!
 
 <p align="center">
-    <img src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_200,h_200/https://api.charmhub.io/api/v1/media/download/charm_g5MbnEy7wX7GTPtr20TcB16YCvXXZu2Y_icon_e08d61629f52f85dd79e8222b8b2360a7377af42e1a0f22fceca778ec3226d7c.png">
+    <img src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_450,h_366/https://assets.ubuntu.com/v1/8e1d3bf5-juju-hero-juju.is.svg">
 </p>
 
 \*다른 언어로 읽기: [English](README.md), [한국어](README.ko.md)
 
-이 섹션은 [Juju charms](https://juju.is/)를 사용하여 spring-hello-world 프로젝트에 운영 능력을 확장하는 방법을 안내합니다.
+이 섹션은 Juju와 Microk8s에서 Spring Boot 애플리케이션을 배포하는 방법을 안내합니다!
 
 ## 📝 필수 조건
 
-- ✨ charmcraft
+- 🔮 [Juju](https://juju.is/)
+  ```bash
+  sudo snap install juju --channel=3/stable
+  ```
+- 🔑 Juju 서버 세팅/접속키 다운로드 (네트워크 과부하를 방지하기 위해 준비했습니다~)
+  - 슬라이드의 Google 스프레드시트 링크에서 쥬쥬 세팅/접속키를 다운로드합니다.
+    ```bash
+    wget <link-to-juju-controller.tar.gz>
+    mkdir -p ~/.local/share/
+    tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
+    ```
+    - 해당 아키텍처에 맞는 Juju 모델을 선택하고 "Assigned" 열에 이름을 기록해주세요.
+
+## 🚀 Spring Boot 애플리케이션을 Juju에 배포하는 방법
+
+이번 섹션에서는 네트워크 과부화 방지를 위해 미리 스프링 애플리케이션 OCI이미지를 Microk8s registry에 준비해놓았습니다 :)
+
+공유된 Juju + Microk8s 클러스터를 사용해봅니다.
+
+1. Juju 연결 테스트
 
 ```bash
-sudo snap install charmcraft --classic
+juju controllers
+juju models
 ```
 
-- 📂 unzip
+2. Juju 모델로 전환
 
 ```bash
-sudo apt install unzip
+export MODEL_NAME=<your-model-name>
+juju switch $MODEL_NAME
 ```
 
-## 🪄 Spring Boot 애플리케이션을 Juju charms로 확장하는 방법
-
-1. 작업 디렉토리 변경
+3. SaaS 오퍼 찾기
 
 ```bash
-cd spring-hello-world
+juju find-offers ubucon-controller:
 ```
 
-2. 별도의 charm 디렉토리 생성 및 작업 디렉토리 변경
+4. SaaS 애플리케이션 가져오기
 
 ```bash
-mkdir charm && cd charm
+juju consume admin/postgres.postgresql-k8s
+juju consume admin/cos.prometheus-k8s
+juju consume admin/cos.loki-k8s
+juju consume admin/cos.grafana-k8s
 ```
 
-3. charm 초기화
+5. 애플리케이션을 Juju에 배포
 
 ```bash
-charmcraft init --profile spring-boot-framework --name spring-hello-world
+export APPLICATION_NAME=<your-model-name>
+juju deploy ./spring-hello-world/charm/spring-hello-world_$(dpkg --print-architecture).charm \
+  $APPLICATION_NAME \
+  --resource app-image=localhost:32000/spring-hello-world:0.1
 ```
 
-4. `charmcraft.yaml`에서 데이터베이스 관계 주석 해제
-
-```diff
-+ requires:
-+   postgresql:
-+     interface: postgresql_client
-+     optional: false
-+     limit: 1
-```
+6. 배포된 애플리케이션을 데이터베이스에 연결
 
 ```bash
-# 또는 파일에 내용을 추가
-cat <<EOF >> charmcraft.yaml
-requires:
-  postgresql:
-    interface: postgresql_client
-    optional: false
-    limit: 1
-EOF
+juju relate $APPLICATION_NAME postgresql-k8s
+juju status --watch=5s
 ```
 
-5. (권장) 같은 `charm` 디렉토리의 `requirements.txt` 파일을 수정하여 다음 줄 추가
-
-```diff
-+ --no-binary=:none:
-ops ~= 2.17
-paas-charm>=1.0,<2
-```
+7. IP 주소를 사용하여 애플리케이션 테스트
 
 ```bash
-# 또는 sed 사용:
-sed -i '1s/^/--no-binary=:none:\n/' requirements.txt
+UNIT_IP=<your application unit IP>
+curl http://$UNIT_IP:8000/health
 ```
 
-6. (ARM64 전용) `charmcraft.yaml` 파일의 `platforms` 섹션 수정
+8. nginx-ingress-integrator charm 배포
 
 ```bash
-dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' charmcraft.yaml
+export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
+juju deploy nginx-ingress-integrator --trust \
+  --config path-routes="/" \
+  --config service-hostname=$SERVICE_HOSTNAME
 ```
 
-7. charm 패키징
+9. 애플리케이션을 nginx-ingress-integrator에 연결
 
 ```bash
-charmcraft pack
+juju relate $APPLICATION_NAME nginx-ingress-integrator
 ```
 
-8. charm 내용 확인
+   - nginx-ingress-integrator 단위 상태에서 ingress IP가 표시될 때까지 대기
+
+      ```bash
+      juju status --relations --watch 5s
+      ```
+
+11. 비밀 저장
 
 ```bash
-mkdir inspect
-unzip spring-hello-world_$(dpkg --print-architecture).charm -d inspect
+curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
 ```
-   
-9. 축하합니다! 이제 Juju에 배포할 수 있는 로컬 charm이 준비되었습니다!
 
-## 다음 단계
+12. 비밀 검색
 
-배포 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/spring-03-deploy) `git checkout spring-03-deploy`을 확인하세요.
+```bash
+curl http://$SERVICE_HOSTNAME/keys/<key-id>
+```
+
+13. Canonical Observability Stack (COS) 연결
+
+```bash
+juju relate $APPLICATION_NAME prometheus-k8s
+juju relate $APPLICATION_NAME loki-k8s
+juju relate $APPLICATION_NAME grafana-k8s
+juju status --watch=5s
+```
+
+14. Grafana URL 방문 (링크 및 자격 증명은 스프레드시트에서 확인)
+
+## 추가 정보
+
+전체 튜토리얼은 [12-factor application read the docs](https://canonical-12-factor-app-support.readthedocs-hosted.com/latest/tutorial/)에서 확인할 수 있습니다!
