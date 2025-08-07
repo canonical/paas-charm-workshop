@@ -1,4 +1,4 @@
-# Hello Ubucon! Welcome to 12-factor Flask rock!
+# Hello Ubucon! Welcome to 12-factor Spring Boot rock!
 
 <p align="center">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt_7ioYr9T6uh35rT46Z_cyNVtMM_SgbHppA&s">
@@ -25,7 +25,7 @@ sudo snap install lxd && lxd init --auto
 
 - (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
-## 📦 How to pack a Flask application
+## 📦 How to pack a Spring Boot application
 
 1. Change the working directory
 

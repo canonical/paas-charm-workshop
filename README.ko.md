@@ -1,4 +1,4 @@
-# 안녕하세요, Ubucon! 12-factor Flask rock에 오신 것을 환영합니다!
+# 안녕하세요, Ubucon! 12-factor Spring Boot rock에 오신 것을 환영합니다!
 
 <p align="center">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt_7ioYr9T6uh35rT46Z_cyNVtMM_SgbHppA&s">
@@ -24,7 +24,7 @@ sudo snap install lxd && lxd init --auto
 
 - (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive) OCI 이미지 분석 도구
 
-## 📦 Flask 애플리케이션 패키징 방법
+## 📦 Spring Boot 애플리케이션 패키징 방법
 
 1. 작업 디렉토리 변경
 
