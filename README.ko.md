@@ -38,6 +38,26 @@ cd spring-hello-world
 rockcraft init --profile spring-boot-framework
 ```
 
+  - 데이터베이스 마이그레이션 스크립트 추가
+
+    ```bash
+    cat <<EOF >> rockcraft.yaml
+    parts:
+      runtime-debs:
+          plugin: nil
+          stage-packages:
+              # Added manually for the migrations
+              - postgresql-client
+      migrate:
+          plugin: dump
+          source: .
+          stage:
+              - app/migrate.sh
+          organize:
+              migrate.sh: app/migrate.sh
+    EOF
+    ```
+
    - rockcraft 확장 내용 확인
 
   ```bash

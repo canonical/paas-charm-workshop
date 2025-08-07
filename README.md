@@ -38,6 +38,25 @@ cd spring-hello-world
 ```bash
 rockcraft init --profile spring-boot-framework
 ```
+  - Add the migration script to the image
+
+    ```bash
+    cat <<EOF >> rockcraft.yaml
+    parts:
+      runtime-debs:
+          plugin: nil
+          stage-packages:
+              # Added manually for the migrations
+              - postgresql-client
+      migrate:
+          plugin: dump
+          source: .
+          stage:
+              - app/migrate.sh
+          organize:
+              migrate.sh: app/migrate.sh
+    EOF
+    ```
 
   - Inspect the rockcraft extension
 
