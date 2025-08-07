@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 public class KeyController {
@@ -32,7 +33,7 @@ public class KeyController {
     }
 
     @GetMapping("/keys/{id}")
-    public ResponseEntity<SecretKey> getKey(@PathVariable Long id) {
+    public ResponseEntity<SecretKey> getKey(@PathVariable UUID id) {
         Optional<SecretKey> key = keyService.getKey(id);
         return key.map(ResponseEntity::ok)
                   .orElseGet(() -> ResponseEntity.notFound().build());
