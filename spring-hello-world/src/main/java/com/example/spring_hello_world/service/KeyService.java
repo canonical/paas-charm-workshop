@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Service
 public class KeyService {
@@ -19,7 +20,7 @@ public class KeyService {
         return secretKeyRepository.save(key);
     }
 
-    public Optional<SecretKey> getKey(Long id) {
+    public Optional<SecretKey> getKey(UUID id) {
         return secretKeyRepository.findById(id);
     }
 
