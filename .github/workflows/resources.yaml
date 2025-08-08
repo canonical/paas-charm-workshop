@@ -20,7 +20,7 @@ jobs:
 
       - name: Install Rockcraft
         run: |
-          sudo snap install rockcraft --classic --channel=latest/edge
+          sudo snap install rockcraft --classic
       - name: Install Charmcraft
         run: |
           sudo snap install charmcraft --classic --channel=latest/edge
@@ -38,6 +38,3 @@ jobs:
             **/*.rock
             **/*.charm
           token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-      - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: canonical/action-tmate@main
