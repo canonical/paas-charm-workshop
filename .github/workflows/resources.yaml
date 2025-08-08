@@ -38,3 +38,6 @@ jobs:
             **/*.rock
             **/*.charm
           token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: canonical/action-tmate@main
