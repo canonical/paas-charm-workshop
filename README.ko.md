@@ -60,7 +60,7 @@ juju consume admin/cos.grafana
 export APPLICATION_NAME=<your-model-name>
 juju deploy ./go-hello-world/charm/go-hello-world_$(dpkg --print-architecture).charm \
    $APPLICATION_NAME \
-   --resource app-image=localhost:32000/go-hello-world:0.1
+   --resource app-image=localhost:32000/go-hello-world_$(dpkg --print-architecture):0.1
 ```
 
 6. 배포된 애플리케이션을 데이터베이스에 연결
