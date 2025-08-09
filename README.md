@@ -66,7 +66,7 @@ juju consume admin/cos.grafana
 export APPLICATION_NAME=<your-model-name>
 juju deploy ./flask-hello-world/charm/flask-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm \
   $APPLICATION_NAME \
-  --resource flask-app-image=localhost:32000/flask-hello-world:0.1
+  --resource flask-app-image=localhost:32000/flask-hello-world_$(dpkg --print-architecture):0.1
 ```
 
 6. Relate the deployed application to database
