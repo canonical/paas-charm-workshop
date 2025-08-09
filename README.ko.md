@@ -113,9 +113,9 @@ curl http://$SERVICE_HOSTNAME/keys/<key-id>
 13. Canonical Observability Stack (COS) 연결
 
 ```bash
-juju relate $APPLICATION_NAME prometheus-k8s
-juju relate $APPLICATION_NAME loki-k8s
-juju relate $APPLICATION_NAME grafana-k8s
+juju relate $APPLICATION_NAME prometheus
+juju relate $APPLICATION_NAME loki
+juju relate $APPLICATION_NAME grafana
 juju status --watch=5s
 ```
 
