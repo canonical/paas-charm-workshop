@@ -54,10 +54,10 @@ juju find-offers ubucon-controller:
 4. Import SaaS applications
 
 ```bash
-juju consume admin/database.postgresql
-juju consume admin/cos.prometheus-k8s
-juju consume admin/cos.loki-k8s
-juju consume admin/cos.grafana-k8s
+juju consume admin/postgres.postgresql-k8s
+juju consume admin/cos.prometheus
+juju consume admin/cos.loki
+juju consume admin/cos.grafana
 ```
 
 5. Deploy the application to Juju
