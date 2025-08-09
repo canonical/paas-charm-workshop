@@ -49,9 +49,9 @@ juju find-offers ubucon-controller:
    
 ```bash
 juju consume admin/postgres.postgresql-k8s
-juju consume admin/cos.prometheus-k8s
-juju consume admin/cos.loki-k8s
-juju consume admin/cos.grafana-k8s
+juju consume admin/cos.prometheus
+juju consume admin/cos.loki
+juju consume admin/cos.grafana
 ```
 5. 애플리케이션을 Juju에 배포
    
