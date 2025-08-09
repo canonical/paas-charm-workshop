@@ -1,7 +1,7 @@
-# Hello Ubucon! Welcome to 12-factor Go app!
+# Hello Ubucon! Welcome to 12-factor Spring app!
 
 <p align="center">
-    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR069DA1jDGVM8x3_8vpwJtjjyabv40qNkm7A5NTiJyRzIYPf38vO8SW4v7R4YcvekCdjCZ6smEpvMk6j3pHTK05QH8PSkP0Dy8IjA-Y-th">
+    <img src="https://e4developer.com/wp-content/uploads/2018/01/spring-boot.png">
 </p>
 
 \*Read this in other languages: [English](README.md), [한국어](README.ko.md)
