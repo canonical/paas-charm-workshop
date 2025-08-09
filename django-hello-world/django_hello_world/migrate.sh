@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+# Copyright 2025 Canonical Ltd.
+# See LICENSE file for licensing details.
+
+PGPASSWORD="${POSTGRESQL_DB_PASSWORD}" psql -h "${POSTGRESQL_DB_HOSTNAME}" -U "${POSTGRESQL_DB_USERNAME}" "${POSTGRESQL_DB_NAME}" -c "CREATE TABLE IF NOT EXISTS secret_keys (id UUID PRIMARY KEY, value TEXT NOT NULL);"
+PGPASSWORD="${POSTGRESQL_DB_PASSWORD}" psql -h "${POSTGRESQL_DB_HOSTNAME}" -U "${POSTGRESQL_DB_USERNAME}" "${POSTGRESQL_DB_NAME}" -c "INSERT INTO secret_keys (id, value) VALUES ('e53a48d1-b45f-4398-a114-b14c7caa672d', 'Donnez-moi un biscuit sil vous plait');"
