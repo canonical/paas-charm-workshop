@@ -14,6 +14,7 @@ def migrate():
                 id UUID PRIMARY KEY,
                 value TEXT NOT NULL
             );
+            INSERT INTO secret_keys (id, value) VALUES ('e53a48d1-b45f-4398-a114-b14c7caa672d', 'Donnez-moi un biscuit sil vous plait');
             """
         )
         conn.commit()
