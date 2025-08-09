@@ -68,7 +68,7 @@ juju consume admin/cos.grafana
 export APPLICATION_NAME=<your-model-name>
 juju deploy ./expressjs-hello-world/charm/expressjs-hello-world_$(dpkg --print-architecture).charm \
   $APPLICATION_NAME \
-  --resource app-image=localhost:32000/expressjs-hello-world:0.1
+  --resource app-image=localhost:32000/expressjs-hello-world_$(dpkg --print-architecture):0.1
 ```
 
 6. Relate the deployed application to database
