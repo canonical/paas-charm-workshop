@@ -18,7 +18,7 @@ This section guides you through deploying a Django application on Juju and Micro
   - Go to the Google Spreadsheet link on the slides and,
     1. download the credentials
     ```
-    wget <link-to-juju-controller.tar.gz>
+    wget -O juju-controller.tar.gz <link-to-juju-controller.tar.gz>
     mkdir -p ~/.local/share/
     tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
     ```
