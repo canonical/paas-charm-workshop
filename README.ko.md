@@ -16,7 +16,6 @@
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
-- (선택 사항): 🐳 [docker](https://docs.docker.com/engine/install/)
 - (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive)OCI 이미지 분석 도구
 
 ## 📦 Django 애플리케이션 패키징 방법
@@ -41,22 +40,18 @@
   ```
 
 3. rock 패키징
-   ```bash
-   rockcraft pack
-   ```
-4. (선택 사항) 이미지를 로컬 Docker 레지스트리에 등록:
-   ```bash
-   rockcraft.skopeo copy \
-     --insecure-policy \
-     --dest-tls-verify=false \
-     oci-archive:./django-hello-world_0.1_$(dpkg --print-architecture).rock \
-     docker-daemon:django-hello-world:0.1
-   ```
-5. (선택 사항) 이미지 검사
-   ```bash
-   dive django-hello-world:0.1
-   ```
-6. 축하합니다! 이제 django-hello-world 애플리케이션을 위한 OCI 이미지가 준비되었습니다!
+
+```bash
+rockcraft pack
+```
+
+4. (선택 사항) 이미지 검사
+
+```
+dive docker-archive://django-hello-world_0.1_$(dpkg --print-architecture).rock
+```
+
+5. 축하합니다! 이제 django-hello-world 애플리케이션을 위한 OCI 이미지가 준비되었습니다!
 
 ## 다음 단계
 
