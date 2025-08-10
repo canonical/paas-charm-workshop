@@ -112,7 +112,7 @@ juju relate $APPLICATION_NAME nginx-ingress-integrator
 11. Store your secret
 
 ```bash
-curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
+curl -X POST http://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
 ```
 
 12. Retrieve your secret
