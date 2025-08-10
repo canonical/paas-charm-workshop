@@ -19,7 +19,6 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` e
   ```
   sudo snap install lxd && lxd init --auto
   ```
-- (optional): 🐳 [docker](https://docs.docker.com/engine/install/)
 - (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## 📦 How to pack a Django application
@@ -44,22 +43,18 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` e
   ```
 
 2. Pack the rock
+
    ```
    rockcraft pack
    ```
-3. (Optional) Push the image to the local Docker registry:
-   ```bash
-   rockcraft.skopeo copy \
-     --insecure-policy \
-     --dest-tls-verify=false \
-     oci-archive:./django-hello-world_0.1_$(dpkg --print-architecture).rock \
-     docker-daemon:django-hello-world:0.1
-   ```
-4. (Optional) Inspect the image
-   ```
-   dive django-hello-world:0.1
-   ```
-5. Congratulations! You now have an OCI image for django-hello-world application!
+   
+3. (Optional) Inspect the image
+
+```
+dive docker-archive://django-hello-world_0.1_$(dpkg --print-architecture).rock
+```
+
+4. Congratulations! You now have an OCI image for django-hello-world application!
 
 ## Next steps
 
