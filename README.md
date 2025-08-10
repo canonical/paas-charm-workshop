@@ -48,13 +48,18 @@ juju switch $MODEL_NAME
 3. Find SaaS offers
 
 ```bash
-juju find-offers ubucon-controller:
+juju find-offers
 ```
 
 4. Import SaaS applications
 
 ```bash
 juju consume admin/postgres.postgresql-k8s
+```
+
+(AMD64 only)
+
+```bash
 juju consume admin/cos.prometheus
 juju consume admin/cos.loki
 juju consume admin/cos.grafana
@@ -116,7 +121,7 @@ curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" 
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
-13. Relate Canonical Observability Stack (COS)
+13. (AMD64 only) Relate Canonical Observability Stack (COS)
 
 ```bash
 juju relate $APPLICATION_NAME prometheus
