@@ -109,7 +109,7 @@ juju relate $APPLICATION_NAME nginx-ingress-integrator
 11. 비밀 저장
 
 ```bash
-curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
+curl -X POST http://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
 ```
 
 12. 비밀 검색
