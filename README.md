@@ -81,14 +81,7 @@ juju relate $APPLICATION_NAME postgresql-k8s
 juju status --watch=5s
 ```
 
-7. Test the application using the unit IP address
-
-```bash
-UNIT_IP=<your application unit IP>
-curl http://$UNIT_IP:8000/health
-```
-
-8. Deploy nginx-ingress-integrator charm
+7. Deploy nginx-ingress-integrator charm
 
 ```bash
 export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
@@ -97,7 +90,7 @@ juju deploy nginx-ingress-integrator --trust \
   --config service-hostname=$SERVICE_HOSTNAME
 ```
 
-9. Relate the application application to nginx-ingress-integrator
+8. Relate the application application to nginx-ingress-integrator
 
 ```bash
 juju relate $APPLICATION_NAME nginx-ingress-integrator
@@ -109,19 +102,19 @@ juju relate $APPLICATION_NAME nginx-ingress-integrator
     juju status --relations --watch 5s
     ```
 
-11. Store your secret
+9. Store your secret
 
 ```bash
 curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
 ```
 
-12. Retrieve your secret
+10. Retrieve your secret
 
 ```bash
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
-13. (AMD64 only) Relate Canonical Observability Stack (COS)
+11. (AMD64 only) Relate Canonical Observability Stack (COS)
 
 ```bash
 juju relate $APPLICATION_NAME prometheus
@@ -130,7 +123,7 @@ juju relate $APPLICATION_NAME grafana
 juju status --watch=5s
 ```
 
-14. Visit the Grafana URL (link & credentials in spreadsheet)
+12. Visit the Grafana URL (link & credentials in spreadsheet)
 
 ## Further information
 
