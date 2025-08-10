@@ -46,13 +46,17 @@ juju switch $MODEL_NAME
 3. SaaS 오퍼 찾기
 
 ```bash
-juju find-offers ubucon-controller:
+juju find-offers
 ```
 
 4. SaaS 애플리케이션 가져오기
 
 ```bash
 juju consume admin/postgres.postgresql-k8s
+```
+
+AMD64 only
+```
 juju consume admin/cos.prometheus
 juju consume admin/cos.loki
 juju consume admin/cos.grafana
@@ -114,7 +118,7 @@ curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" 
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
-13. Canonical Observability Stack (COS) 연결
+13. (AMD64 only) Canonical Observability Stack (COS) 연결
 
 ```bash
 juju relate $APPLICATION_NAME prometheus
