@@ -43,16 +43,22 @@ juju switch $MODEL_NAME
 3. SaaS 오퍼 찾기
    
 ```bash
-juju find-offers ubucon-controller:
+juju find-offers
 ```
 4. SaaS 애플리케이션 가져오기
    
 ```bash
 juju consume admin/postgres.postgresql-k8s
+```
+
+(AMD64 only)
+
+```bash
 juju consume admin/cos.prometheus
 juju consume admin/cos.loki
 juju consume admin/cos.grafana
 ```
+
 5. 애플리케이션을 Juju에 배포
    
 ```bash
@@ -61,18 +67,21 @@ juju deploy ./expressjs-hello-world/charm/expressjs-hello-world_$(dpkg --print-a
    $APPLICATION_NAME \
    --resource app-image=localhost:32000/expressjs-hello-world_$(dpkg --print-architecture):0.1
 ```
+
 6. 배포된 애플리케이션을 데이터베이스에 연결
    
 ```bash
 juju relate $APPLICATION_NAME postgresql-k8s
 juju status --watch=5s
 ```
+
 7. IP 주소를 사용하여 애플리케이션 테스트
    
 ```bash
 UNIT_IP=<your application unit IP>
 curl http://$UNIT_IP:8000/health
 ```
+
 8. nginx-ingress-integrator charm 배포
    
 ```bash
@@ -81,6 +90,7 @@ juju deploy nginx-ingress-integrator --trust \
    --config path-routes="/" \
    --config service-hostname=$SERVICE_HOSTNAME
 ```
+
 9. 애플리케이션을 nginx-ingress-integrator에 연결
    
 ```bash
@@ -103,7 +113,7 @@ curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" 
    curl http://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
-12. Canonical Observability Stack (COS) 연결
+12. (AMD64 only) Canonical Observability Stack (COS) 연결
    
 ```bash
 juju relate $APPLICATION_NAME prometheus
