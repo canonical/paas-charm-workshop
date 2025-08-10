@@ -18,7 +18,7 @@ This section guides you through deploying a Go application on Juju and Microk8s!
   - Go to the Google Spreadsheet link on the slides and,
     1. download the credentials
     ```
-    wget <link-to-juju-controller.tar.gz>
+    wget <link-to-juju-controller.tar.gz> -O juju-controller.tar.gz
     mkdir -p ~/.local/share/
     tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
     ```
