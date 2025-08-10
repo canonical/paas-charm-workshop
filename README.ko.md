@@ -86,7 +86,7 @@ curl http://$UNIT_IP:8000/health
 8. nginx-ingress-integrator charm 배포
 
 ```bash
-export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
+export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
 juju deploy nginx-ingress-integrator --trust \
    --config path-routes="/" \
    --config service-hostname=$SERVICE_HOSTNAME
