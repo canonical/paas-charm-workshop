@@ -13,7 +13,7 @@
 - ✨ charmcraft
 
 ```bash
-sudo snap install charmcraft --classic
+sudo snap install charmcraft --classic --channel=latest/edge
 ```
 
 - 📂 unzip
