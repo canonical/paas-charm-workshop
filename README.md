@@ -69,7 +69,7 @@ juju consume admin/cos.grafana
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
-juju deploy ./spring-hello-world/charm/spring-hello-world.charm \
+juju deploy ./spring-hello-world/charm/spring-hello-world_(dpkg --print-architecture).charm \
   $APPLICATION_NAME \
   --resource app-image=localhost:32000/spring-hello-world:0.1
 ```
