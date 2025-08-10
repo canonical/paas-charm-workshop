@@ -91,7 +91,7 @@ curl http://$UNIT_IP:8080/health
 8. Deploy nginx-ingress-integrator charm
 
 ```bash
-export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
+export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
 juju deploy nginx-ingress-integrator --trust \
   --config path-routes="/" \
   --config service-hostname=$SERVICE_HOSTNAME
