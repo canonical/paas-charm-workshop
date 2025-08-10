@@ -20,7 +20,7 @@ sudo snap install juju --channel=3/stable
   - 슬라이드의 Google 스프레드시트 링크에서 쥬쥬 세팅/접속키를 다운로드합니다.
     
    ```bash
-   wget <link-to-juju-controller.tar.gz>
+   wget -O juju-controller.tar.gz <link-to-juju-controller.tar.gz>
    mkdir -p ~/.local/share/
    tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
    ```
