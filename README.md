@@ -19,7 +19,7 @@ This section guides you through deploying a ExpressJS application on Juju and Mi
     1. download the credentials
 
     ```bash
-    wget <link-to-juju-controller.tar.gz>
+    wget -O juju-controller.tar.gz <link-to-juju-controller.tar.gz>
     mkdir -p ~/.local/share/
     tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
     ```
