@@ -65,7 +65,7 @@ juju consume admin/cos.grafana
 export APPLICATION_NAME=<your-model-name>
 juju deploy ./django-hello-world/charm/django-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm \
    $APPLICATION_NAME \
-   --resource django-app-image=localhost:32000/django-hello-world_$(dpkg --print-architecture):0.1 \
+   --resource django-app-image=localhost:32000/django-hello-world:0.1 \
    --config django-allowed-hosts="*"
 ```
 
