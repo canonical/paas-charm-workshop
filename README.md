@@ -25,7 +25,7 @@ git clone https://github.com/canonical/paas-charm-workshop.git
 - [FastAPI](https://github.com/yanksyoon/hello-ubucon/tree/fastapi) (`git checkout fastapi`)
 - [Flask](https://github.com/yanksyoon/hello-ubucon/tree/flask) (`git checkout flask`)
 - [Go](https://github.com/yanksyoon/hello-ubucon/tree/go) (`git checkout go`)
-- Spring Boot
+- [Spring Boot](https://github.com/yanksyoon/hello-ubucon/tree/springboot) (`git checkout springboot`)
 
 3. Switch the branch to the framework you chose (e.g., `git checkout django`)
 4. Follow the instructions in the `README.md`!
