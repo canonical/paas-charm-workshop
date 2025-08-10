@@ -100,4 +100,4 @@ unzip spring-hello-world_$(dpkg --print-architecture).charm -d inspect
 
 ## Next steps
 
-Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/spring-03-deploy) `git checkout spring-03-deploy`
+Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/springboot-03-deploy) `git checkout spring-03-deploy`
