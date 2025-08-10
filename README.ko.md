@@ -17,7 +17,7 @@
 - 🔑 Juju 서버 세팅/접속키 다운로드 (네트워크 과부하를 방지하기 위해 준비했습니다~)
   - 슬라이드의 Google 스프레드시트 링크에서 쥬쥬 세팅/접속키를 다운로드합니다.
     ```bash
-    wget <link-to-juju-controller.tar.gz>
+    wget -O juju-controller.tar.gz <link-to-juju-controller.tar.gz>
     mkdir -p ~/.local/share/
     tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
     ```
