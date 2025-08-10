@@ -99,4 +99,4 @@ unzip spring-hello-world_$(dpkg --print-architecture).charm -d inspect
 
 ## 다음 단계
 
-배포 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/spring-03-deploy) `git checkout spring-03-deploy`을 확인하세요.
+배포 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/springboot-03-deploy) `git checkout spring-03-deploy`을 확인하세요.
