@@ -6,7 +6,7 @@
 
 \*Read this in other languages: [English](README.md), [한국어](README.ko.md)
 
-This section guides you through deploying a Spring Boot application on Juju and Microk8s!
+This section guides you through deploying a Spring Boot application on Juju and K8s!
 
 ## 📝 Prerequisites
 
@@ -14,7 +14,7 @@ This section guides you through deploying a Spring Boot application on Juju and 
   ```
   sudo snap install juju --channel=3/stable
   ```
-- 🔑 Juju credentials (we don't want to overload the network with Juju and Microk8s)
+- 🔑 Juju credentials (we don't want to overload the network with Juju and K8s)
   - Go to the Google Spreadsheet link on the slides and,
     1. download the credentials
     ```
@@ -27,9 +27,9 @@ This section guides you through deploying a Spring Boot application on Juju and 
 ## 🚀 How to deploy a Spring Boot application on Juju
 
 In this section, to be nice to our network, we've already populated the spring boot application image
-on MicroK8s.
+on K8s.
 
-We'll also be using a shared Juju + Microk8s cluster :)
+We'll also be using a shared Juju + K8s cluster :)
 
 1. Test your juju connection
 
@@ -64,7 +64,7 @@ juju consume admin/cos.grafana-k8s
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
-juju deploy ./spring-hello-world/charm/spring-hello-world_$(dpkg --print-architecture).charm \
+juju deploy ./spring-hello-world/charm/spring-hello-world_amd64.charm \
   $APPLICATION_NAME \
   --resource app-image=localhost:32000/spring-hello-world:0.1
 ```

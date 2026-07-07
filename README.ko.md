@@ -6,7 +6,7 @@
 
 \*다른 언어로 읽기: [English](README.md), [한국어](README.ko.md)
 
-이 섹션은 Juju와 Microk8s에서 Spring Boot 애플리케이션을 배포하는 방법을 안내합니다!
+이 섹션은 Juju와 K8s에서 Spring Boot 애플리케이션을 배포하는 방법을 안내합니다!
 
 ## 📝 필수 조건
 
@@ -25,9 +25,9 @@
 
 ## 🚀 Spring Boot 애플리케이션을 Juju에 배포하는 방법
 
-이번 섹션에서는 네트워크 과부화 방지를 위해 미리 스프링 애플리케이션 OCI이미지를 Microk8s registry에 준비해놓았습니다 :)
+이번 섹션에서는 네트워크 과부화 방지를 위해 미리 스프링 애플리케이션 OCI이미지를 K8s registry에 준비해놓았습니다 :)
 
-공유된 Juju + Microk8s 클러스터를 사용해봅니다.
+공유된 Juju + K8s 클러스터를 사용해봅니다.
 
 1. Juju 연결 테스트
 
@@ -62,7 +62,7 @@ juju consume admin/cos.grafana-k8s
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
-juju deploy ./spring-hello-world/charm/spring-hello-world_$(dpkg --print-architecture).charm \
+juju deploy ./spring-hello-world/charm/spring-hello-world_amd64.charm \
   $APPLICATION_NAME \
   --resource app-image=localhost:32000/spring-hello-world:0.1
 ```
