@@ -23,19 +23,24 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` e
    ```
    rockcraft init --profile django-framework
    ```
-2. Pack the rock
+   - Inspect the rockcraft extension
+     ```bash
+     export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+     rockcraft expand-extensions
+     ```
+3. Pack the rock
 
    ```
    rockcraft pack
    ```
    
-3. (Optional) Inspect the image
+4. (Optional) Inspect the image
 
 ```
 dive docker-archive://django-hello-world_0.1_amd64.rock
 ```
 
-4. Congratulations! You now have an OCI image for django-hello-world application!
+5. Congratulations! You now have an OCI image for django-hello-world application!
 
 ## Next steps
 
