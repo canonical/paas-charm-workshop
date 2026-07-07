@@ -8,6 +8,11 @@
 
 ## 📝 필수 조건
 
+- 📂 unzip
+  ```bash
+  sudo apt install unzip
+  ```
+
 ## 🪄 ExpressJS 애플리케이션을 Juju charms로 확장하는 방법
 
 1. 작업 디렉토리 변경
@@ -40,16 +45,16 @@
        limit: 1
    EOF
    ```
-7. charm 패키징
+5. charm 패키징
    ```bash
    charmcraft pack
    ```
-8. charm 검사
+6. charm 검사
    ```bash
    mkdir inspect
    unzip expressjs-hello-world_amd64.charm -d inspect
    ```
-9. 축하합니다! 이제 Juju에 배포할 수 있는 로컬 charm이 준비되었습니다!
+7. 축하합니다! 이제 Juju에 배포할 수 있는 로컬 charm이 준비되었습니다!
 
 ## 다음 단계
 
