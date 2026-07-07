@@ -18,19 +18,19 @@ This application exposes 3 endpoints:
 1. Change the working directory
 
 ```
-cd django-hello-world
+cd fastapi-hello-world
 ```
 
-2. Create a virtual environment and install the dependencies
+2. Install the dependencies with [uv](https://docs.astral.sh/uv/)
 
 ```
-python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt
+uv sync
 ```
 
 3. Run the server
 
 ```
-fastapi dev app.py
+uv run fastapi dev app.py
 ```
 
 4. Test the endpoints using the following curl commands
@@ -44,4 +44,4 @@ curl http://localhost:8000/fibonacci/9
 
 ## Next steps
 
-Let's start packaging! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/fastapi-01-rock) `git checkout fastapi-01-rock`
+Let's start packaging! Check out the [next branch](https://github.com/canonical/paas-charm-workshop/tree/fastapi-01-rock) `git checkout fastapi-01-rock`

@@ -1,0 +1,9 @@
+[project]
+name = "fastapi-hello-world"
+version = "0.1.0"
+description = "A simple 12-factor FastAPI application."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]",
+    "psycopg2-binary",
+]
