@@ -10,15 +10,6 @@
 
 ## 📝 필수 조건
 
-- ✨ charmcraft
-  ```bash
-  sudo snap install charmcraft --classic
-  ```
-- 📂 unzip
-  ```bash
-  sudo apt install unzip
-  ```
-
 ## 🪄 Django 애플리케이션을 Juju charms로 확장하는 방법
 
 1. 작업 디렉토리 변경
@@ -54,23 +45,6 @@ requires:
 EOF
 ```
 
-5. (권장) 같은 `charm` 디렉토리의 `requirements.txt` 파일을 수정하여 다음 줄 추가
-
-```diff
-+ --no-binary=:none:
-ops ~= 2.17
-paas-charm>=1.0,<2
-```
-
-```bash
-# 또는 sed 사용:
-sed -i '1s/^/--no-binary=:none:\n/' requirements.txt
-```
-
-6. (ARM64 전용) `charmcraft.yaml` 파일의 `platforms` 섹션 수정
-   ```bash
-   dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' charmcraft.yaml
-   ```
 7. charm 패키징
    ```bash
    charmcraft pack
@@ -78,10 +52,10 @@ sed -i '1s/^/--no-binary=:none:\n/' requirements.txt
 8. charm 검사
    ```bash
    mkdir inspect
-   unzip django-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm -d inspect
+   unzip django-hello-world_ubuntu-22.04-amd64.charm -d inspect
    ```
 9. 축하합니다! 이제 Juju에 배포할 수 있는 로컬 charm이 준비되었습니다!
 
 ## 다음 단계
 
-배포 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/django-03-deploy) `git checkout django-03-deploy`을 확인하세요.
+배포 시작! [다음 브랜치](https://github.com/canonical/paas-charm-workshop/tree/django-03-deploy) `git checkout django-03-deploy`을 확인하세요.
