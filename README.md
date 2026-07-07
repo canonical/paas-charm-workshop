@@ -11,6 +11,11 @@ using [Juju charms](https://juju.is/).
 
 ## 📝 Prerequisites
 
+- 📂 unzip
+  ```bash
+  sudo apt install unzip
+  ```
+
 ## 🪄 How to extend a Flask application with Juju charms
 
 1. Change the working directory
@@ -46,16 +51,16 @@ requires:
 EOF
 ```
 
-7. Pack the charm
+5. Pack the charm
    ```
    charmcraft pack
    ```
-8. Inspect the charm
+6. Inspect the charm
    ```
    mkdir inspect
    unzip flask-hello-world_ubuntu-22.04-amd64.charm -d inspect
    ```
-9. Congratulations! You have have a local charm you can deploy to Juju!
+7. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
