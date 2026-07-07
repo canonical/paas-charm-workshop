@@ -43,11 +43,11 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
   ```
   rockcraft pack
   ```
-3. (Optional) Inspect the image
+4. (Optional) Inspect the image
   ```bash
   dive docker-archive://go-hello-world_0.1_amd64.rock
   ```
-4. Congratulations! You now have an OCI image for go-hello-world application!
+5. Congratulations! You now have an OCI image for go-hello-world application!
 
 ## Next steps
 
