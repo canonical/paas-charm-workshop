@@ -11,14 +11,6 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
 
 ## 📝 Prerequisites
 
-- 🪨 rockcraft
-  ```
-  sudo snap install rockcraft --channel=latest/edge --classic
-  ```
-- ☁️ lxd
-  ```
-  sudo snap install lxd && lxd init --auto
-  ```
 - (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## 📦 How to pack a Go application
@@ -31,11 +23,6 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
   ```bash
   rockcraft init --profile go-framework
   ```
-  - Inspect the rockcraft extension
-    ```bash
-    export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-    rockcraft expand-extensions
-    ```
   - Add the postgresql-client package to the runtime
     ```bash
     cat <<EOF >> rockcraft.yaml
@@ -47,20 +34,16 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
           - postgresql-client
     EOF
     ```
-  - (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
-    ```bash
-    dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-    ```
 2. Pack the rock
   ```
   rockcraft pack
   ```
 3. (Optional) Inspect the image
   ```bash
-  dive docker-archive://go-hello-world_0.1_$(dpkg --print-architecture).rock
+  dive docker-archive://go-hello-world_0.1_amd64.rock
   ```
 5. Congratulations! You now have an OCI image for go-hello-world application!
 
 ## Next steps
 
-Let's start charming! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/go-02-charm) `git checkout go-02-charm`
+Let's start charming! Check out the [next branch](https://github.com/canonical/paas-charm-workshop/tree/go-02-charm) `git checkout go-02-charm`
