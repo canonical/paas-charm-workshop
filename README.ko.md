@@ -52,4 +52,4 @@ curl http://localhost:8000/keys/<key_id>
 
 ## 다음 단계
 
-패키징 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/django-01-rock) `git checkout django-01-rock`을 확인하세요.
+패키징 시작! [다음 브랜치](https://github.com/canonical/paas-charm-workshop/tree/django-01-rock) `git checkout django-01-rock`을 확인하세요.

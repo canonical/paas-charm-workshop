@@ -53,4 +53,4 @@ curl http://localhost:8000/keys/<key_id>
 
 ## Next steps
 
-Let's start packaging! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/django-01-rock) `git checkout django-01-rock`
+Let's start packaging! Check out the [next branch](https://github.com/canonical/paas-charm-workshop/tree/django-01-rock) `git checkout django-01-rock`
