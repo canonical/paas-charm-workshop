@@ -40,19 +40,11 @@
 
 세미나를 위해 필요한 스냅은 다음과 같습니다.
 
-- [Rockcraft](https://snapcraft.io/rockcraft)
-  ```bash
-  sudo snap install rockcraft --classic
-  ```
-- [Charmcraft](https://snapcraft.io/charmcraft)
-  ```bash
-  sudo snap install charmcraft --classic
-  ```
-- [Juju](https://snapcraft.io/juju)
-  ```bash
-  sudo snap install juju --channel=3/stable
-  ```
-- [LXD](https://snapcraft.io/lxd)
-  ```bash
-  sudo snap install lxd && lxd init --auto
-  ```
+다음 명령으로 설치하세요.
+
+```bash
+sudo snap install rockcraft --classic
+sudo snap install charmcraft --classic
+sudo snap install juju --channel=3/stable
+sudo snap install lxd && lxd init --auto
+```

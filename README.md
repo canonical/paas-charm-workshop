@@ -40,19 +40,11 @@ git clone https://github.com/canonical/paas-charm-workshop.git
 
 The following snaps are required for the tutorial.
 
-- [Rockcraft](https://snapcraft.io/rockcraft)
-  ```bash
-  sudo snap install rockcraft --classic
-  ```
-- [Charmcraft](https://snapcraft.io/charmcraft)
-  ```bash
-  sudo snap install charmcraft --classic
-  ```
-- [Juju](https://snapcraft.io/juju)
-  ```bash
-  sudo snap install juju --channel=3/stable
-  ```
-- [LXD](https://snapcraft.io/lxd)
-  ```bash
-  sudo snap install lxd && lxd init --auto
-  ```
+Install them with:
+
+```bash
+sudo snap install rockcraft --classic
+sudo snap install charmcraft --classic
+sudo snap install juju --channel=3/stable
+sudo snap install lxd && lxd init --auto
+```
