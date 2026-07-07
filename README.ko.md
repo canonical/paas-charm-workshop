@@ -19,16 +19,16 @@
 cd flask-hello-world
 ```
 
-2. 가상 환경 생성 및 패키지 설치
+2. [uv](https://docs.astral.sh/uv/)로 패키지 설치
 
 ```
-python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt
+uv sync
 ```
 
 3. 서버 실행
 
 ```
-python3 app.py
+uv run python3 app.py
 ```
 
 4. curl 명령어를 사용하여 엔드포인트 확인
@@ -42,4 +42,4 @@ curl http://localhost:3000/fibonacci/9
 
 ## 다음 단계
 
-패키징을 시작합시다! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/flask-01-rock)를 확인하세요 `git checkout flask-01-rock`
+패키징을 시작합시다! [다음 브랜치](https://github.com/canonical/paas-charm-workshop/tree/flask-01-rock)를 확인하세요 `git checkout flask-01-rock`

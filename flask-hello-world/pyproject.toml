@@ -1,0 +1,9 @@
+[project]
+name = "flask-hello-world"
+version = "0.1.0"
+description = "A simple 12-factor Flask application."
+requires-python = ">=3.12"
+dependencies = [
+    "Flask",
+    "psycopg2-binary",
+]
