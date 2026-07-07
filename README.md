@@ -23,6 +23,11 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `fastapi-framework` 
    ```bash
    rockcraft init --profile fastapi-framework
    ```
+   - Inspect the rockcraft extension
+     ```bash
+     export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+     rockcraft expand-extensions
+     ```
 3. Pack the rock
    ```bash
    rockcraft pack
