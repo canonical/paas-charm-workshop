@@ -25,6 +25,10 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `expressjs-framework
    rockcraft init --profile expressjs-framework
    ```
 
+- Inspect the rockcraft extension
+  ```bash
+  rockcraft expand-extensions
+  ```
 - Add the postgresql-client package to the runtime
   ```bash
   cat <<EOF >> rockcraft.yaml
