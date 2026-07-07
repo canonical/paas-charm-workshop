@@ -11,6 +11,11 @@ using [Juju charms](https://juju.is/).
 
 ## 📝 Prerequisites
 
+- 📂 unzip
+  ```bash
+  sudo apt install unzip
+  ```
+
 ## 🪄 How to extend a Spring Boot application with Juju charms
 
 1. Change the working directory
@@ -52,20 +57,20 @@ requires:
 EOF
 ```
 
-7. Pack the charm
+5. Pack the charm
 
 ```bash
 charmcraft pack
 ```
 
-8. Inspect the charm
+6. Inspect the charm
 
 ```bash
 mkdir inspect
 unzip spring-hello-world_amd64.charm -d inspect
 ```
 
-9. Congratulations! You have have a local charm you can deploy to Juju!
+7. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
