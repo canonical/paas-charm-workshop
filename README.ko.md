@@ -81,22 +81,22 @@ UNIT_IP=<your application unit IP>
 curl http://$UNIT_IP:8000/health
 ```
 
-8. nginx-ingress-integrator charm 배포
+8. ingress-configurator charm 배포
 
 ```bash
 export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
-juju deploy nginx-ingress-integrator --trust \
-  --config path-routes="/" \
-  --config service-hostname=$SERVICE_HOSTNAME
+juju deploy ingress-configurator --trust \
+  --config paths="/" \
+  --config hostname=$SERVICE_HOSTNAME
 ```
 
-9. 애플리케이션을 nginx-ingress-integrator에 연결
+9. 애플리케이션을 ingress-configurator에 연결
 
 ```bash
-juju relate $APPLICATION_NAME nginx-ingress-integrator
+juju relate $APPLICATION_NAME ingress-configurator
 ```
 
-   - nginx-ingress-integrator 단위 상태에서 ingress IP가 표시될 때까지 대기
+   - ingress-configurator 단위 상태에서 ingress IP가 표시될 때까지 대기
 
       ```bash
       juju status --relations --watch 5s

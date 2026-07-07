@@ -83,22 +83,22 @@ UNIT_IP=<your application unit IP>
 curl http://$UNIT_IP:8000/health
 ```
 
-8. Deploy nginx-ingress-integrator charm
+8. Deploy ingress-configurator charm
 
 ```bash
 export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
-juju deploy nginx-ingress-integrator --trust \
-  --config path-routes="/" \
-  --config service-hostname=$SERVICE_HOSTNAME
+juju deploy ingress-configurator --trust \
+  --config paths="/" \
+  --config hostname=$SERVICE_HOSTNAME
 ```
 
-9. Relate the application application to nginx-ingress-integrator
+9. Relate the application application to ingress-configurator
 
 ```bash
-juju relate $APPLICATION_NAME nginx-ingress-integrator
+juju relate $APPLICATION_NAME ingress-configurator
 ```
 
-  - Wait for the ingress IP to show up on the nginx-ingress-integrator unit status
+  - Wait for the ingress IP to show up on the ingress-configurator unit status
 
     ```bash
     juju status --relations --watch 5s
@@ -125,7 +125,6 @@ juju relate $APPLICATION_NAME grafana-k8s
 juju status --watch=5s
 ```
 
-14. Visit the Grafana URL (link & credentials in spreadsheet)
 
 ## Further information
 
