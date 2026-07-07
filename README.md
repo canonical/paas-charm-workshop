@@ -11,18 +11,6 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `spring-boot-framewo
 
 ## 📝 Prerequisites
 
-- 🪨 rockcraft
-
-```bash
-sudo snap install rockcraft --channel=latest/edge --classic
-```
-
-- ☁️ lxd
-
-```bash
-sudo snap install lxd && lxd init --auto
-```
-
 - (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## 📦 How to pack a Spring Boot application
@@ -58,19 +46,6 @@ rockcraft init --profile spring-boot-framework
     EOF
     ```
 
-  - Inspect the rockcraft extension
-
-    ```bash
-    export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-    rockcraft expand-extensions
-    ```
-
-  - (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
-
-    ```bash
-    dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-    ```
-
 3. Pack the rock
 
 ```bash
@@ -80,11 +55,11 @@ rockcraft pack
 4. (Optional) Inspect the image
 
 ```
-dive docker-archive://spring-hello-world_0.1_$(dpkg --print-architecture).rock
+dive docker-archive://spring-hello-world_0.1_amd64.rock
 ```
 
 5. Congratulations! You now have an OCI image for flask-hello-world application!
 
 ## Next steps
 
-Let's start charming! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/springboot-02-charm) `git checkout springboot-02-charm`
+Let's start charming! Check out the [next branch](https://github.com/canonical/paas-charm-workshop/tree/springboot-02-charm) `git checkout springboot-02-charm`
