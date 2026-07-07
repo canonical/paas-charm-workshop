@@ -19,12 +19,12 @@
 
 2. 다음 프레임워크 중 하나를 선택합니다:
 
-- [Django](https://github.com/yanksyoon/hello-ubucon/tree/django) (`git checkout django`)
-- [ExpressJS](https://github.com/yanksyoon/hello-ubucon/tree/expressjs) (`git checkout expressjs`)
-- [FastAPI](https://github.com/yanksyoon/hello-ubucon/tree/fastapi) (`git checkout fastapi`)
-- [Flask](https://github.com/yanksyoon/hello-ubucon/tree/flask) (`git checkout flask`)
-- [Go](https://github.com/yanksyoon/hello-ubucon/tree/go) (`git checkout go`)
-- Spring Boot
+- [Django](https://github.com/canonical/paas-charm-workshop/tree/django) (`git checkout django`)
+- [ExpressJS](https://github.com/canonical/paas-charm-workshop/tree/expressjs) (`git checkout expressjs`)
+- [FastAPI](https://github.com/canonical/paas-charm-workshop/tree/fastapi) (`git checkout fastapi`)
+- [Flask](https://github.com/canonical/paas-charm-workshop/tree/flask) (`git checkout flask`)
+- [Go](https://github.com/canonical/paas-charm-workshop/tree/go) (`git checkout go`)
+- [Spring Boot](https://github.com/canonical/paas-charm-workshop/tree/springboot) (`git checkout springboot`)
 
 3. 선택한 프레임워크의 브랜치로 전환합니다 (예: `git checkout django`)
 
@@ -34,13 +34,25 @@
 
 - 선택한 12-factor 애플리케이션을 끝까지 배포할 수 있습니다!
   - 애플리케이션 OCI 이미지를 생성하고 저장소에 올립니다.
-  - 애플리케이션을 Juju + Microk8s 환경에 배포합니다.
+  - 애플리케이션을 Juju + K8s 환경에 배포합니다.
 
 ## 📝 필수 조건
 
 세미나를 위해 필요한 스냅은 다음과 같습니다.
 
 - [Rockcraft](https://snapcraft.io/rockcraft)
+  ```bash
+  sudo snap install rockcraft --classic
+  ```
 - [Charmcraft](https://snapcraft.io/charmcraft)
+  ```bash
+  sudo snap install charmcraft --classic
+  ```
 - [Juju](https://snapcraft.io/juju)
+  ```bash
+  sudo snap install juju --channel=3/stable
+  ```
 - [LXD](https://snapcraft.io/lxd)
+  ```bash
+  sudo snap install lxd && lxd init --auto
+  ```

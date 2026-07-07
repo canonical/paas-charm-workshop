@@ -20,12 +20,12 @@ git clone https://github.com/canonical/paas-charm-workshop.git
 
 2. Choose one of the following frameworks:
 
-- [Django](https://github.com/yanksyoon/hello-ubucon/tree/django) (`git checkout django`)
-- [ExpressJS](https://github.com/yanksyoon/hello-ubucon/tree/expressjs) (`git checkout expressjs`)
-- [FastAPI](https://github.com/yanksyoon/hello-ubucon/tree/fastapi) (`git checkout fastapi`)
-- [Flask](https://github.com/yanksyoon/hello-ubucon/tree/flask) (`git checkout flask`)
-- [Go](https://github.com/yanksyoon/hello-ubucon/tree/go) (`git checkout go`)
-- Spring Boot
+- [Django](https://github.com/canonical/paas-charm-workshop/tree/django) (`git checkout django`)
+- [ExpressJS](https://github.com/canonical/paas-charm-workshop/tree/expressjs) (`git checkout expressjs`)
+- [FastAPI](https://github.com/canonical/paas-charm-workshop/tree/fastapi) (`git checkout fastapi`)
+- [Flask](https://github.com/canonical/paas-charm-workshop/tree/flask) (`git checkout flask`)
+- [Go](https://github.com/canonical/paas-charm-workshop/tree/go) (`git checkout go`)
+- [Spring Boot](https://github.com/canonical/paas-charm-workshop/tree/springboot) (`git checkout springboot`)
 
 3. Switch the branch to the framework you chose (e.g., `git checkout django`)
 4. Follow the instructions in the `README.md`!
@@ -34,13 +34,25 @@ git clone https://github.com/canonical/paas-charm-workshop.git
 
 - You should be able to deploy a 12-factor application of your choice end-to-end! This means that:
   - The application OCI image is created and pushed to a repository.
-  - The application is deployed to a Juju + Microk8s environment.
+  - The application is deployed to a Juju + K8s environment.
 
 ## 📝 Prerequisites
 
 The following snaps are required for the tutorial.
 
 - [Rockcraft](https://snapcraft.io/rockcraft)
+  ```bash
+  sudo snap install rockcraft --classic
+  ```
 - [Charmcraft](https://snapcraft.io/charmcraft)
+  ```bash
+  sudo snap install charmcraft --classic
+  ```
 - [Juju](https://snapcraft.io/juju)
+  ```bash
+  sudo snap install juju --channel=3/stable
+  ```
 - [LXD](https://snapcraft.io/lxd)
+  ```bash
+  sudo snap install lxd && lxd init --auto
+  ```
