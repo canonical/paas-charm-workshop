@@ -46,4 +46,4 @@ curl http://localhost:8080/fibonacci/9
 
 ## Next steps
 
-Let's start packaging! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/go-01-rock) `git checkout go-01-rock`
+Let's start packaging! Check out the [next branch](https://github.com/canonical/paas-charm-workshop/tree/go-01-rock) `git checkout go-01-rock`

@@ -47,4 +47,4 @@ curl http://localhost:8080/fibonacci/9
 
 ## 다음 단계
 
-패키징 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/go-01-rock) `git checkout go-01-rock`을 확인하세요.
+패키징 시작! [다음 브랜치](https://github.com/canonical/paas-charm-workshop/tree/go-01-rock) `git checkout go-01-rock`을 확인하세요.
