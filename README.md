@@ -23,6 +23,11 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `flask-framework` ex
   ```bash
   rockcraft init --profile flask-framework
   ```
+  - Inspect the rockcraft extension
+    ```bash
+    export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+    rockcraft expand-extensions
+    ```
 3. Pack the rock
   ```bash
   rockcraft pack
