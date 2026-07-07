@@ -23,6 +23,11 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
   ```bash
   rockcraft init --profile go-framework
   ```
+  - Inspect the rockcraft extension
+    ```bash
+    export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+    rockcraft expand-extensions
+    ```
   - Add the postgresql-client package to the runtime
     ```bash
     cat <<EOF >> rockcraft.yaml
@@ -34,7 +39,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
           - postgresql-client
     EOF
     ```
-2. Pack the rock
+3. Pack the rock
   ```
   rockcraft pack
   ```
@@ -42,7 +47,7 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
   ```bash
   dive docker-archive://go-hello-world_0.1_amd64.rock
   ```
-5. Congratulations! You now have an OCI image for go-hello-world application!
+4. Congratulations! You now have an OCI image for go-hello-world application!
 
 ## Next steps
 
