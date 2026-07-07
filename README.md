@@ -37,7 +37,7 @@ DJANGO_DEBUG=true DJANGO_ALLOWED_HOSTS='["*"]' uv run ./django_hello_world/manag
 4. Run the database migration script
 
 ```
-uv run uv run uv run ./django_hello_world/manage.py migrate
+uv run uv run uv run uv run ./django_hello_world/manage.py migrate
 ```
 
 5. Test the endpoints using the following curl commands

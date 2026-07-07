@@ -36,7 +36,7 @@ DJANGO_DEBUG=true DJANGO_ALLOWED_HOSTS='["*"]' uv run ./django_hello_world/manag
 4. 데이터베이스 마이그레이션 스크립트 실행
 
 ```
-uv run uv run uv run ./django_hello_world/manage.py migrate
+uv run uv run uv run uv run ./django_hello_world/manage.py migrate
 ```
 
 5. 다음 curl 명령어를 사용하여 엔드포인트 테스트
