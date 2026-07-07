@@ -22,22 +22,22 @@ and exposes 3 endpoints:
 cd django-hello-world
 ```
 
-2. Create a virtual environment and install the dependencies
+2. Create a virtual environment and install the dependencies with [uv](https://docs.astral.sh/uv/)
 
 ```
-python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt
+uv sync
 ```
 
 3. Run the server
 
 ```
-DJANGO_DEBUG=true DJANGO_ALLOWED_HOSTS='["*"]' ./django_hello_world/manage.py runserver
+DJANGO_DEBUG=true DJANGO_ALLOWED_HOSTS='["*"]' uv run ./django_hello_world/manage.py runserver
 ```
 
 4. Run the database migration script
 
 ```
-./django_hello_world/manage.py migrate
+uv run ./django_hello_world/manage.py migrate
 ```
 
 5. Test the endpoints using the following curl commands

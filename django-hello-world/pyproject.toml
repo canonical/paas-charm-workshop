@@ -1,0 +1,10 @@
+[project]
+name = "django-hello-world"
+version = "0.1.0"
+description = "A simple 12-factor Django application."
+requires-python = ">=3.12"
+dependencies = [
+    "Django",
+    "psycopg2-binary",
+    "tzdata",
+]
