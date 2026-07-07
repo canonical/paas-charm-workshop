@@ -58,7 +58,7 @@ rockcraft pack
 dive docker-archive://spring-hello-world_0.1_amd64.rock
 ```
 
-5. Congratulations! You now have an OCI image for flask-hello-world application!
+5. Congratulations! You now have an OCI image for spring-hello-world application!
 
 ## Next steps
 
