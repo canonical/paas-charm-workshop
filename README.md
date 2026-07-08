@@ -9,9 +9,6 @@
 This section guides you to packing the spring-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `spring-boot-framework` extension.
 
-## 📝 Prerequisites
-
-
 ## 📦 How to pack a Spring Boot application
 
 1. Change the working directory
