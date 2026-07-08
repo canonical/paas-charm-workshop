@@ -8,12 +8,6 @@
 
 이 섹션은 Juju와 K8s에서 Flask 애플리케이션을 배포하는 방법을 안내합니다!
 
-## 📝 필수 조건
-
-- 🔮 [Juju](https://juju.is/)
-  ```bash
-  sudo snap install juju --channel=3/stable
-  ```
 ## 🚀 Flask 애플리케이션을 Juju에 배포하는 방법
 
 1. Juju 연결 테스트
