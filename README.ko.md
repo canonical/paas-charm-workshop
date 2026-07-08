@@ -21,6 +21,11 @@
    ```bash
    rockcraft init --profile go-framework
    ```
+   - rockcraft 확장 검사
+   ```bash
+   export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+   rockcraft expand-extensions
+   ```
    - runtime에 postgresql-client 패키지 추가
    ```bash
    cat <<EOF >> rockcraft.yaml
