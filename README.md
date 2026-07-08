@@ -9,9 +9,6 @@
 This section guides you to packing the flask-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `flask-framework` extension.
 
-## 📝 Prerequisites
-
-
 ## 📦 How to pack a Flask application
 
 1. Change the working directory
