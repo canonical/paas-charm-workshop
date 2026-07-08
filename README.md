@@ -8,12 +8,6 @@
 
 This section guides you through deploying a ExpressJS application on Juju and K8s!
 
-## 📝 Prerequisites
-
-- 🔮 [Juju](https://juju.is/)
-  ```
-  sudo snap install juju --channel=3/stable
-  ```
 ## 🚀 How to deploy a ExpressJS application on Juju
 
 1. Test your juju connection
