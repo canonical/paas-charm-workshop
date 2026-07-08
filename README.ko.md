@@ -6,8 +6,6 @@
 
 이 섹션은 [Juju charms](https://juju.is/)를 사용하여 expressjs-hello-world 프로젝트에 운영 능력을 확장하는 방법을 안내합니다.
 
-## 📝 필수 조건
-
 ## 🪄 ExpressJS 애플리케이션을 Juju charms로 확장하는 방법
 
 1. 작업 디렉토리 변경
