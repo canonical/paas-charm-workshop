@@ -22,6 +22,10 @@
    rockcraft init --profile expressjs-framework
    ```
 
+- rockcraft 확장 검사
+  ```bash
+  rockcraft expand-extensions
+  ```
 - runtime에 postgresql-client 패키지 추가
   ```bash
   cat <<EOF >> rockcraft.yaml
