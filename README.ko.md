@@ -38,7 +38,7 @@
 
 ## 📝 필수 조건
 
-세미나를 위해 필요한 스냅은 다음과 같습니다.
+세미나를 위해 필요한 도구는 다음과 같습니다.
 
 - [Rockcraft](https://snapcraft.io/rockcraft)
   ```bash
@@ -56,8 +56,12 @@
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
-- 📂 unzip
+- [unzip](https://packages.ubuntu.com/search?keywords=unzip)
   ```bash
   sudo apt install unzip
   ```
 - (선택 사항) 🤿 [dive](https://github.com/wagoodman/dive) OCI 이미지 분석 도구
+  ```bash
+  wget https://github.com/wagoodman/dive/releases/latest/download/dive_linux_amd64.deb
+  sudo apt install -y ./dive_linux_amd64.deb
+  ```

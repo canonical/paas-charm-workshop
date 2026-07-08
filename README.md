@@ -38,7 +38,7 @@ git clone https://github.com/canonical/paas-charm-workshop.git
 
 ## 📝 Prerequisites
 
-The following snaps are required for the tutorial.
+The following tools are required for the tutorial.
 
 - [Rockcraft](https://snapcraft.io/rockcraft)
   ```bash
@@ -56,8 +56,12 @@ The following snaps are required for the tutorial.
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
-- 📂 unzip
+- [unzip](https://packages.ubuntu.com/search?keywords=unzip)
   ```bash
   sudo apt install unzip
   ```
 - (optional) 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
+  ```bash
+  wget https://github.com/wagoodman/dive/releases/latest/download/dive_linux_amd64.deb
+  sudo apt install -y ./dive_linux_amd64.deb
+  ```
