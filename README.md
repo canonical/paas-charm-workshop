@@ -38,7 +38,7 @@ git clone https://github.com/canonical/paas-charm-workshop.git
 
 ## 📝 Prerequisites
 
-The following snaps are required for the tutorial.
+The following tools are required for the tutorial.
 
 - [Rockcraft](https://snapcraft.io/rockcraft)
   ```bash
@@ -55,5 +55,9 @@ The following snaps are required for the tutorial.
 - [LXD](https://snapcraft.io/lxd)
   ```bash
   sudo snap install lxd && lxd init --auto
+  ```
+- [uv](https://docs.astral.sh/uv/) (Python package manager, used by Django, FastAPI, and Flask frameworks)
+  ```bash
+  curl -LsSf https://astral.sh/uv/install.sh | sh
   ```
 - (optional) 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images

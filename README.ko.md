@@ -38,7 +38,7 @@
 
 ## 📝 필수 조건
 
-세미나를 위해 필요한 스냅은 다음과 같습니다.
+세미나를 위해 필요한 도구는 다음과 같습니다.
 
 - [Rockcraft](https://snapcraft.io/rockcraft)
   ```bash
@@ -55,5 +55,9 @@
 - [LXD](https://snapcraft.io/lxd)
   ```bash
   sudo snap install lxd && lxd init --auto
+  ```
+- [uv](https://docs.astral.sh/uv/) (Python 패키지 관리자, Django, FastAPI, Flask 프레임워크에서 사용)
+  ```bash
+  curl -LsSf https://astral.sh/uv/install.sh | sh
   ```
 - (선택 사항) 🤿 [dive](https://github.com/wagoodman/dive) OCI 이미지 분석 도구
