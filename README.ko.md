@@ -8,11 +8,6 @@
 
 ## 📝 필수 조건
 
-- 📂 unzip
-  ```bash
-  sudo apt install unzip
-  ```
-
 ## 🪄 ExpressJS 애플리케이션을 Juju charms로 확장하는 방법
 
 1. 작업 디렉토리 변경
