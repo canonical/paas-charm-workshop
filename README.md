@@ -62,6 +62,5 @@ The following tools are required for the tutorial.
   ```
 - (optional) 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
   ```bash
-  wget https://github.com/wagoodman/dive/releases/latest/download/dive_linux_amd64.deb
-  sudo apt install -y ./dive_linux_amd64.deb
+  sudo snap install dive
   ```
