@@ -21,6 +21,11 @@
    ```bash
    rockcraft init --profile flask-framework
    ```
+   - rockcraft 확장 내용 확인
+   ```bash
+   export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+   rockcraft expand-extensions
+   ```
 3. rock 패키징
    ```bash
    rockcraft pack
