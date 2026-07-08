@@ -8,7 +8,6 @@
 
 ## 📝 필수 조건
 
-- (선택 사항): 🤿 [dive](https://github.com/wagoodman/dive)OCI 이미지 분석 도구
 
 ## 📦 Django 애플리케이션 패키징 방법
 
