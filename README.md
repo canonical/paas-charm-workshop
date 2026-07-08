@@ -11,11 +11,6 @@ using [Juju charms](https://juju.is/).
 
 ## 📝 Prerequisites
 
-- 📂 unzip
-  ```bash
-  sudo apt install unzip
-  ```
-
 ## 🪄 How to extend a Django application with Juju charms
 
 1. Change the working directory
