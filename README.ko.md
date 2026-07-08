@@ -8,9 +8,6 @@
 
 이 섹션은 [Rockcraft](https://github.com/canonical/rockcraft)의 `go-framework` 확장을 사용하여 go-hello-world 프로젝트를 OCI 이미지로 패키징하는 방법을 안내합니다.
 
-## 📝 필수 조건
-
-
 ## 📦 Go 애플리케이션 패키징 방법
 
 1. 작업 디렉토리 변경

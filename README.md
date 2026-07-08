@@ -9,9 +9,6 @@
 This section guides you to packing the go-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` extension.
 
-## 📝 Prerequisites
-
-
 ## 📦 How to pack a Go application
 
 1. Change the working directory
