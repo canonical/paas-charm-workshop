@@ -21,6 +21,11 @@
    ```bash
    rockcraft init --profile fastapi-framework
    ```
+      - rockcraft 확장 검사
+      ```bash
+      export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+      rockcraft expand-extensions
+      ```
 3. rock 패키징
    ```bash
    rockcraft pack
