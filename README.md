@@ -11,7 +11,6 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `go-framework` exten
 
 ## 📝 Prerequisites
 
-- (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
 
 ## 📦 How to pack a Go application
 
