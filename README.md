@@ -9,9 +9,6 @@
 This section guides you to packing the fastapi-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `fastapi-framework` extension.
 
-## 📝 Prerequisites
-
-
 ## 📦 How to pack a FastAPI application
 
 1. Change the working directory
