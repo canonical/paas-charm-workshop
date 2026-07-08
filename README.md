@@ -9,9 +9,6 @@
 This section guides you to packing the django-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` extension.
 
-## 📝 Prerequisites
-
-
 ## 📦 How to pack a Django application
 
 1. Change the working directory

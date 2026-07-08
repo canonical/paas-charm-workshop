@@ -6,9 +6,6 @@
 
 이번 세션에서는 [Rockcraft](https://github.com/canonical/rockcraft)의 `django-framework` 확장팩을 사용하여 django-hello-world 프로젝트를 OCI 이미지로 패키징하는 방법을 안내합니다.
 
-## 📝 필수 조건
-
-
 ## 📦 Django 애플리케이션 패키징 방법
 
 1. 작업 디렉토리 변경
