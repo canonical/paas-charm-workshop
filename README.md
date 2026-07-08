@@ -56,4 +56,8 @@ The following snaps are required for the tutorial.
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
+- 📂 unzip
+  ```bash
+  sudo apt install unzip
+  ```
 - (optional) 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images

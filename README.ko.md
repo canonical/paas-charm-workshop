@@ -56,4 +56,8 @@
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
+- 📂 unzip
+  ```bash
+  sudo apt install unzip
+  ```
 - (선택 사항) 🤿 [dive](https://github.com/wagoodman/dive) OCI 이미지 분석 도구
