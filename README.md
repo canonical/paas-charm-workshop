@@ -9,8 +9,6 @@
 This section guides you to extending the fastapi-hello-world project with operational capabilities
 using [Juju charms](https://juju.is/).
 
-## 📝 Prerequisites
-
 ## 🪄 How to extend a FastAPI application with Juju charms
 
 1. Change the working directory
