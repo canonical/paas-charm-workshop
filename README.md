@@ -9,9 +9,6 @@
 This section guides you to packing the expressjs-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `expressjs-framework` extension.
 
-## 📝 Prerequisites
-
-
 ## 📦 How to pack a ExpressJS application
 
 1. Change the working directory

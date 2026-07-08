@@ -7,9 +7,6 @@
 이번 세션에서는 [Rockcraft](https://github.com/canonical/rockcraft)의 `expressjs-framework`
 확장을 사용하여 expressjs-hello-world 프로젝트를 OCI 이미지로 패키징하는 방법을 배워봅니다.
 
-## 📝 필수 조건
-
-
 ## 📦 ExpressJS 애플리케이션 패키징 방법
 
 1. 작업 디렉토리 변경
