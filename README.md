@@ -9,18 +9,6 @@
 This section guides you to packing the expressjs-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `expressjs-framework` extension.
 
-## 📝 Prerequisites
-
-- 🪨 rockcraft
-  ```
-  sudo snap install rockcraft --channel=latest/edge --classic
-  ```
-- ☁️ lxd
-  ```
-  sudo snap install lxd && lxd init --auto
-  ```
-- (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
-
 ## 📦 How to pack a ExpressJS application
 
 1. Change the working directory
@@ -48,21 +36,16 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `expressjs-framework
         - postgresql-client
   EOF
   ```
-- (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
-  ```bash
-  dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-  ```
-
 3. Pack the rock
    ```bash
    rockcraft pack
    ```
 4. (Optional) Inspect the image
    ```bash
-   dive docker-archive://expressjs-hello-world_0.1_$(dpkg --print-architecture).rock
+   dive docker-archive://expressjs-hello-world_0.1_amd64.rock
    ```
 5. Congratulations! You now have an OCI image for expressjs-hello-world application!
 
 ## Next steps
 
-Let's start charming! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/expressjs-02-charm) `git checkout expressjs-02-charm`
+Let's start charming! Check out the [next branch](https://github.com/canonical/paas-charm-workshop/tree/expressjs-02-charm) `git checkout expressjs-02-charm`
