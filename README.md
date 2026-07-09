@@ -9,18 +9,6 @@
 This section guides you to packing the django-hello-world project into an OCI compliant image
 using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` extension.
 
-## 📝 Prerequisites
-
-- 🪨 rockcraft
-  ```
-  sudo snap install rockcraft --channel=latest/edge --classic
-  ```
-- ☁️ lxd
-  ```
-  sudo snap install lxd && lxd init --auto
-  ```
-- (optional): 🤿 [dive](https://github.com/wagoodman/dive) to inspect OCI images
-
 ## 📦 How to pack a Django application
 
 1. Change the working directory
@@ -32,30 +20,24 @@ using [Rockcraft](https://github.com/canonical/rockcraft)'s `django-framework` e
    rockcraft init --profile django-framework
    ```
    - Inspect the rockcraft extension
-   ```
-   ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
-   rockcraft expand-extensions
-   ```
-
-- (ARM64 only) modify the `platforms` section of the `rockcraft.yaml` file
-  ```
-  dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' rockcraft.yaml
-  ```
-
-2. Pack the rock
+     ```bash
+     export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
+     rockcraft expand-extensions
+     ```
+3. Pack the rock
 
    ```
    rockcraft pack
    ```
    
-3. (Optional) Inspect the image
+4. (Optional) Inspect the image
 
 ```
-dive docker-archive://django-hello-world_0.1_$(dpkg --print-architecture).rock
+dive docker-archive://django-hello-world_0.1_amd64.rock
 ```
 
-4. Congratulations! You now have an OCI image for django-hello-world application!
+5. Congratulations! You now have an OCI image for django-hello-world application!
 
 ## Next steps
 
-Let's start charming! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/blob/django-02-charm/README.md) `git checkout django-02-charm`
+Let's start charming! Check out the [next branch](https://github.com/canonical/paas-charm-workshop/tree/django-02-charm) `git checkout django-02-charm`
