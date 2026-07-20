@@ -6,30 +6,9 @@
 
 \*Read this in other languages: [English](README.md), [한국어](README.ko.md)
 
-This section guides you through deploying a Spring Boot application on Juju and Microk8s!
-
-## 📝 Prerequisites
-
-- 🔮 [Juju](https://juju.is/)
-  ```
-  sudo snap install juju --channel=3/stable
-  ```
-- 🔑 Juju credentials (we don't want to overload the network with Juju and Microk8s)
-  - Go to the Google Spreadsheet link on the slides and,
-    1. download the credentials
-    ```
-    wget <link-to-juju-controller.tar.gz>
-    mkdir -p ~/.local/share/
-    tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
-    ```
-    2. choose a Juju model with your corresponding architecture, mark your name down on the "Assigned" column.
+This section guides you through deploying a Spring Boot application on Juju and K8s!
 
 ## 🚀 How to deploy a Spring Boot application on Juju
-
-In this section, to be nice to our network, we've already populated the spring boot application image
-on MicroK8s.
-
-We'll also be using a shared Juju + Microk8s cluster :)
 
 1. Test your juju connection
 
@@ -64,7 +43,7 @@ juju consume admin/cos.grafana-k8s
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
-juju deploy ./spring-hello-world/charm/spring-hello-world_$(dpkg --print-architecture).charm \
+juju deploy ./spring-hello-world/charm/spring-hello-world_amd64.charm \
   $APPLICATION_NAME \
   --resource app-image=localhost:32000/spring-hello-world:0.1
 ```
@@ -83,22 +62,22 @@ UNIT_IP=<your application unit IP>
 curl http://$UNIT_IP:8000/health
 ```
 
-8. Deploy nginx-ingress-integrator charm
+8. Deploy ingress-configurator charm
 
 ```bash
 export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
-juju deploy nginx-ingress-integrator --trust \
-  --config path-routes="/" \
-  --config service-hostname=$SERVICE_HOSTNAME
+juju deploy ingress-configurator --trust \
+  --config paths="/" \
+  --config hostname=$SERVICE_HOSTNAME
 ```
 
-9. Relate the application application to nginx-ingress-integrator
+9. Relate the application application to ingress-configurator
 
 ```bash
-juju relate $APPLICATION_NAME nginx-ingress-integrator
+juju relate $APPLICATION_NAME ingress-configurator
 ```
 
-  - Wait for the ingress IP to show up on the nginx-ingress-integrator unit status
+  - Wait for the ingress IP to show up on the ingress-configurator unit status
 
     ```bash
     juju status --relations --watch 5s
@@ -125,7 +104,6 @@ juju relate $APPLICATION_NAME grafana-k8s
 juju status --watch=5s
 ```
 
-14. Visit the Grafana URL (link & credentials in spreadsheet)
 
 ## Further information
 
