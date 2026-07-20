@@ -1,0 +1,28 @@
+django_hello_world
+
+# Rock and charm build artifacts (from rockcraft pack / charmcraft pack)
+*.rock
+*.charm
+
+# Charm inspection directory (from: unzip *.charm -d inspect)
+inspect/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+
+# uv
+.uv/
+
+# Node.js (ExpressJS)
+node_modules/
+
+# Java / Spring Boot
+target/
+*.jar
+*.class
+
+# Go binaries
+go-hello-world/go-hello-world
