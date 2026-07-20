@@ -6,28 +6,9 @@
 
 \*다른 언어로 읽기: [English](README.md), [한국어](README.ko.md)
 
-이 섹션은 Juju와 Microk8s에서 Spring Boot 애플리케이션을 배포하는 방법을 안내합니다!
-
-## 📝 필수 조건
-
-- 🔮 [Juju](https://juju.is/)
-  ```bash
-  sudo snap install juju --channel=3/stable
-  ```
-- 🔑 Juju 서버 세팅/접속키 다운로드 (네트워크 과부하를 방지하기 위해 준비했습니다~)
-  - 슬라이드의 Google 스프레드시트 링크에서 쥬쥬 세팅/접속키를 다운로드합니다.
-    ```bash
-    wget <link-to-juju-controller.tar.gz> -O juju-controller.tar.gz
-    mkdir -p ~/.local/share/
-    tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
-    ```
-    - 해당 아키텍처에 맞는 Juju 모델을 선택하고 "Assigned" 열에 이름을 기록해주세요.
+이 섹션은 Juju와 K8s에서 Spring Boot 애플리케이션을 배포하는 방법을 안내합니다!
 
 ## 🚀 Spring Boot 애플리케이션을 Juju에 배포하는 방법
-
-이번 섹션에서는 네트워크 과부화 방지를 위해 미리 스프링 애플리케이션 OCI이미지를 Microk8s registry에 준비해놓았습니다 :)
-
-공유된 Juju + Microk8s 클러스터를 사용해봅니다.
 
 1. Juju 연결 테스트
 
@@ -55,7 +36,6 @@ juju find-offers
 juju consume admin/postgres.postgresql-k8s
 ```
 
-AMD64 only
 ```
 juju consume admin/cos.prometheus
 juju consume admin/cos.loki
@@ -66,7 +46,7 @@ juju consume admin/cos.grafana
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
-juju deploy ./spring-hello-world/charm/spring-hello-world_$(dpkg --print-architecture).charm \
+juju deploy ./spring-hello-world/charm/spring-hello-world_amd64.charm \
   $APPLICATION_NAME \
   --resource app-image=localhost:32000/spring-hello-world:0.1
 ```
@@ -78,22 +58,22 @@ juju relate $APPLICATION_NAME postgresql-k8s
 juju status --watch=5s
 ```
 
-7. nginx-ingress-integrator charm 배포
+7. ingress-configurator charm 배포
 
 ```bash
 export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
-juju deploy nginx-ingress-integrator --trust \
-  --config path-routes="/" \
-  --config service-hostname=$SERVICE_HOSTNAME
+juju deploy ingress-configurator --trust \
+  --config paths="/" \
+  --config hostname=$SERVICE_HOSTNAME
 ```
 
-8. 애플리케이션을 nginx-ingress-integrator에 연결
+8. 애플리케이션을 ingress-configurator에 연결
 
 ```bash
-juju relate $APPLICATION_NAME nginx-ingress-integrator
+juju relate $APPLICATION_NAME ingress-configurator
 ```
 
-   - nginx-ingress-integrator 단위 상태에서 ingress IP가 표시될 때까지 대기
+   - ingress-configurator 단위 상태에서 ingress IP가 표시될 때까지 대기
 
       ```bash
       juju status --relations --watch 5s
@@ -111,7 +91,7 @@ curl -X POST http://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" -
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
-11. (AMD64 only) Canonical Observability Stack (COS) 연결
+11. Canonical Observability Stack (COS) 연결
 
 ```bash
 juju relate $APPLICATION_NAME prometheus
@@ -119,8 +99,6 @@ juju relate $APPLICATION_NAME loki
 juju relate $APPLICATION_NAME grafana
 juju status --watch=5s
 ```
-
-12. Grafana URL 방문 (링크 및 자격 증명은 스프레드시트에서 확인)
 
 ## 추가 정보
 
