@@ -9,20 +9,6 @@
 This section guides you to extending the spring-hello-world project with operational capabilities
 using [Juju charms](https://juju.is/).
 
-## 📝 Prerequisites
-
-- ✨ charmcraft
-
-```bash
-sudo snap install charmcraft --classic --channel=latest/edge
-```
-
-- 📂 unzip
-
-```bash
-sudo apt install unzip
-```
-
 ## 🪄 How to extend a Spring Boot application with Juju charms
 
 1. Change the working directory
@@ -64,40 +50,21 @@ requires:
 EOF
 ```
 
-5. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file
-
-```diff
-+ --no-binary=:none:
-ops ~= 2.17
-paas-charm>=1.0,<2
-```
-
-```bash
-# or use sed:
-sed -i '1s/^/--no-binary=:none:\n/' requirements.txt
-```
-
-6. (ARM64 only) modify the `platforms` section of the `charmcraft.yaml` file
-
-```bash
-dpkg --print-architecture | grep arm64 && sed -i 's/# arm64/arm64/' charmcraft.yaml
-```
-
-7. Pack the charm
+5. Pack the charm
 
 ```bash
 charmcraft pack
 ```
 
-8. Inspect the charm
+6. Inspect the charm
 
 ```bash
 mkdir inspect
-unzip spring-hello-world_$(dpkg --print-architecture).charm -d inspect
+unzip spring-hello-world_amd64.charm -d inspect
 ```
 
-9. Congratulations! You have have a local charm you can deploy to Juju!
+7. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
-Let's start getting our hands dirty! Check out the [next branch](https://github.com/yanksyoon/hello-ubucon/tree/springboot-03-deploy) `git checkout spring-03-deploy`
+Let's start getting our hands dirty! Check out the [next branch](https://github.com/canonical/paas-charm-workshop/tree/springboot-03-deploy) `git checkout springboot-03-deploy`
