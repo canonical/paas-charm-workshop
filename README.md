@@ -6,30 +6,9 @@
 
 \*Read this in other languages: [English](README.md), [한국어](README.ko.md)
 
-This section guides you through deploying a Flask application on Juju and Microk8s!
-
-## 📝 Prerequisites
-
-- 🔮 [Juju](https://juju.is/)
-  ```
-  sudo snap install juju --channel=3/stable
-  ```
-- 🔑 Juju credentials (we don't want to overload the network with Juju and Microk8s)
-  - Go to the Google Spreadsheet link on the slides and,
-    1. download the credentials
-    ```
-    wget <link-to-juju-controller.tar.gz> -O juju-controller.tar.gz
-    mkdir -p ~/.local/share/
-    tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
-    ```
-    2. choose a Juju model with your corresponding architecture, mark your name down on the "Assigned" column.
+This section guides you through deploying a Flask application on Juju and K8s!
 
 ## 🚀 How to deploy a Flask application on Juju
-
-In this section, to be nice to our network, we've already populated the flask application image
-on MicroK8s.
-
-We'll also be using a shared Juju + Microk8s cluster :)
 
 1. Test your juju connection
 
@@ -57,8 +36,6 @@ juju find-offers
 juju consume admin/postgres.postgresql-k8s
 ```
 
-AMD64 only
-
 ```bash
 juju consume admin/cos.prometheus
 juju consume admin/cos.loki
@@ -69,7 +46,7 @@ juju consume admin/cos.grafana
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
-juju deploy ./flask-hello-world/charm/flask-hello-world_ubuntu-22.04-$(dpkg --print-architecture).charm \
+juju deploy ./flask-hello-world/charm/flask-hello-world_ubuntu-22.04-amd64.charm \
   $APPLICATION_NAME \
   --resource flask-app-image=localhost:32000/flask-hello-world:0.1
 ```
@@ -81,22 +58,22 @@ juju relate $APPLICATION_NAME postgresql-k8s
 juju status --watch=5s
 ```
 
-7. Deploy nginx-ingress-integrator charm
+7. Deploy ingress-configurator charm
 
 ```bash
 export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
-juju deploy nginx-ingress-integrator --trust \
-  --config path-routes="/" \
-  --config service-hostname=$SERVICE_HOSTNAME
+juju deploy ingress-configurator --trust \
+  --config paths="/" \
+  --config hostname=$SERVICE_HOSTNAME
 ```
 
-8. Relate the application application to nginx-ingress-integrator
+8. Relate the application to ingress-configurator
 
 ```bash
-juju relate $APPLICATION_NAME nginx-ingress-integrator
+juju relate $APPLICATION_NAME ingress-configurator
 ```
 
-  - Wait for the ingress IP to show up on the nginx-ingress-integrator unit status
+  - Wait for the ingress IP to show up on the ingress-configurator unit status
 
     ```bash
     juju status --relations --watch 5s
@@ -114,7 +91,7 @@ curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" 
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
-11. (AMD64 only) Relate Canonical Observability Stack (COS)
+11. Relate Canonical Observability Stack (COS)
 
 ```bash
 juju relate $APPLICATION_NAME prometheus
@@ -122,8 +99,6 @@ juju relate $APPLICATION_NAME loki
 juju relate $APPLICATION_NAME grafana
 juju status --watch=5s
 ```
-
-12. Visit the Grafana URL (link & credentials in spreadsheet)
 
 ## Further information
 
