@@ -21,22 +21,22 @@
 cd django-hello-world
 ```
 
-2. 가상 환경 생성 및 패키지 설치
+2. [uv](https://docs.astral.sh/uv/)로 패키지 설치
 
 ```
-python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt
+uv sync
 ```
 
 3. 서버 실행
 
 ```
-DJANGO_DEBUG=true DJANGO_ALLOWED_HOSTS='["*"]' ./django_hello_world/manage.py runserver
+DJANGO_DEBUG=true DJANGO_ALLOWED_HOSTS='["*"]' uv run ./django_hello_world/manage.py runserver
 ```
 
 4. 데이터베이스 마이그레이션 스크립트 실행
 
 ```
-./django_hello_world/manage.py migrate
+uv run ./django_hello_world/manage.py migrate
 ```
 
 5. 다음 curl 명령어를 사용하여 엔드포인트 테스트
@@ -52,4 +52,4 @@ curl http://localhost:8000/keys/<key_id>
 
 ## 다음 단계
 
-패키징 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/django-01-rock) `git checkout django-01-rock`을 확인하세요.
+패키징 시작! [다음 브랜치](https://github.com/canonical/paas-charm-workshop/tree/django-01-rock) `git checkout django-01-rock`을 확인하세요.
