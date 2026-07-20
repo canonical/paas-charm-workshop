@@ -8,28 +8,7 @@
 
 This section guides you through deploying a Spring Boot application on Juju and K8s!
 
-## 📝 Prerequisites
-
-- 🔮 [Juju](https://juju.is/)
-  ```
-  sudo snap install juju --channel=3/stable
-  ```
-- 🔑 Juju credentials (we don't want to overload the network with Juju and K8s)
-  - Go to the Google Spreadsheet link on the slides and,
-    1. download the credentials
-    ```
-    wget <link-to-juju-controller.tar.gz>
-    mkdir -p ~/.local/share/
-    tar -xvzf ./juju-controller.tar.gz -C ~/.local/share
-    ```
-    2. choose a Juju model with your corresponding architecture, mark your name down on the "Assigned" column.
-
 ## 🚀 How to deploy a Spring Boot application on Juju
-
-In this section, to be nice to our network, we've already populated the spring boot application image
-on K8s.
-
-We'll also be using a shared Juju + K8s cluster :)
 
 1. Test your juju connection
 
