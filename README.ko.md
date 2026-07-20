@@ -18,19 +18,19 @@
 1. 작업 디렉토리 변경
 
 ```
-cd django-hello-world
+cd fastapi-hello-world
 ```
 
-2. 가상 환경을 생성 및 패키지 설치
+2. [uv](https://docs.astral.sh/uv/)로 패키지 설치
 
 ```
-python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt
+uv sync
 ```
 
 3. 서버 실행
 
 ```
-fastapi dev app.py
+uv run fastapi dev app.py
 ```
 
 4. 다음 curl 명령어를 사용하여 엔드포인트 테스트
@@ -44,4 +44,4 @@ curl http://localhost:8000/fibonacci/9
 
 ## 다음 단계
 
-패키징 시작! [다음 브랜치](https://github.com/yanksyoon/hello-ubucon/tree/fastapi-01-rock) `git checkout fastapi-01-rock`를 확인하세요.
+패키징 시작! [다음 브랜치](https://github.com/canonical/paas-charm-workshop/tree/fastapi-01-rock) `git checkout fastapi-01-rock`를 확인하세요.
