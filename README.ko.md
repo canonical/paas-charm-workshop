@@ -52,7 +52,7 @@
   ```bash
   sudo snap install juju --channel=3.6/stable
   ```
-- [Canonical Kubernetes (`k8s` snap)](https://snapcraft.io/k8s)
+- [Canonical Kubernetes](https://snapcraft.io/k8s)
   ```bash
   sudo snap install k8s --classic --channel=1.35-classic/stable
   ```
