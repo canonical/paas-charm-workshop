@@ -52,11 +52,15 @@
   ```bash
   sudo snap install juju --channel=3.6/stable
   ```
+- [Canonical Kubernetes (`k8s` snap)](https://snapcraft.io/k8s)
+  ```bash
+  sudo snap install k8s --classic --channel=1.35-classic/stable
+  ```
 - [LXD](https://snapcraft.io/lxd)
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
-- [unzip](https://packages.ubuntu.com/search?keywords=unzip)
+- (선택 사항) [unzip](https://packages.ubuntu.com/search?keywords=unzip) charm 패키지 내용을 확인하기 위한 도구
   ```bash
   sudo apt install unzip
   ```

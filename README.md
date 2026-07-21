@@ -52,6 +52,10 @@ The following tools are required for the tutorial.
   ```bash
   sudo snap install juju --channel=3.6/stable
   ```
+- [Canonical Kubernetes (`k8s` snap)](https://snapcraft.io/k8s)
+  ```bash
+  sudo snap install k8s --classic --channel=1.35-classic/stable
+  ```
 - [LXD](https://snapcraft.io/lxd)
   ```bash
   sudo snap install lxd && lxd init --auto
