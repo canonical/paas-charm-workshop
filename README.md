@@ -56,7 +56,7 @@ The following tools are required for the tutorial.
   ```bash
   sudo snap install lxd && lxd init --auto
   ```
-- [unzip](https://packages.ubuntu.com/search?keywords=unzip)
+- (optional) [unzip](https://packages.ubuntu.com/search?keywords=unzip) to inspect the charm package contents.
   ```bash
   sudo apt install unzip
   ```
