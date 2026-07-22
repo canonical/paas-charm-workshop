@@ -78,4 +78,4 @@ curl http://$SERVICE_HOSTNAME/keys/<key-id>
 
 ## 추가 정보
 
-전체 튜토리얼은 [12-factor application read the docs](https://canonical-12-factor-app-support.readthedocs-hosted.com/latest/tutorial/)에서 확인할 수 있습니다!
+전체 튜토리얼은 [12-factor application documentation](https://canonical.com/juju/docs/12-factor/latest/)에서 확인할 수 있습니다!
