@@ -26,8 +26,8 @@ charmcraft login
 3. Upload the charm and rock to the local registry
 
 ```bash
-charmcraft upload ./expressjs-hello-world/charm/expressjs-hello-world_amd64.charm
-charmcraft upload-resource expressjs-hello-world app-image --image=oci-archive:./expressjs-hello-world_0.1_amd64.rock
+charmcraft upload ./expressjs-hello-world_amd64.charm
+charmcraft upload-resource expressjs-hello-world app-image --image=oci-archive:../expressjs-hello-world_0.1_amd64.rock
 charmcraft release expressjs-hello-world --revision=1 --channel=latest/edge --resource=app-image:1
 ```
 
