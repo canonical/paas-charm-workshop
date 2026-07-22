@@ -17,61 +17,37 @@ juju controllers
 juju models
 ```
 
-2. Switch to your Juju model
+2. Login to charmcraft
 
 ```bash
-export MODEL_NAME=<your-model-name>
-juju switch $MODEL_NAME
+charmcraft login
 ```
 
-3. Find SaaS offers
+3. Upload the charm and rock to the local registry
 
 ```bash
-juju find-offers
+charmcraft upload ./django-hello-world_ubuntu-22.04-amd64.charm
+charmcraft upload-resource django-hello-world django-app-image --image=oci-archive:../django-hello-world_0.1_amd64.rock
+charmcraft release django-hello-world --revision=1 --channel=latest/edge --resource=django-app-image:1
 ```
 
-4. Import SaaS applications
+4. Deploy the application to Juju
 
 ```bash
-juju consume admin/postgres.postgresql-k8s
+juju deploy django-hello-world --channel=latest/edge --config django-allowed-hosts="*"
 ```
 
-```bash
-juju consume admin/cos.prometheus
-juju consume admin/cos.loki
-juju consume admin/cos.grafana
-```
-
-5. Deploy the application to Juju
+5. Integrate the deployed application with the database
 
 ```bash
-export APPLICATION_NAME=<your-model-name>
-juju deploy ./django-hello-world/charm/django-hello-world_ubuntu-22.04-amd64.charm \
-  $APPLICATION_NAME \
-  --resource django-app-image=localhost:32000/django-hello-world:0.1 \
-  --config django-allowed-hosts="*"
-```
-
-6. Relate the deployed application to database
-
-```bash
-juju relate $APPLICATION_NAME postgresql-k8s
+juju integrate django-hello-world postgresql-k8s
 juju status --watch=5s
 ```
 
-7. Deploy ingress-configurator charm
+6. Integrate the application with ingress-configurator
 
 ```bash
-export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
-juju deploy ingress-configurator --trust \
-  --config paths="/" \
-  --config hostname=$SERVICE_HOSTNAME
-```
-
-8. Relate the application to ingress-configurator
-
-```bash
-juju relate $APPLICATION_NAME ingress-configurator
+juju integrate django-hello-world ingress-configurator
 ```
 
    - Wait for the ingress IP to show up on the ingress-configurator unit status
@@ -80,26 +56,25 @@ juju relate $APPLICATION_NAME ingress-configurator
     juju status --relations --watch 5s
     ```
 
-9. Store your secret
+7. Add the hostname to /etc/hosts
+
+```bash
+export INGRESS_IP=$(juju status --format=json | jq -r '.applications["ingress-configurator"].units["ingress-configurator/0"]["address"]')
+export SERVICE_HOSTNAME=$(juju config ingress-configurator hostname)
+echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
+```
+
+8. Store your secret
 
 ```bash
 curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" \
   --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
 ```
 
-10. Retrieve your secret
+9. Retrieve your secret
 
 ```bash
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
-```
-
-11. Relate Canonical Observability Stack (COS)
-
-```bash
-juju relate $APPLICATION_NAME prometheus
-juju relate $APPLICATION_NAME loki
-juju relate $APPLICATION_NAME grafana
-juju status --watch=5s
 ```
 
 ## Further information
