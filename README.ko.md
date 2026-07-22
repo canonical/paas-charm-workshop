@@ -11,89 +11,69 @@
 ## 🚀 ExpressJS 애플리케이션을 Juju에 배포하는 방법
 
 1. Juju 연결 테스트
-   
+
 ```bash
 juju controllers
 juju models
 ```
-2. Juju 모델로 전환
-   
-```bash
-export MODEL_NAME=<your-model-name>
-juju switch $MODEL_NAME
-```
-3. SaaS 오퍼 찾기
-   
-```bash
-juju find-offers
-```
-4. SaaS 애플리케이션 가져오기
-   
-```bash
-juju consume admin/postgres.postgresql-k8s
-```
+
+2. charmcraft 로그인
 
 ```bash
-juju consume admin/cos.prometheus
-juju consume admin/cos.loki
-juju consume admin/cos.grafana
+charmcraft login
 ```
 
-5. 애플리케이션을 Juju에 배포
-   
+3. 로컬 레지스트리에 charm과 rock 업로드
+
 ```bash
-export APPLICATION_NAME=<your-model-name>
-juju deploy ./expressjs-hello-world/charm/expressjs-hello-world_amd64.charm \
-   $APPLICATION_NAME \
-   --resource app-image=localhost:32000/expressjs-hello-world:0.1
+charmcraft upload ./expressjs-hello-world_amd64.charm
+charmcraft upload-resource expressjs-hello-world app-image --image=oci-archive:../expressjs-hello-world_0.1_amd64.rock
+charmcraft release expressjs-hello-world --revision=1 --channel=latest/edge --resource=app-image:1
 ```
 
-6. 배포된 애플리케이션을 데이터베이스에 연결
-   
+4. 애플리케이션을 Juju에 배포
+
 ```bash
-juju relate $APPLICATION_NAME postgresql-k8s
+juju deploy expressjs-hello-world --channel=latest/edge
+```
+
+5. 배포된 애플리케이션을 데이터베이스에 연결
+
+```bash
+juju integrate expressjs-hello-world postgresql-k8s
 juju status --watch=5s
 ```
 
-7. ingress-configurator charm 배포
-   
+6. 애플리케이션을 ingress-configurator에 연결
+
 ```bash
-export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
-juju deploy ingress-configurator --trust \
-   --config paths="/" \
-   --config hostname=$SERVICE_HOSTNAME
+juju integrate expressjs-hello-world ingress-configurator
 ```
 
-8. 애플리케이션을 ingress-configurator에 연결
-   
-```bash
-juju relate $APPLICATION_NAME ingress-configurator
-```
    - ingress-configurator 상태에서 ingress IP가 표시될 때까지 대기
-      
+
+      ```bash
+      juju status --relations --watch 5s
+      ```
+
+7. /etc/hosts에 호스트명 추가
+
 ```bash
-juju status --relations --watch 5s
+export INGRESS_IP=$(juju status --format=json | jq -r '.applications["ingress-configurator"].units["ingress-configurator/0"]["address"]')
+export SERVICE_HOSTNAME=$(juju config ingress-configurator hostname)
+echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 ```
 
-9. 비밀 저장
-   
+8. 비밀 저장
+
 ```bash
 curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
 ```
 
-10. 비밀 검색
-    
-```bash
-   curl http://$SERVICE_HOSTNAME/keys/<key-id>
-```
+9. 비밀 검색
 
-11. Canonical Observability Stack (COS) 연결
-   
 ```bash
-juju relate $APPLICATION_NAME prometheus
-juju relate $APPLICATION_NAME loki
-juju relate $APPLICATION_NAME grafana
-juju status --watch=5s
+curl http://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
 ## 추가 정보
