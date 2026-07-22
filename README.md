@@ -26,8 +26,8 @@ charmcraft login
 3. Upload the charm and rock to the local registry
 
 ```bash
-charmcraft upload ./fastapi-hello-world/charm/fastapi-hello-world_amd64.charm
-charmcraft upload-resource fastapi-hello-world app-image --image=oci-archive:./fastapi-hello-world_0.1_amd64.rock
+charmcraft upload ./fastapi-hello-world_amd64.charm
+charmcraft upload-resource fastapi-hello-world app-image --image=oci-archive:../fastapi-hello-world_0.1_amd64.rock
 charmcraft release fastapi-hello-world --revision=1 --channel=latest/edge --resource=app-image:1
 ```
 
