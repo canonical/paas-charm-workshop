@@ -79,4 +79,4 @@ curl http://$SERVICE_HOSTNAME/keys/<key-id>
 
 ## Further information
 
-The complete documentation and tutorial is available at [12-factor application read the docs](https://canonical-12-factor-app-support.readthedocs-hosted.com/latest/tutorial/)!
+The complete documentation and tutorial is available at [12-factor application documentation](https://canonical.com/juju/docs/12-factor/latest/)!
