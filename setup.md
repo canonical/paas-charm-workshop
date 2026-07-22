@@ -34,6 +34,14 @@ LXD initialization:
 sudo lxd init --auto
 ```
 
+## Gnome Keyring setup
+
+Install gnome-keyring and dbus-user-session for charmcraft authentication to work properly:
+
+```bash
+sudo apt install -y dbus-user-session gnome-keyring
+```
+
 ## Canonical Kubernetes setup
 
 The local Kubernetes substrate is provided by Canonical Kubernetes.
@@ -57,6 +65,8 @@ Configure the load balancer:
 sudo k8s enable load-balancer
 sudo k8s set load-balancer.cidrs=10.3.254.45-10.3.254.48 load-balancer.l2-mode=true
 ```
+
+**NOTE**: The IP address range (`load-balancer.cidrs`) needs to be adapted depending on your host network configuration. Choose a range that is available on your network and won't conflict with existing allocations.
 
 Verify Canonical Kubernetes feature state:
 
@@ -117,12 +127,15 @@ sudo snap set spellbook \
 sudo snap start spellbook
 ```
 
-Configure Charmcraft endpoints for the custom registry:
+Configure Charmcraft endpoints for the custom registry. For persistence across sessions, add these environment variables to `~/.bashrc`:
 
 ```bash
+cat <<EOF >> ~/.bashrc
 export CHARMCRAFT_STORE_API_URL=http://<your-ip>:8080
 export CHARMCRAFT_REGISTRY_URL=https://<your-ip>:5000
 export CHARMCRAFT_UPLOAD_URL=http://<your-ip>:8080
+EOF
+source ~/.bashrc
 ```
 
 Trust the local registry certificate on the host:
@@ -131,6 +144,16 @@ Trust the local registry certificate on the host:
 sudo cp /var/snap/spellbook/common/certs/oci.crt /usr/local/share/ca-certificates/charm-registry-oci.crt
 sudo update-ca-certificates
 ```
+
+Configure Canonical Kubernetes containerd to trust the local OCI registry certificate (required for K8s to pull images):
+
+```bash
+CHARM_REGISTRY_K8S_OCI_CA_FILE=/var/snap/spellbook/common/certs/oci.crt \
+  CHARM_REGISTRY_PUBLIC_REGISTRY_URL=https://<your-ip>:5000 \
+  /snap/spellbook/current/bin/install-oci-cert.sh
+```
+
+This script copies the certificate to containerd's certificate directory and creates the necessary `hosts.toml` configuration, then restarts the `k8s.containerd` service.
 
 Sync required charms into the private registry from CharmHub:
 
@@ -159,15 +182,16 @@ juju switch workshop:app
 
 ## Charm deployment
 
-The app model is pre-populated with the following applications and channels:
+The app model is pre-populated with the following applications. These charms are deployed and integrated as part of the workshop provisioning, so users don't need to deploy them manually:
 
 ```bash
-juju deploy gateway-api-integrator --channel 1/edge
-juju deploy ingress-configurator --channel latest/edge
-juju deploy postgresql-k8s --channel 16/edge
+juju deploy postgresql-k8s --channel 16/edge --trust
 juju deploy self-signed-certificates --channel 1/stable
+juju deploy gateway-api-integrator --config gateway-class=cilium --channel 1/edge --trust
+juju deploy ingress-configurator --config hostname=www.example.local --channel latest/edge --trust
 juju integrate gateway-api-integrator self-signed-certificates
 juju integrate gateway-api-integrator ingress-configurator
+juju integrate postgresql-k8s self-signed-certificates
 ```
 
 ## Final Juju status
