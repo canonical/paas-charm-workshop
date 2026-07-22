@@ -24,25 +24,7 @@ export MODEL_NAME=<your-model-name>
 juju switch $MODEL_NAME
 ```
 
-3. SaaS 오퍼 찾기
-
-```bash
-juju find-offers
-```
-
-4. SaaS 애플리케이션 가져오기
-
-```bash
-juju consume admin/postgres.postgresql-k8s
-```
-
-```
-juju consume admin/cos.prometheus
-juju consume admin/cos.loki
-juju consume admin/cos.grafana
-```
-
-5. 애플리케이션을 Juju에 배포
+3. 애플리케이션을 Juju에 배포
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
@@ -51,14 +33,14 @@ juju deploy ./spring-hello-world/charm/spring-hello-world_amd64.charm \
   --resource app-image=localhost:32000/spring-hello-world:0.1
 ```
 
-6. 배포된 애플리케이션을 데이터베이스에 연결
+4. 배포된 애플리케이션을 데이터베이스에 연결
 
 ```bash
 juju relate $APPLICATION_NAME postgresql-k8s
 juju status --watch=5s
 ```
 
-7. ingress-configurator charm 배포
+5. ingress-configurator charm 배포
 
 ```bash
 export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
@@ -67,7 +49,7 @@ juju deploy ingress-configurator --trust \
   --config hostname=$SERVICE_HOSTNAME
 ```
 
-8. 애플리케이션을 ingress-configurator에 연결
+6. 애플리케이션을 ingress-configurator에 연결
 
 ```bash
 juju relate $APPLICATION_NAME ingress-configurator
@@ -79,25 +61,16 @@ juju relate $APPLICATION_NAME ingress-configurator
       juju status --relations --watch 5s
       ```
 
-9. 비밀 저장
+7. 비밀 저장
 
 ```bash
 curl -X POST http://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
 ```
 
-10. 비밀 검색
+8. 비밀 검색
 
 ```bash
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
-```
-
-11. Canonical Observability Stack (COS) 연결
-
-```bash
-juju relate $APPLICATION_NAME prometheus
-juju relate $APPLICATION_NAME loki
-juju relate $APPLICATION_NAME grafana
-juju status --watch=5s
 ```
 
 ## 추가 정보
