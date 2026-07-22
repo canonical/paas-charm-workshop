@@ -24,35 +24,34 @@ export MODEL_NAME=<your-model-name>
 juju switch $MODEL_NAME
 ```
 
-3. 애플리케이션을 Juju에 배포
+3. 로컬 레지스트리에 charm과 rock 업로드
+
+```bash
+charmcraft upload ./django-hello-world/charm/django-hello-world_ubuntu-22.04-amd64.charm
+charmcraft upload-resource django-hello-world django-app-image --image=oci-archive:./django-hello-world_0.1_amd64.rock
+charmcraft release django-hello-world --revision=1 --channel=latest/edge --resource=django-app-image:1
+```
+
+4. 애플리케이션을 Juju에 배포
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
-juju deploy ./django-hello-world/charm/django-hello-world_ubuntu-22.04-amd64.charm \
-   $APPLICATION_NAME \
-   --resource django-app-image=localhost:32000/django-hello-world:0.1 \
+juju deploy django-hello-world $APPLICATION_NAME \
+   --channel=latest/edge \
    --config django-allowed-hosts="*"
 ```
 
-4. 배포된 애플리케이션을 데이터베이스에 연결
+5. 배포된 애플리케이션을 데이터베이스에 연결
 
 ```bash
 juju relate $APPLICATION_NAME postgresql-k8s
 juju status --watch=5s
 ```
 
-5. ingress-configurator charm 배포
-
-```bash
-export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
-juju deploy ingress-configurator --trust \
-   --config paths="/" \
-   --config hostname=$SERVICE_HOSTNAME
-```
-
 6. 애플리케이션을 ingress-configurator에 연결
 
 ```bash
+export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
 juju relate $APPLICATION_NAME ingress-configurator
 ```
 
