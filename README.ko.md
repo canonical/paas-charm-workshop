@@ -17,11 +17,10 @@ juju controllers
 juju models
 ```
 
-2. Juju 모델 전환
+2. charmcraft 로그인
 
 ```bash
-export MODEL_NAME=<your-model-name>
-juju switch $MODEL_NAME
+charmcraft login
 ```
 
 3. 로컬 레지스트리에 charm과 rock 업로드
@@ -35,24 +34,20 @@ charmcraft release django-hello-world --revision=1 --channel=latest/edge --resou
 4. 애플리케이션을 Juju에 배포
 
 ```bash
-export APPLICATION_NAME=<your-model-name>
-juju deploy django-hello-world $APPLICATION_NAME \
-   --channel=latest/edge \
-   --config django-allowed-hosts="*"
+juju deploy django-hello-world --channel=latest/edge --config django-allowed-hosts="*"
 ```
 
 5. 배포된 애플리케이션을 데이터베이스에 연결
 
 ```bash
-juju relate $APPLICATION_NAME postgresql-k8s
+juju integrate django-hello-world postgresql-k8s
 juju status --watch=5s
 ```
 
 6. 애플리케이션을 ingress-configurator에 연결
 
 ```bash
-export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
-juju relate $APPLICATION_NAME ingress-configurator
+juju integrate django-hello-world ingress-configurator
 ```
 
    - ingress-configurator 상태에서 ingress IP가 표시될 때까지 대기
@@ -61,14 +56,22 @@ juju relate $APPLICATION_NAME ingress-configurator
       juju status --relations --watch 5s
       ```
 
-7. 비밀 저장
+7. /etc/hosts에 호스트명 추가
+
+```bash
+export INGRESS_IP=$(juju status --format=json | jq -r '.applications["ingress-configurator"].units["ingress-configurator/0"]["address"]')
+export SERVICE_HOSTNAME=$(juju config ingress-configurator hostname)
+echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
+```
+
+8. 비밀 저장
 
 ```bash
 curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" \
    --data '{"value": "저 사실 민초파입니다."}' -Lkv
 ```
 
-8. 비밀 검색
+9. 비밀 검색
 
 ```bash
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
