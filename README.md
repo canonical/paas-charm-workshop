@@ -24,25 +24,7 @@ export MODEL_NAME=<your-model-name>
 juju switch $MODEL_NAME
 ```
 
-3. Find SaaS offers
-
-```bash
-juju find-offers
-```
-
-4. Import SaaS applications
-
-```bash
-juju consume admin/postgres.postgresql-k8s
-```
-
-```bash
-juju consume admin/cos.prometheus
-juju consume admin/cos.loki
-juju consume admin/cos.grafana
-```
-
-5. Deploy the application to Juju
+3. Deploy the application to Juju
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
@@ -52,14 +34,14 @@ juju deploy ./django-hello-world/charm/django-hello-world_ubuntu-22.04-amd64.cha
   --config django-allowed-hosts="*"
 ```
 
-6. Relate the deployed application to database
+4. Relate the deployed application to database
 
 ```bash
 juju relate $APPLICATION_NAME postgresql-k8s
 juju status --watch=5s
 ```
 
-7. Deploy ingress-configurator charm
+5. Deploy ingress-configurator charm
 
 ```bash
 export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
@@ -68,7 +50,7 @@ juju deploy ingress-configurator --trust \
   --config hostname=$SERVICE_HOSTNAME
 ```
 
-8. Relate the application to ingress-configurator
+6. Relate the application to ingress-configurator
 
 ```bash
 juju relate $APPLICATION_NAME ingress-configurator
@@ -80,26 +62,17 @@ juju relate $APPLICATION_NAME ingress-configurator
     juju status --relations --watch 5s
     ```
 
-9. Store your secret
+7. Store your secret
 
 ```bash
 curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" \
   --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
 ```
 
-10. Retrieve your secret
+8. Retrieve your secret
 
 ```bash
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
-```
-
-11. Relate Canonical Observability Stack (COS)
-
-```bash
-juju relate $APPLICATION_NAME prometheus
-juju relate $APPLICATION_NAME loki
-juju relate $APPLICATION_NAME grafana
-juju status --watch=5s
 ```
 
 ## Further information
