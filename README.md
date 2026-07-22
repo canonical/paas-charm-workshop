@@ -20,35 +20,36 @@ juju models
 2. Switch to your Juju model
 
 ```bash
-juju switch <your-model-name>
+export MODEL_NAME=<your-model-name>
+juju switch $MODEL_NAME
 ```
 
-3. Deploy the application to Juju
+3. Upload the charm and rock to the local registry
+
+```bash
+charmcraft upload ./go-hello-world/charm/go-hello-world_amd64.charm
+charmcraft upload-resource go-hello-world app-image --image=oci-archive:./go-hello-world_0.1_amd64.rock
+charmcraft release go-hello-world --revision=1 --channel=latest/edge --resource=app-image:1
+```
+
+4. Deploy the application to Juju
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
-juju deploy ./go-hello-world/charm/go-hello-world_amd64.charm \
-  $APPLICATION_NAME \
-  --resource app-image=localhost:32000/go-hello-world:0.1
+juju deploy go-hello-world $APPLICATION_NAME --channel=latest/edge
 ```
 
-4. Relate the deployed application to database
+5. Relate the deployed application to database
 
 ```bash
 juju relate $APPLICATION_NAME postgresql-k8s
 juju status --watch=5s
 ```
 
-5. Deploy ingress-configurator charm
-
-```bash
-export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
-juju deploy ingress-configurator --trust --config paths=/ --config hostname=$SERVICE_HOSTNAME
-```
-
 6. Relate the application to ingress-configurator
 
 ```bash
+export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.local"
 juju relate $APPLICATION_NAME ingress-configurator
 ```
 
