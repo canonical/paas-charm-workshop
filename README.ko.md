@@ -24,34 +24,32 @@ export MODEL_NAME=<your-model-name>
 juju switch $MODEL_NAME
 ```
 
-3. 애플리케이션을 Juju에 배포
+3. 로컬 레지스트리에 charm과 rock 업로드
+
+```bash
+charmcraft upload ./spring-hello-world/charm/spring-hello-world_amd64.charm
+charmcraft upload-resource spring-hello-world app-image --image=oci-archive:./spring-hello-world_0.1_amd64.rock
+charmcraft release spring-hello-world --revision=1 --channel=latest/edge --resource=app-image:1
+```
+
+4. 애플리케이션을 Juju에 배포
 
 ```bash
 export APPLICATION_NAME=<your-model-name>
-juju deploy ./spring-hello-world/charm/spring-hello-world_amd64.charm \
-  $APPLICATION_NAME \
-  --resource app-image=localhost:32000/spring-hello-world:0.1
+juju deploy spring-hello-world $APPLICATION_NAME --channel=latest/edge
 ```
 
-4. 배포된 애플리케이션을 데이터베이스에 연결
+5. 배포된 애플리케이션을 데이터베이스에 연결
 
 ```bash
 juju relate $APPLICATION_NAME postgresql-k8s
 juju status --watch=5s
 ```
 
-5. ingress-configurator charm 배포
-
-```bash
-export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
-juju deploy ingress-configurator --trust \
-  --config paths="/" \
-  --config hostname=$SERVICE_HOSTNAME
-```
-
 6. 애플리케이션을 ingress-configurator에 연결
 
 ```bash
+export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
 juju relate $APPLICATION_NAME ingress-configurator
 ```
 
