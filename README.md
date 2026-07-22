@@ -17,11 +17,10 @@ juju controllers
 juju models
 ```
 
-2. Switch to your Juju model
+2. Login to charmcraft
 
 ```bash
-export MODEL_NAME=<your-model-name>
-juju switch $MODEL_NAME
+charmcraft login
 ```
 
 3. Upload the charm and rock to the local registry
@@ -35,22 +34,20 @@ charmcraft release expressjs-hello-world --revision=1 --channel=latest/edge --re
 4. Deploy the application to Juju
 
 ```bash
-export APPLICATION_NAME=<your-model-name>
-juju deploy expressjs-hello-world $APPLICATION_NAME --channel=latest/edge
+juju deploy expressjs-hello-world --channel=latest/edge
 ```
 
-5. Relate the deployed application to database
+5. Integrate the deployed application with the database
 
 ```bash
-juju relate $APPLICATION_NAME postgresql-k8s
+juju integrate expressjs-hello-world postgresql-k8s
 juju status --watch=5s
 ```
 
-6. Relate the application to ingress-configurator
+6. Integrate the application with ingress-configurator
 
 ```bash
-export SERVICE_HOSTNAME="$MODEL_NAME.ubuntu.lan"
-juju relate $APPLICATION_NAME ingress-configurator
+juju integrate expressjs-hello-world ingress-configurator
 ```
 
   - Wait for the ingress IP to show up on the ingress-configurator unit status
@@ -59,13 +56,21 @@ juju relate $APPLICATION_NAME ingress-configurator
     juju status --relations --watch 5s
     ```
 
-7. Store your secret
+7. Add the hostname to /etc/hosts
+
+```bash
+export INGRESS_IP=$(juju status --format=json | jq -r '.applications["ingress-configurator"].units["ingress-configurator/0"]["address"]')
+export SERVICE_HOSTNAME=$(juju config ingress-configurator hostname)
+echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
+```
+
+8. Store your secret
 
 ```bash
 curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
 ```
 
-8. Retrieve your secret
+9. Retrieve your secret
 
 ```bash
 curl http://$SERVICE_HOSTNAME/keys/<key-id>
