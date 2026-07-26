@@ -36,6 +36,10 @@ git clone https://github.com/canonical/paas-charm-workshop.git
   - The application OCI image is created and pushed to a repository.
   - The application is deployed to a Juju + K8s environment.
 
+## 📚 Further reading
+
+- [Workshop environment setup details](setup.md): If you're interesting in learning more about the exact setup steps for the pre-provisioned Juju environment users receive at the workshop.
+
 ## 📝 Prerequisites
 
 The following tools are required for the tutorial.
