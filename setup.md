@@ -109,7 +109,15 @@ juju bootstrap local-k8s workshop
 
 ## Private charm registry setup (Spellbook)
 
-The workshop environment includes a custom private charm registry backed by Spellbook. This is an optional step. Users can directly upload to the official CharmHub registry if required (or even directly deploy the locally packaged charm without uploading). But for the purpose of this workshop, we are creating a private registry. 
+The workshop environment includes a custom private charm registry backed by Spellbook. This is an optional step. Users can directly upload to the official CharmHub registry if required (or even directly deploy the locally packaged charm without uploading). But for the purpose of this workshop, we are creating a private registry.
+
+Set your host IP address as an environment variable:
+
+```bash
+export LOCAL_IP=<your-ip>
+```
+
+Replace `<your-ip>` with your actual host IP address (e.g., `10.3.254.1`).
 
 Install and configure Spellbook:
 
@@ -118,9 +126,9 @@ sudo snap install spellbook
 sudo snap set spellbook \
    oci.secret-key='replace-this-with-a-long-random-secret' \
    insecure-dev-auth=true admin.usernames=admin \
-   public-registry-url=https://<your-ip>:5000 \
-   public-api-url=http://<your-ip>:8080 \
-   public-storage-url=http://<your-ip>:8080 \
+   public-registry-url=https://${LOCAL_IP}:5000 \
+   public-api-url=http://${LOCAL_IP}:8080 \
+   public-storage-url=http://${LOCAL_IP}:8080 \
    limits.max-archive-file-bytes=32MB \
    limits.max-upload-bytes=128MB \
    charmhub.max-artifact-bytes=128MB
@@ -131,9 +139,9 @@ Configure Charmcraft endpoints for the custom registry. For persistence across s
 
 ```bash
 cat <<EOF >> ~/.bashrc
-export CHARMCRAFT_STORE_API_URL=http://<your-ip>:8080
-export CHARMCRAFT_REGISTRY_URL=https://<your-ip>:5000
-export CHARMCRAFT_UPLOAD_URL=http://<your-ip>:8080
+export CHARMCRAFT_STORE_API_URL=http://${LOCAL_IP}:8080
+export CHARMCRAFT_REGISTRY_URL=https://${LOCAL_IP}:5000
+export CHARMCRAFT_UPLOAD_URL=http://${LOCAL_IP}:8080
 EOF
 source ~/.bashrc
 ```
@@ -149,7 +157,7 @@ Configure Canonical Kubernetes containerd to trust the local OCI registry certif
 
 ```bash
 CHARM_REGISTRY_K8S_OCI_CA_FILE=/var/snap/spellbook/common/certs/oci.crt \
-  CHARM_REGISTRY_PUBLIC_REGISTRY_URL=https://<your-ip>:5000 \
+  CHARM_REGISTRY_PUBLIC_REGISTRY_URL=https://${LOCAL_IP}:5000 \
   /snap/spellbook/current/bin/install-oci-cert.sh
 ```
 
@@ -174,8 +182,7 @@ spellbook.charm-registryctl sync list
 Create a new model and configure it to use the private charm registry:
 
 ```bash
-
-echo "charmhub-url: http://<your-ip>:8080" > ~/juju-config.yaml
+echo "charmhub-url: http://${LOCAL_IP}:8080" > ~/juju-config.yaml
 juju add-model app --config ~/juju-config.yaml
 juju switch workshop:app
 ```
@@ -191,7 +198,6 @@ juju deploy gateway-api-integrator --config gateway-class=cilium --channel 1/edg
 juju deploy ingress-configurator --config hostname=www.example.local --channel latest/edge --trust
 juju integrate gateway-api-integrator self-signed-certificates
 juju integrate gateway-api-integrator ingress-configurator
-juju integrate postgresql-k8s self-signed-certificates
 ```
 
 ## Final Juju status
