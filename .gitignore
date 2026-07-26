@@ -2,3 +2,4 @@ __pycache__
 *.charm
 *.rock
 flask-hello-world/rockcraft.yaml
+flask-hello-world/charm/
