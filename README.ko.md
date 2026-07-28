@@ -35,6 +35,7 @@ charmcraft release spring-hello-world --revision=1 --channel=latest/edge --resou
 
 ```bash
 juju deploy spring-hello-world --channel=latest/edge
+juju config spring-hello-world app-port=8081
 ```
 
 5. 배포된 애플리케이션을 데이터베이스에 연결
@@ -67,13 +68,13 @@ echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 8. 비밀 저장
 
 ```bash
-curl -X POST http://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
+curl -X POST https://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
 ```
 
 9. 비밀 검색
 
 ```bash
-curl http://$SERVICE_HOSTNAME/keys/<key-id>
+curl -Lkv https://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
 ## 추가 정보
