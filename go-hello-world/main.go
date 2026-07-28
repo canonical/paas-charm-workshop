@@ -127,6 +127,6 @@ func main() {
 	http.HandleFunc("/keys", createKey)          // Create key endpoint
 	http.HandleFunc("/keys/", getKey)            // Get key endpoint
 
-	port := ":8080"
+	port := ":8081"
 	log.Fatal(http.ListenAndServe(port, nil))
 }
