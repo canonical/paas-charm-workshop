@@ -26,7 +26,7 @@ charmcraft login
 3. Upload the charm and rock to the local registry
 
 ```bash
-charmcraft upload ./django-hello-world_ubuntu-22.04-amd64.charm
+charmcraft upload ./django-hello-world_amd64.charm
 charmcraft upload-resource django-hello-world django-app-image --image=oci-archive:../django-hello-world_0.1_amd64.rock
 charmcraft release django-hello-world --revision=1 --channel=latest/edge --resource=django-app-image:1
 ```
@@ -59,7 +59,7 @@ juju integrate django-hello-world ingress-configurator
 7. Add the hostname to /etc/hosts
 
 ```bash
-export INGRESS_IP=$(juju status --format=json | jq -r '.applications["ingress-configurator"].units["ingress-configurator/0"]["address"]')
+export INGRESS_IP=$(juju status | grep "^gateway-api-integrator " | sed -n 's/.*Gateway addresses: //p')
 export SERVICE_HOSTNAME=$(juju config ingress-configurator hostname)
 echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 ```
