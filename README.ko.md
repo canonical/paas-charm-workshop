@@ -67,14 +67,14 @@ echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 8. 비밀 저장
 
 ```bash
-curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" \
+curl -X POST https://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" \
    --data '{"value": "저 사실 민초파입니다."}' -Lkv
 ```
 
 9. 비밀 검색
 
 ```bash
-curl http://$SERVICE_HOSTNAME/keys/<key-id>
+curl -Lkv https://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
 ## 추가 정보
