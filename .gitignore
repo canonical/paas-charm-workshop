@@ -1,3 +1,5 @@
 node_modules/
 *.rock
 *.charm
+expressjs-hello-world/rockcraft.yaml
+expressjs-hello-world/charm/
