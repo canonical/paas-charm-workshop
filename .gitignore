@@ -1,2 +1,4 @@
 *.rock
 *.charm
+spring-hello-world/rockcraft.yaml
+spring-hello-world/charm/
