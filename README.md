@@ -46,6 +46,7 @@ EOF
 
 5. Pack the charm
    ```
+   export CHARMCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
    charmcraft pack
    ```
 6. Inspect the charm
