@@ -25,7 +25,9 @@ sudo snap install lxd
 Optional inspection utility:
 
 ```bash
-sudo snap install dive
+DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+curl -fOL "https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.deb"
+sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb
 ```
 
 LXD initialization:
@@ -194,7 +196,7 @@ The app model is pre-populated with the following applications. These charms are
 ```bash
 juju deploy postgresql-k8s --channel 16/edge --trust
 juju deploy self-signed-certificates --channel 1/stable
-juju deploy gateway-api-integrator --config gateway-class=cilium --channel 1/edge --trust
+juju deploy gateway-api-integrator --config gateway-class=ck-gateway --channel 1/edge --trust
 juju deploy ingress-configurator --config hostname=www.example.local --channel latest/edge --trust
 juju integrate gateway-api-integrator self-signed-certificates
 juju integrate gateway-api-integrator ingress-configurator
