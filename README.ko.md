@@ -26,7 +26,7 @@ charmcraft login
 3. 로컬 레지스트리에 charm과 rock 업로드
 
 ```bash
-charmcraft upload ./flask-hello-world_ubuntu-22.04-amd64.charm
+charmcraft upload ./flask-hello-world_amd64.charm
 charmcraft upload-resource flask-hello-world flask-app-image --image=oci-archive:../flask-hello-world_0.1_amd64.rock
 charmcraft release flask-hello-world --revision=1 --channel=latest/edge --resource=flask-app-image:1
 ```
@@ -59,7 +59,7 @@ juju integrate flask-hello-world ingress-configurator
 7. /etc/hosts에 호스트명 추가
 
 ```bash
-export INGRESS_IP=$(juju status --format=json | jq -r '.applications["ingress-configurator"].units["ingress-configurator/0"]["address"]')
+export INGRESS_IP=$(juju status | grep "^gateway-api-integrator " | sed -n 's/.*Gateway addresses: //p')
 export SERVICE_HOSTNAME=$(juju config ingress-configurator hostname)
 echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 ```
