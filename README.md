@@ -35,6 +35,7 @@ charmcraft release fastapi-hello-world --revision=1 --channel=latest/edge --reso
 
 ```bash
 juju deploy fastapi-hello-world --channel=latest/edge
+juju config fastapi-hello-world webserver-port=8000
 ```
 
 5. Integrate the deployed application with the database
@@ -67,13 +68,13 @@ echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 8. Store your secret
 
 ```bash
-curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
+curl -X POST https://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
 ```
 
 9. Retrieve your secret
 
 ```bash
-curl http://$SERVICE_HOSTNAME/keys/<key-id>
+curl -Lkv https://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
 ## Further information
