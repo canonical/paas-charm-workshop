@@ -26,6 +26,7 @@ charmcraft login
 3. 로컬 레지스트리에 charm과 rock 업로드
 
 ```bash
+charmcraft register flask-hello-world
 charmcraft upload ./flask-hello-world_amd64.charm
 charmcraft upload-resource flask-hello-world flask-app-image --image=oci-archive:../flask-hello-world_0.1_amd64.rock
 charmcraft release flask-hello-world --revision=1 --channel=latest/edge --resource=flask-app-image:1
