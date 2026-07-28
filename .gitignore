@@ -1,2 +1,4 @@
 *.charm
 *.rock
+go-hello-world/rockcraft.yaml
+go-hello-world/charm/
