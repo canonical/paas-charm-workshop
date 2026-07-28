@@ -50,7 +50,7 @@ EOF
 6. charm 검사
    ```bash
    mkdir inspect
-   unzip django-hello-world_ubuntu-22.04-amd64.charm -d inspect
+   unzip django-hello-world_amd64.charm -d inspect
    ```
 7. 축하합니다! 이제 Juju에 배포할 수 있는 로컬 charm이 준비되었습니다!
 

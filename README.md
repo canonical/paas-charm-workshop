@@ -51,7 +51,7 @@ EOF
 6. Inspect the charm
    ```
    mkdir inspect
-   unzip django-hello-world_ubuntu-22.04-amd64.charm -d inspect
+   unzip django-hello-world_amd64.charm -d inspect
    ```
 7. Congratulations! You have have a local charm you can deploy to Juju!
 
