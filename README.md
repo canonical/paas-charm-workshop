@@ -59,7 +59,7 @@ juju integrate spring-hello-world ingress-configurator
 7. Add the hostname to /etc/hosts
 
 ```bash
-export INGRESS_IP=$(juju status --format=json | jq -r '.applications["ingress-configurator"].units["ingress-configurator/0"]["address"]')
+export INGRESS_IP=$(juju status | grep "^gateway-api-integrator " | sed -n 's/.*Gateway addresses: //p')
 export SERVICE_HOSTNAME=$(juju config ingress-configurator hostname)
 echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 ```
