@@ -2,3 +2,5 @@
 *.rock
 *.sqlite3
 __pycache__
+django-hello-world/rockcraft.yaml
+django-hello-world/charm/
