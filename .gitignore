@@ -1,3 +1,5 @@
 __pycache__
 *.charm
 *.rock
+fastapi-hello-world/rockcraft.yaml
+fastapi-hello-world/charm/
