@@ -38,8 +38,8 @@ go run .
 3. Test the endpoints using the following curl commands
 
 ```
-curl http://localhost:8080/health
-curl http://localhost:8080/fibonacci/9
+curl http://localhost:8081/health
+curl http://localhost:8081/fibonacci/9
 ```
 
 4. Congratulations! You've finished exploring the Go Hello World project!

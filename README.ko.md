@@ -39,8 +39,8 @@ go run .
 3. 다음 curl 명령어를 사용하여 엔드포인트 테스트
 
 ```
-curl http://localhost:8080/health
-curl http://localhost:8080/fibonacci/9
+curl http://localhost:8081/health
+curl http://localhost:8081/fibonacci/9
 ```
 
 4. 축하합니다! Go Hello World 프로젝트 탐색을 완료했습니다!
