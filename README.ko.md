@@ -26,6 +26,7 @@ charmcraft login
 3. 로컬 레지스트리에 charm과 rock 업로드
 
 ```bash
+charmcraft register django-hello-world
 charmcraft upload ./django-hello-world_amd64.charm
 charmcraft upload-resource django-hello-world django-app-image --image=oci-archive:../django-hello-world_0.1_amd64.rock
 charmcraft release django-hello-world --revision=1 --channel=latest/edge --resource=django-app-image:1
@@ -67,14 +68,14 @@ echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 8. 비밀 저장
 
 ```bash
-curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" \
+curl -X POST https://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" \
    --data '{"value": "저 사실 민초파입니다."}' -Lkv
 ```
 
 9. 비밀 검색
 
 ```bash
-curl http://$SERVICE_HOSTNAME/keys/<key-id>
+curl -Lkv https://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
 ## 추가 정보
