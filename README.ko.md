@@ -1,7 +1,7 @@
 # 안녕하세요, Ubucon! 12-factor ExpressJS 앱에 오신 것을 환영합니다!
 
 <p align="center">
-    <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--MgAyrZbI--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://cdn-images-1.medium.com/max/1024/1%2AhYfdBkfKgvtMoDcqk_LjWA.png">
+    <img width="554" height="554" alt="image" src="https://github.com/user-attachments/assets/b4c047e9-c055-43f5-ae11-f109c9756f8f" />
 </p>
 
 \*다른 언어로 읽기: [English](README.md), [한국어](README.ko.md)
