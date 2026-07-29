@@ -55,7 +55,10 @@ EOF
 > **Note:** The private charm registry doesn't support syncing libraries yet. As a temporary measure, the command below unsets the store URL so charmcraft pulls libraries from CharmHub, then resets the variable back.
 
 ```bash
-_SAVED="$CHARMCRAFT_STORE_API_URL"; unset CHARMCRAFT_STORE_API_URL; charmcraft pack; export CHARMCRAFT_STORE_API_URL="$_SAVED"
+_SAVED="$CHARMCRAFT_STORE_API_URL"
+unset CHARMCRAFT_STORE_API_URL
+charmcraft pack
+export CHARMCRAFT_STORE_API_URL="$_SAVED"
 ```
 
 6. Inspect the charm
