@@ -35,8 +35,7 @@ charmcraft release fastapi-hello-world --revision=1 --channel=latest/edge --reso
 4. 애플리케이션을 Juju에 배포
 
 ```bash
-juju deploy fastapi-hello-world --channel=latest/edge
-juju config fastapi-hello-world webserver-port=8000
+juju deploy fastapi-hello-world --channel=latest/edge --config app-port=8000
 ```
 
 5. 배포된 애플리케이션을 데이터베이스에 연결
