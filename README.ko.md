@@ -26,6 +26,7 @@ charmcraft login
 3. 로컬 레지스트리에 charm과 rock 업로드
 
 ```bash
+charmcraft register go-hello-world
 charmcraft upload ./go-hello-world_amd64.charm
 charmcraft upload-resource go-hello-world app-image --image=oci-archive:../go-hello-world_0.1_amd64.rock
 charmcraft release go-hello-world --revision=1 --channel=latest/edge --resource=app-image:1
