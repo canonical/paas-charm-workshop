@@ -35,8 +35,7 @@ charmcraft release spring-hello-world --revision=1 --channel=latest/edge --resou
 4. 애플리케이션을 Juju에 배포
 
 ```bash
-juju deploy spring-hello-world --channel=latest/edge
-juju config spring-hello-world app-port=8081
+juju deploy spring-hello-world --channel=latest/edge --config app-port=8081
 ```
 
 5. 배포된 애플리케이션을 데이터베이스에 연결
