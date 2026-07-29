@@ -1,7 +1,7 @@
 # Hello Ubucon! Welcome to 12-factor ExpressJS app!
 
 <p align="center">
-    <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--MgAyrZbI--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://cdn-images-1.medium.com/max/1024/1%2AhYfdBkfKgvtMoDcqk_LjWA.png">
+    <img width="554" height="554" alt="image" src="https://github.com/user-attachments/assets/5815e8c8-8297-48f4-84d9-394ad3d1b5bf" />
 </p>
 
 \*Read this in other languages: [English](README.md), [한국어](README.ko.md)
