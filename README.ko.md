@@ -35,8 +35,7 @@ charmcraft release expressjs-hello-world --revision=1 --channel=latest/edge --re
 4. 애플리케이션을 Juju에 배포
 
 ```bash
-juju deploy expressjs-hello-world --channel=latest/edge
-juju config expressjs-hello-world app-port=3000
+juju deploy expressjs-hello-world --channel=latest/edge --config app-port=3000
 ```
 
 5. 배포된 애플리케이션을 데이터베이스에 연결

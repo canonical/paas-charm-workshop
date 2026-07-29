@@ -35,8 +35,7 @@ charmcraft release expressjs-hello-world --revision=1 --channel=latest/edge --re
 4. Deploy the application to Juju
 
 ```bash
-juju deploy expressjs-hello-world --channel=latest/edge
-juju config expressjs-hello-world app-port=3000
+juju deploy expressjs-hello-world --channel=latest/edge --config app-port=3000
 ```
 
 5. Integrate the deployed application with the database
