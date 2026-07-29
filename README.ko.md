@@ -48,7 +48,10 @@ EOF
    > **참고:** 개인 charm 레지스트리는 아직 라이브러리 동기화를 지원하지 않습니다. 임시 조치로 store URL을 해제하여 charmcraft가 CharmHub에서 라이브러리를 가져오도록 한 후 변수를 복원합니다.
 
    ```bash
-   _SAVED="$CHARMCRAFT_STORE_API_URL"; unset CHARMCRAFT_STORE_API_URL; charmcraft pack; export CHARMCRAFT_STORE_API_URL="$_SAVED"
+   _SAVED="$CHARMCRAFT_STORE_API_URL"
+   unset CHARMCRAFT_STORE_API_URL
+   charmcraft pack
+   export CHARMCRAFT_STORE_API_URL="$_SAVED"
    ```
 6. charm 검사
    ```bash
