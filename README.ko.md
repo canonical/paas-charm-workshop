@@ -50,7 +50,7 @@ EOF
    ```bash
    _SAVED="$CHARMCRAFT_STORE_API_URL"
    unset CHARMCRAFT_STORE_API_URL
-   charmcraft pack
+   export CHARMCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True && charmcraft pack
    export CHARMCRAFT_STORE_API_URL="$_SAVED"
    ```
 6. charm 검사
