@@ -26,6 +26,7 @@ charmcraft login
 3. 로컬 레지스트리에 charm과 rock 업로드
 
 ```bash
+charmcraft register expressjs-hello-world
 charmcraft upload ./expressjs-hello-world_amd64.charm
 charmcraft upload-resource expressjs-hello-world app-image --image=oci-archive:../expressjs-hello-world_0.1_amd64.rock
 charmcraft release expressjs-hello-world --revision=1 --channel=latest/edge --resource=app-image:1
@@ -34,7 +35,7 @@ charmcraft release expressjs-hello-world --revision=1 --channel=latest/edge --re
 4. 애플리케이션을 Juju에 배포
 
 ```bash
-juju deploy expressjs-hello-world --channel=latest/edge
+juju deploy expressjs-hello-world --channel=latest/edge --config app-port=3000
 ```
 
 5. 배포된 애플리케이션을 데이터베이스에 연결
@@ -67,13 +68,13 @@ echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 8. 비밀 저장
 
 ```bash
-curl -X POST http://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
+curl -X POST https://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" --data '{"value": "저 사실 민초파입니다."}' -Lkv
 ```
 
 9. 비밀 검색
 
 ```bash
-curl http://$SERVICE_HOSTNAME/keys/<key-id>
+curl -Lkv https://$SERVICE_HOSTNAME/keys/<key-id>
 ```
 
 ## 추가 정보
