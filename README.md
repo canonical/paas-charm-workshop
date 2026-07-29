@@ -26,6 +26,7 @@ charmcraft login
 3. Upload the charm and rock to the local registry
 
 ```bash
+charmcraft register spring-hello-world
 charmcraft upload ./spring-hello-world_amd64.charm
 charmcraft upload-resource spring-hello-world app-image --image=oci-archive:../spring-hello-world_0.1_amd64.rock
 charmcraft release spring-hello-world --revision=1 --channel=latest/edge --resource=app-image:1
