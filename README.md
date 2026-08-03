@@ -35,7 +35,7 @@ charmcraft release fastapi-hello-world --revision=1 --channel=latest/edge --reso
 4. Deploy the application to Juju
 
 ```bash
-juju deploy fastapi-hello-world --channel=latest/edge --config app-port=8000
+juju deploy fastapi-hello-world --channel=latest/edge --config webserver-port=8000
 ```
 
 5. Integrate the deployed application with the database
