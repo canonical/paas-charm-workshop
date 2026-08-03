@@ -7,3 +7,6 @@ dependencies = [
     "Flask",
     "psycopg2-binary",
 ]
+
+[tool.setuptools]
+py-modules = ["app", "migrate"]
