@@ -21,16 +21,16 @@
 cd fastapi-hello-world
 ```
 
-2. 패키지 설치
+2. [uv](https://docs.astral.sh/uv/)로 패키지 설치
 
 ```
-python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt
+uv sync
 ```
 
 3. 서버 실행
 
 ```
-fastapi dev app.py
+uv run fastapi dev app.py
 ```
 
 4. 다음 curl 명령어를 사용하여 엔드포인트 테스트
