@@ -4,3 +4,4 @@
 __pycache__
 django-hello-world/rockcraft.yaml
 django-hello-world/charm/
+uv.lock
