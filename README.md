@@ -68,7 +68,7 @@ echo "$INGRESS_IP $SERVICE_HOSTNAME" | sudo tee -a /etc/hosts
 8. Store your secret
 
 ```bash
-curl -X POST https://$SERVICE_HOSTNAME/keys -H "Content-Type: application/json" \
+curl -X POST https://$SERVICE_HOSTNAME/keys/ -H "Content-Type: application/json" \
   --data '{"value": "I like mint flavored ice-cream and pizza with pineapples"}' -Lkv
 ```
 
