@@ -44,7 +44,14 @@ requires:
 EOF
 ```
 
-5. Pack the charm
+5. (Recommended) modify the `requirements.txt` in the same `charm` directory by adding the following line into the beginning of the file.
+  ```diff
+  + --no-binary=:none:
+  ops ~= 2.17
+  paas-charm>=1.0,<2
+  ```
+
+6. Pack the charm
 
    > **Note:** The private charm registry doesn't support syncing libraries yet. As a temporary measure, the command below unsets the store URL so charmcraft pulls libraries from CharmHub, then resets the variable back.
 
@@ -54,12 +61,12 @@ EOF
    export CHARMCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True && charmcraft pack
    export CHARMCRAFT_STORE_API_URL="$_SAVED"
    ```
-6. Inspect the charm
+7. Inspect the charm
    ```
    mkdir inspect
    unzip django-hello-world_amd64.charm -d inspect
    ```
-7. Congratulations! You have have a local charm you can deploy to Juju!
+8. Congratulations! You have have a local charm you can deploy to Juju!
 
 ## Next steps
 
